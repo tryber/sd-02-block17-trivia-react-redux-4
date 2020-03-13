@@ -1,0 +1,50 @@
+.comp_dropdown > .selected {
+  border-color: black;
+  border-style: solid;
+  border-width: 1px;
+  display: flex;
+  height: 25px;
+  justify-content: center;
+  position: relative;
+}
+
+.comp_dropdown > .selected > p {
+  margin: auto;
+  text-align: center;
+}
+
+.comp_dropdown > .selected > button {
+  background-color: white;
+  border-style: none;
+  cursor: pointer;
+  height: 80%;
+  margin: 1% 4%;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  width: 10%;
+}
+
+.comp_dropdown > .selected > button > .material-icons {
+  height: 100%;
+  width: 100%;
+}
+
+.comp_dropdown > .list {
+  display: none;
+  flex-direction: column;
+}
+
+.comp_dropdown > .list > button {
+  background-color: white;
+  border-color: black;
+  border-style: solid;
+  border-width: 1px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.comp_dropdown > .list > button:hover {
+  background-color: black;
+  color: white;
+}

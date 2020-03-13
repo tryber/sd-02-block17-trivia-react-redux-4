@@ -1,0 +1,11 @@
+.page_config {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
+
+.page_config > .content {
+  width: 25%;
+}
