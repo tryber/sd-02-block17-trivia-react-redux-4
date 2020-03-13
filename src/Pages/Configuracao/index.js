@@ -19,7 +19,7 @@ export default class Configuracao extends Component {
   render() {
     return (
       <div className="page_config">
-        <p ref={this.ref}></p>
+        <p ref={this.ref} />
         <div className="content">
           <div className="campo">
             <p>Categoria:</p>
