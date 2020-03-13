@@ -34,12 +34,12 @@ export default class Dropdown extends Component {
             <i className="material-icons">
               keyboard_arrow_down
             </i>
+            <p ref={this.selected} />
           </button>
-          <p ref={this.selected} />
         </div>
         <div className="list" ref={this.list}>
           {options.map((option) => (
-            <button type="button" onClick={(e) => this.clickHandle(e)}>{option}</button>
+            <button key={option} type="button" onClick={(e) => this.clickHandle(e)}>{option}</button>
           ))}
         </div>
       </div>

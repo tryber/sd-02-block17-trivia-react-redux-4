@@ -8,30 +8,28 @@
   position: relative;
 }
 
-.comp_dropdown > .selected > p {
+.comp_dropdown > .selected > button > p {
   margin: auto;
   text-align: center;
-}
-
-.comp_dropdown > .selected > button:focus {
-  outline: none;
 }
 
 .comp_dropdown > .selected > button {
   background-color: white;
   border-style: none;
   cursor: pointer;
-  height: 80%;
-  margin: 1% 4%;
+  height: 100%;
   padding: 0;
   position: absolute;
-  right: 0;
-  width: 10%;
+  width: 100%;
 }
 
 .comp_dropdown > .selected > button > .material-icons {
-  height: 100%;
-  width: 100%;
+  height: 6%;
+  margin: 0 4%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 10%;
 }
 
 .comp_dropdown > .list {
