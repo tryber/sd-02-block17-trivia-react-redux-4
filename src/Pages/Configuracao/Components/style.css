@@ -13,6 +13,10 @@
   text-align: center;
 }
 
+.comp_dropdown > .selected > button:focus {
+  outline: none;
+}
+
 .comp_dropdown > .selected > button {
   background-color: white;
   border-style: none;
