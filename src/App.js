@@ -5,6 +5,7 @@ import Game from './Pages/Game';
 import FeedBack from './Pages/Feedback';
 import Configuracao from './Pages/Configuracao';
 import Ranking from './Pages/Ranking';
+import NotFound from './Pages/NotFound';
 
 import './App.css';
 
@@ -18,6 +19,7 @@ export default function App() {
           <Route exact path="/game-feedback" component={FeedBack} />
           <Route exact path="/game-configuration" component={Configuracao} />
           <Route exact path="/game-ranking" component={Ranking} />
+          <Route component={NotFound} />
         </Switch>
       </BrowserRouter>
     </div>
