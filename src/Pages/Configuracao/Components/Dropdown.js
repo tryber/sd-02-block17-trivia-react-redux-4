@@ -35,7 +35,7 @@ export default class Dropdown extends Component {
               keyboard_arrow_down
             </i>
           </button>
-          <p ref={this.selected}></p>
+          <p ref={this.selected} />
         </div>
         <div className="list" ref={this.list}>
           {options.map((option) => (
