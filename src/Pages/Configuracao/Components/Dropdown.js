@@ -48,7 +48,13 @@ export default class Dropdown extends Component {
         </div>
         <div className="list" ref={this.list}>
           {options.map((option) => (
-            <button key={option} type="button" onClick={(e) => this.clickHandle(e)}>{option}</button>
+            <button 
+              key={option}
+              type="button"
+              onClick={(e) => this.clickHandle(e)}
+            >
+            {option}
+            </button>
           ))}
         </div>
       </div>
