@@ -4,6 +4,11 @@ import './style.css';
 
 import Dropdown from './Components/Dropdown';
 
+const categoria = [
+  'categoria1',
+  'categoria2',
+  'categoria3'
+]
 export default class Configuracao extends Component {
   render() {
     return (
@@ -11,15 +16,15 @@ export default class Configuracao extends Component {
         <div className="content">
           <div className="campo">
             <p>Categoria:</p>
-            <Dropdown />
+            <Dropdown options={categoria} />
           </div>
           <div className="campo">
             <p>Dificuldade:</p>
-            <Dropdown />
+            <Dropdown options={categoria} />
           </div>
           <div className="campo">
             <p>Tipo:</p>
-            <Dropdown />
+            <Dropdown options={categoria} />
           </div>
         </div>
       </div>

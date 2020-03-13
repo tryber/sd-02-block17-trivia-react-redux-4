@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import './style.css';
 
@@ -13,3 +14,9 @@ export default class Campo extends Component {
     );
   }
 }
+
+
+Campo.propTypes = {
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+};

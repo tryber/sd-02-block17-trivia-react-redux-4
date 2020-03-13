@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import './style.css';
 
@@ -7,10 +8,15 @@ export default class Dropdown extends Component {
     super(props);
     this.dropdown = false;
     this.list = React.createRef();
-    this.btn = React.createRef();
+    this.selected = React.createRef();
   }
 
-  dropDonw(e) {
+  clickHandle(e) {
+    this.selected.current.innerText = e.target.outerText;
+    this.dropDonw();
+  }
+
+  dropDonw() {
     this.dropdown = !this.dropdown;
     if (this.dropdown) {
       this.list.current.style.display = 'none';
@@ -20,22 +26,29 @@ export default class Dropdown extends Component {
   }
 
   render() {
+    const { options } = this.props;
     return (
       <div className="comp_dropdown">
         <div className="selected">
-          <button type="button" onClick={(e) => this.dropDonw(e)} ref={this.btn}>
-            <i class="material-icons">
+          <button type="button" onClick={() => this.dropDonw()} ref={this.btn}>
+            <i className="material-icons">
               keyboard_arrow_down
             </i>
           </button>
-          <p>item</p>
+          <p ref={this.selected}></p>
         </div>
         <div className="list" ref={this.list}>
-          <button type="button">item</button>
-          <button type="button">item</button>
-          <button type="button">item</button>
+          {options.map((option) => (
+            <button type="button" onClick={(e) => this.clickHandle(e)}>{option}</button>
+          ))}
         </div>
       </div>
     );
   }
 }
+
+Dropdown.propTypes = {
+  options: PropTypes.arrayOf(
+    PropTypes.string.isRequired,
+  ).isRequired,
+};
