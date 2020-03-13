@@ -1,11 +1,13 @@
 import React from 'react';
 
-import Configuracao from './Pages/Configuracao';
+import Feedback from './Pages/Feedback';
+
+import './App.css';
 
 export default function App() {
   return (
     <div className="App">
-      <Configuracao />
+      <Feedback />
     </div>
   );
 }

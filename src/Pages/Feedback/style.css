@@ -1,0 +1,11 @@
+.page_feedback {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
+
+.page_feedback > .content {
+  width: 25%;
+}
