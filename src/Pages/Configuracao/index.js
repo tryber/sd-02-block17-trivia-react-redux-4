@@ -7,8 +7,9 @@ import Dropdown from './Components/Dropdown';
 const categoria = [
   'categoria1',
   'categoria2',
-  'categoria3'
-]
+  'categoria3',
+];
+
 export default class Configuracao extends Component {
   render() {
     return (

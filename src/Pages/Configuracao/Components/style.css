@@ -2,10 +2,10 @@
 .comp_dropdown > .selected {
   border-color: black;
   border-style: solid;
-  display: flex;
   border-width: 1px;
-  justify-content: center;
+  display: flex;
   height: 25px;
+  justify-content: center;
   position: relative;
 }
 
@@ -15,19 +15,15 @@
 }
 
 .comp_dropdown > .selected > button {
-  cursor: pointer;
   background-color: white;
   border-style: none;
+  cursor: pointer;
   height: 80%;
   margin: 1% 4%;
   padding: 0;
   position: absolute;
   right: 0;
   width: 10%;
-}
-
-.comp_dropdown > .selected > button:focus {
-  outline: none;
 }
 
 .comp_dropdown > .selected > button > .material-icons {
