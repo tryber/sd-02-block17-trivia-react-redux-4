@@ -24,22 +24,37 @@ export default class Dropdown extends Component {
       this.list.current.style.display = 'flex';
     }
   }
+  renderBtn() {
+    return (
+      <button
+        type="button"
+        onClick={() => this.dropDonw()}
+        ref={this.btn}
+      >
+        <i className="material-icons">
+          keyboard_arrow_down
+        </i>
+        <p ref={this.selected} />
+      </button>
+    );
+  }
 
   render() {
     const { options } = this.props;
     return (
       <div className="comp_dropdown">
         <div className="selected">
-          <button type="button" onClick={() => this.dropDonw()} ref={this.btn}>
-            <i className="material-icons">
-              keyboard_arrow_down
-            </i>
-          </button>
-          <p ref={this.selected} />
+          {this.renderBtn()}
         </div>
         <div className="list" ref={this.list}>
           {options.map((option) => (
-            <button type="button" onClick={(e) => this.clickHandle(e)}>{option}</button>
+            <button
+              key={option}
+              type="button"
+              onClick={(e) => this.clickHandle(e)}
+            >
+              {option}
+            </button>
           ))}
         </div>
       </div>
