@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import './style.css';
 
 const propriedade = {
@@ -10,8 +10,8 @@ const propriedade = {
 function situacaoRender(acertos) {
   return (
     (acertos < 3) ?
-    <h3>Podia ser melhor...</h3> :
-    <h3>Mandou bem !</h3>
+    <h3 className="title">Podia ser melhor...</h3> :
+    <h3 className="title">Mandou bem !</h3>
   );
 }
 
@@ -84,6 +84,8 @@ export default class Feedback extends Component {
   }
 }
 
-history: PropTypes.shape({
-  push: PropTypes.func
-}).isRequired
+Feedback.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired
+}
