@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Game from '../../Game/index';
 import { Link } from 'react-router-dom';
 import settingsBtn from '../../../imgs/settings.png';
 import './style.css';
@@ -22,8 +21,8 @@ const renderLoginSection = () => (
       type="name"
       placeholder="Insira seu nome"
     />
-    <Link to="/game-page" component={Game}>
-    <button className="btn-jogar">JOGAR!</button>
+    <Link to="/game-page">
+      <button className="btn-jogar">JOGAR!</button>
     </Link>
   </div>
 );
