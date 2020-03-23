@@ -9,9 +9,7 @@ export default class Login extends Component {
     return (
       <div className="page_login">
         <div className="content">
-          <Campo name={'Email do Gravatar:'} type={'email'} />
-          <Campo name={'Nome do jogador:'} type={'text'} />
-          <button type="button">JOGAR!</button>
+          <Campo />
         </div>
       </div>
     );

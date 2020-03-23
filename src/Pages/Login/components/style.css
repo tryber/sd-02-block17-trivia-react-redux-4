@@ -1,8 +1,45 @@
-.login_campo > p {
-  margin: 2% 0;
-}
-
 .login_campo > input {
   box-sizing: border-box;
-  width: 100%;
+  font-size: 25px;
+  height: 76px;
+  width: 300px;
+}
+
+.login_campo > label {
+  height: 47px;
+  margin: 0;
+  width: 325px;
+}
+
+.login_campo {
+  font-family: sans-serif;
+  font-size: 25px;
+  justify-content: center;
+  line-height: 47px;
+  margin-top: 80px;
+}
+
+.btn-jogar {
+  background: rgb(134, 214, 96);
+  font-size: 20px;
+  height: 55px;
+  margin-top: 10px;
+  width: 300px;
+}
+
+.settingsBtn {
+  display: flex;
+  left: 30px;
+  width: 50px;
+}
+
+.settingsIcon {
+  margin-top: 10px;
+  width: 40px;
+}
+
+.settingsDiv {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: 800px;
 }
