@@ -43,7 +43,7 @@
   text-align: center;
 }
 
-.page_feedback .body div:nth-of-type(1) {
+.page_feedback .body div:nth-of-type( 1 ) {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -51,21 +51,21 @@
   margin-bottom: 10%;
 }
 
-.page_feedback .body div:nth-of-type(2) {
+.page_feedback .body div:nth-of-type( 2 ) {
   display: flex;
   flex-direction: column;
 }
 
-.page_feedback .body div:nth-of-type(2) button:nth-of-type(1) {
-  border-style: none;
+.page_feedback .body div:nth-of-type( 2 ) button:nth-of-type( 1 ) {
   background-color: gainsboro;
+  border-style: none;
   cursor: pointer;
   margin: 2% auto;
   padding: 2%;
   width: 50%;
 }
 
-.page_feedback .body div:nth-of-type(2) button:nth-of-type(2) {
+.page_feedback .body div:nth-of-type( 2 ) button:nth-of-type( 2 ) {
   background-color: lawngreen;
   border-style: none;
   cursor: pointer;

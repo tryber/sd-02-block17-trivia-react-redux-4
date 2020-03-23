@@ -10,8 +10,8 @@ const propriedade = {
 function situacaoRender(acertos) {
   return (
     (acertos < 3) ?
-    <h3 className="title">Podia ser melhor...</h3> :
-    <h3 className="title">Mandou bem !</h3>
+      <h3 className="title">Podia ser melhor...</h3> :
+      <h3 className="title">Mandou bem !</h3>
   );
 }
 
@@ -87,5 +87,5 @@ export default class Feedback extends Component {
 Feedback.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
-  }).isRequired
-}
+  }).isRequired,
+};
