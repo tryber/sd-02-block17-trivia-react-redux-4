@@ -3,9 +3,10 @@ import { GET_QUESTIONS, GET_QUESTIONS_SUCCESS, GET_QUESTIONS_FAILURE } from '../
 const initialState = {
   questions: [],
   fetching: true,
-}
+};
 
 const apiReducer = (state = initialState, action) => {
+  console.log(action);
   switch (action.type) {
     case GET_QUESTIONS:
       return {

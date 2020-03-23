@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import propTypes from 'prop-types';
 import { thunkQuestions } from '../../Actions';
 
 class Game extends Component {
@@ -7,6 +8,7 @@ class Game extends Component {
     const { importedThunk } = this.props;
     importedThunk();
   }
+
   render() {
     return (
       <div>
@@ -21,6 +23,10 @@ const mapStateToProps = ({ apiReducer: { questions, fetching } }) => ({ question
 const mapDispatchToProps = (dispatch) => ({
   importedThunk: () => dispatch(thunkQuestions()),
 });
+
+Game.propTypes = {
+  importedThunk: propTypes.func.isRequired,
+}
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

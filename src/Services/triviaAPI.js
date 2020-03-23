@@ -1,5 +1,5 @@
 const triviaTokenURL = 'https://opentdb.com/api_token.php?command=request';
-const triviaQuestionsURL = 'https://opentdb.com/api.php?amount=5&token='
+const triviaQuestionsURL = 'https://opentdb.com/api.php?amount=5&token=';
 
 const getQuestions = (token) => (
   fetch(`${triviaQuestionsURL}${token}`)
