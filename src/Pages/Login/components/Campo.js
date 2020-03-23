@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 import './style.css';
 
 export default class Campo extends Component {
+  componentDidMount() {
+    
+  }
+
   render() {
     const { name, type } = this.props;
     return (
