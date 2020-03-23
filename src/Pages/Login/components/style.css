@@ -34,6 +34,13 @@
   width: 50px;
 }
 
+.settingsIcon {
+  margin-top: 10px;
+  width: 40px;
+}
+
 .settingsDiv {
+  display: flex;
   justify-content: flex-end;
+  margin-left: 800px;
 }

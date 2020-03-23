@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-// import settingsBtn from '../../../imgs/settings.png'
+import settingsBtn from '../../../imgs/settings.png'
 import './style.css';
 
 class Campo extends React.Component {
   renderSettingsButton() {
     return (
       <Link to="/settings">
-      <button className="settingsBtn">
-        Teste
-        {/* <img className="settingsIcon" src={settingsBtn} alt="settings icon" /> */}
-      </button>
+      <icon className="settingsBtn">
+        <img className="settingsIcon" src={settingsBtn} alt="settings icon" />
+      </icon>
       </Link>
     )
   }
