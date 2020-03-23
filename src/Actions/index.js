@@ -1,4 +1,4 @@
-import getQuestions from '../Services/triviaAPI';
+import generateToken from '../Services/triviaAPI';
 
 export const GET_QUESTIONS = 'GET_QUESTIONS';
 export const GET_QUESTIONS_SUCCESS = 'GET_QUESTIONS_SUCCESS';
@@ -8,7 +8,7 @@ export const getQuestionsAction = () => (
   { type: GET_QUESTIONS, loading: true }
 );
 export const getQuestionsSuccess = (data) => (
-  { type: GET_QUESTIONS_SUCCESS, data: data.results }
+  { type: GET_QUESTIONS_SUCCESS, questions: data.results }
 );
 export const getQuestionsFailure = (error) => (
   { type: GET_QUESTIONS_FAILURE, error }
@@ -17,9 +17,9 @@ export const getQuestionsFailure = (error) => (
 export function thunkQuestions() {
   return (dispatch) => {
     dispatch(getQuestionsAction());
-    return getQuestions()
+    return generateToken()
       .then(
-        (planet) => dispatch(getQuestionsSuccess(planet)),
+        (question) => dispatch(getQuestionsSuccess(question)),
         (error) => dispatch(getQuestionsFailure(error.message)),
       );
   };
