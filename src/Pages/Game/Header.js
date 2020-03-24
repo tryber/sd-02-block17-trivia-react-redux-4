@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import './Header.css';
 import { connect } from 'react-redux';
+import propTypes from 'prop-types';
+import './Header.css';
 
 class Header extends Component {
   render() {
@@ -12,7 +13,7 @@ class Header extends Component {
       </header>
     );
   }
-}
+};
 
 const mapStateToProps = ({
   questionReducer: {
@@ -20,6 +21,10 @@ const mapStateToProps = ({
   },
 }) => ({
   score,
-})
+});
+
+Header.propTypes = {
+  score: propTypes.number,
+}.isRequired;
 
 export default connect(mapStateToProps)(Header);

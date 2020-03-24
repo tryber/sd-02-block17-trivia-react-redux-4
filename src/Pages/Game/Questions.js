@@ -10,7 +10,7 @@ class Questions extends Component {
   constructor(props) {
     super(props);
     this.nextQuestion = this.nextQuestion.bind(this);
-  }
+  };
 
   nextQuestion(target) {
     const {
@@ -25,7 +25,7 @@ class Questions extends Component {
     } else {
       getQuestionsNumber(1);
     }
-  }
+  };
 
   render() {
     const {
@@ -57,7 +57,7 @@ class Questions extends Component {
       </div>
     );
   }
-}
+};
 
 const mapStateToProps = ({
   checkboxReducer: {
@@ -73,12 +73,22 @@ const mapStateToProps = ({
   questionsResults,
   score,
   questionNumber,
-})
+});
 
 const mapDispatchToProps = (dispatch) => ({
   getQuestions: (data) => dispatch(addQuestions(data)),
   getScore: (score) => dispatch(addScore(score)),
   getQuestionsNumber: (questionNumber) => dispatch(addQuestionNumber(questionNumber)),
-})
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Questions)
+Checkbox.propTypes = {
+  markedAnswer: propTypes.string,
+  questionResults: propTypes.instaceOf(Array),
+  questionNumber: propTypes.number,
+  score: propTypes.number,
+  getScore: propTypes.func,
+  getQuestionsNumber: propTypes.func,
+  getQuestions: propTypes.func,
+}.isRequired;
+
+export default connect(mapStateToProps, mapDispatchToProps)(Questions);

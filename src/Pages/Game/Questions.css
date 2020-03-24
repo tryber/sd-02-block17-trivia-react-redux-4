@@ -20,9 +20,9 @@
   align-self: center;
   color: black;
   font-family: Roboto;
+  font-size: 2em;
   font-style: normal;
   font-weight: normal;
-  font-size: 2em;
   line-height: 2em;
   margin: 0 auto;
 }
@@ -30,9 +30,9 @@
 .question-body {
   width: 93%;
   font-family: Roboto;
+  font-size: 1.5em;
   font-style: normal;
   font-weight: normal;
-  font-size: 1.5em;
   height: 73%;
   line-height: 35px;
   margin: 0 auto;
@@ -68,9 +68,9 @@
   border: none;
   color: black;
   font-family: Roboto;
+  font-size: 1.9em;
   font-style: normal;
   font-weight: normal;
-  font-size: 1.9em;
   line-height: 1.9em;
   margin: 0 auto;
 }

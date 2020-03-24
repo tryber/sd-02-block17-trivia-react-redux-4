@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import data from './questionsMock';
 import { connect } from 'react-redux';
+import propTypes from 'prop-types';
+import data from './questionsMock';
 import './Checkbox.css';
 import { addMarkedAnswer } from '../../actions/checkbox';
 
@@ -9,7 +10,16 @@ class Checkbox extends Component {
     super(props);
     this.referencia = React.createRef();
     this.handleChangeAnswer = this.handleChangeAnswer.bind(this);
-  }
+  };I
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.questionNumber !== this.props.questionNumber) {
+      const allButtons = this.referencia.current.querySelectorAll('button');
+      allButtons.forEach((button) => {
+        button.style.background = 'gray';
+      });
+    }
+  };
 
   handleChangeAnswer(target) {
     const { getAddMarkedAnswer } = this.props;
@@ -19,21 +29,13 @@ class Checkbox extends Component {
     });
     target.style.background = 'blue';
     getAddMarkedAnswer(target.innerText);
-  }
+  };
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.questionNumber !== this.props.questionNumber) {
-      const allButtons = this.referencia.current.querySelectorAll('button');
-      allButtons.forEach((button) => {
-        button.style.background = 'gray';
-      });
-    }
-  }
 
   render() {
     const { questionNumber } = this.props;
     const { results } = data[questionNumber];
-    const answers = [results[0].correct_answer, ...results[0].incorrect_answers];    
+    const answers = [results[0].correct_answer, ...results[0].incorrect_answers];
     return (
       <div className="flex-container" ref={this.referencia}>
         {answers.map((answer) => (
@@ -49,11 +51,11 @@ class Checkbox extends Component {
       </div>
     )
   }
-}
+};
 
 const mapDispatchToProps = (dispatch) => ({
   getAddMarkedAnswer: (answer) => dispatch(addMarkedAnswer(answer)),
-})
+});
 
 const mapStateToProps = ({
   checkboxReducer: {
@@ -61,6 +63,12 @@ const mapStateToProps = ({
   }
 }) => ({
   markedAnswer,
-})
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Checkbox)
+Checkbox.propTypes = {
+  markedAnswer: propTypes.string,
+  questionNumber: propTypes.number,
+  getAddMarkedAnswer: propTypes.func,
+}.isRequired;
+
+export default connect(mapStateToProps, mapDispatchToProps)(Checkbox);
