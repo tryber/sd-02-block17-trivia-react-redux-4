@@ -1,6 +1,5 @@
 const data = [
   {
-    response_code: 0,
     results: [
       {
         category: 'Politica',
@@ -17,10 +16,9 @@ const data = [
     ],
   },
   {
-    response_code: 0,
     results: [
       {
-        category: 'Cultura',
+        category: 'Games',
         type: 'boolean',
         difficulty: 'hard',
         question: 'TF2: Sentry rocket damage falloff is calculated based on the distance between the sentry and the enemy, not the engineer and the enemy',
@@ -32,10 +30,9 @@ const data = [
     ],
   },
   {
-    response_code: 0,
     results: [
       {
-        category: 'Cultura',
+        category: 'Historia',
         type: 'boolean',
         difficulty: 'hard',
         question: 'TF2: Sentry rocket damage falloff is calculated based on the distance between the sentry and the enemy, not the engineer and the enemy',
@@ -47,12 +44,11 @@ const data = [
     ],
   },
   {
-    response_code: 0,
     results: [
       {
-        category: 'Politica',
+        category: 'Matematica',
         type: 'multiple',
-        difficulty: 'easy',
+        difficulty: 'normal',
         question: 'What is the first weapon you acquire in Half-Life?',
         correct_answer: 'A crowbar',
         incorrect_answers: [
@@ -64,16 +60,15 @@ const data = [
     ],
   },
   {
-    response_code: 0,
     results: [
       {
         category: 'Cultura',
         type: 'boolean',
         difficulty: 'hard',
-        question: 'TF2: Sentry rocket damage falloff is calculated based on the distance between the sentry and the enemy, not the engineer and the enemy',
-        correct_answer: 'False',
+        question: 'Teste 5',
+        correct_answer: 'True',
         incorrect_answers: [
-          'True',
+          'False',
         ],
       },
     ],

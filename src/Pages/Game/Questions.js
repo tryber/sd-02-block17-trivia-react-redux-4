@@ -14,12 +14,13 @@ class Questions extends Component {
   }
 
   nextQuestion(target) {
+    console.log(target);
     const {
       markedAnswer, questionNumber, questionsResults, getQuestionsNumber, getScore,
     } = this.props;
     const { results } = questionsResults[questionNumber];
     if (questionNumber >= 4) {
-      target.disabled = true; //  history.push();
+      // target.disabled = true; //  history.push();
     } else if (markedAnswer === results[0].correct_answer) {
       getQuestionsNumber(1);
       getScore(10);
