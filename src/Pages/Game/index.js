@@ -26,7 +26,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 Game.propTypes = {
   importedQuestionThunk: propTypes.func.isRequired,
-}
+};
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);
