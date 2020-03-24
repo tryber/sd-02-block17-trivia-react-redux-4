@@ -5,8 +5,8 @@ import { thunkQuestions } from '../../Actions';
 
 class Game extends Component {
   componentDidMount() {
-    const { importedThunk } = this.props;
-    importedThunk();
+    const { importedQuestionThunk } = this.props;
+    importedQuestionThunk();
   }
 
   render() {
@@ -21,11 +21,11 @@ class Game extends Component {
 const mapStateToProps = ({ apiReducer: { questions, fetching } }) => ({ questions, fetching });
 
 const mapDispatchToProps = (dispatch) => ({
-  importedThunk: () => dispatch(thunkQuestions()),
+  importedQuestionThunk: () => dispatch(thunkQuestions()),
 });
 
 Game.propTypes = {
-  importedThunk: propTypes.func.isRequired,
+  importedQuestionThunk: propTypes.func.isRequired,
 }
 
 
