@@ -15,7 +15,7 @@ class Questions extends Component {
 
   nextQuestion(target) {
     const {
-      markedAnswer, questionNumber, questionsResults, getQuestionsNumber, getScore
+      markedAnswer, questionNumber, questionsResults, getQuestionsNumber, getScore,
     } = this.props;
     const { results } = questionsResults[questionNumber];
     if (questionNumber >= 4) {
