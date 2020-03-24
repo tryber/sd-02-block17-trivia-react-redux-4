@@ -36,10 +36,10 @@ class Questions extends Component {
       <div className="game-container">
         <div className="question-content">
           <div className="question-header">
-            <h2>{results[0].category}</h2>
+            <h2 className="category">{results[0].category}</h2>
           </div>
           <div className="question-body">
-            <h3>{results[0].question}</h3>
+            <h3 className="question">{results[0].question}</h3>
           </div>
         </div>
         <div className="answers-content">

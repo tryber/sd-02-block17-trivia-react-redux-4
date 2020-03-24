@@ -7,8 +7,8 @@ class Header extends Component {
     const { score } = this.props;
     return (
       <header className="header-content">
-        <h1>Jogador: nome</h1>
-        <h2>Pontos: {score}</h2>
+        <h1 className="jogador">Jogador: nome</h1>
+        <h2 className="score">Pontos: {score}</h2>
       </header>
     );
   }
