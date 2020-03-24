@@ -9,11 +9,14 @@ class Header extends Component {
     return (
       <header className="header-content">
         <h1 className="jogador">Jogador: nome</h1>
-        <h2 className="score">Pontos: {score}</h2>
+        <h2 className="score">
+          Pontos:
+          {score}
+        </h2>
       </header>
     );
   }
-};
+}
 
 const mapStateToProps = ({
   questionReducer: {

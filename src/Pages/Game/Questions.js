@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import './Questions.css';
-import Checkbox from './Checkbox';
 import { connect } from 'react-redux';
+import propTypes from 'prop-types';
+import Checkbox from './Checkbox';
+import './Questions.css';
 import {
-  addQuestions, addQuestionNumber, addScore
+  addQuestions, addQuestionNumber, addScore,
 } from '../../actions/questions';
 
 class Questions extends Component {
   constructor(props) {
     super(props);
     this.nextQuestion = this.nextQuestion.bind(this);
-  };
+  }
 
   nextQuestion(target) {
     const {
@@ -18,14 +19,14 @@ class Questions extends Component {
     } = this.props;
     const { results } = questionsResults[questionNumber];
     if (questionNumber >= 4) {
-      target.disabled = true;//history.push();
+      target.disabled = true; //  history.push();
     } else if (markedAnswer === results[0].correct_answer) {
       getQuestionsNumber(1);
       getScore(10);
     } else {
       getQuestionsNumber(1);
     }
-  };
+  }
 
   render() {
     const {
@@ -57,7 +58,7 @@ class Questions extends Component {
       </div>
     );
   }
-};
+}
 
 const mapStateToProps = ({
   checkboxReducer: {
@@ -81,7 +82,7 @@ const mapDispatchToProps = (dispatch) => ({
   getQuestionsNumber: (questionNumber) => dispatch(addQuestionNumber(questionNumber)),
 });
 
-Checkbox.propTypes = {
+Questions.propTypes = {
   markedAnswer: propTypes.string,
   questionResults: propTypes.instaceOf(Array),
   questionNumber: propTypes.number,
