@@ -52,6 +52,7 @@ class Campo extends React.Component {
 
 export default Campo;
 
+
 Campo.propTypes = {
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
