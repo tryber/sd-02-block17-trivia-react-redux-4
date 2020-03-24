@@ -12,6 +12,7 @@ const renderLoginSection = () => (
       id="email"
       name="email"
       type="text"
+      data-testid="input-gravatar-email"
       placeholder="Insira seu e-mail Gravatar"
     />
     <label htmlFor="name">Nome do Jogador:</label>
@@ -19,17 +20,18 @@ const renderLoginSection = () => (
       id="name"
       name="name"
       type="name"
+      data-testid="input-player-name"
       placeholder="Insira seu nome"
     />
     <Link to="/game-page">
-      <button className="btn-jogar">JOGAR!</button>
+      <button className="btn-jogar" data-testid="btn-play">JOGAR!</button>
     </Link>
   </div>
 );
 
 const renderSettingsButton = () => (
   <Link to="/settings">
-    <icon className="settingsBtn">
+    <icon className="settingsBtn" data-testid="config-button">
       <img className="settingsIcon" src={settingsBtn} alt="settings icon" />
     </icon>
   </Link>
