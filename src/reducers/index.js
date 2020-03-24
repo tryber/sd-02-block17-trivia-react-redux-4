@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import { checkboxReducer } from './checkbox';
-import { questionReducer } from './questions';
+import checkboxReducer from './checkbox';
+import questionReducer from './questions';
 
 const rootReducer = combineReducers({
   checkboxReducer,

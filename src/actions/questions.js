@@ -17,14 +17,14 @@ const receiveQuestionNumber = (questionNumber) => ({
   questionNumber,
 });
 
-export const addQuestions = (questions) => {
-  return (dispatch) => dispatch(receiveQuestions(questions));
-}
+export const addQuestions = (questions) => (
+  (dispatch) => dispatch(receiveQuestions(questions))
+);
 
-export const addScore = (score) => {
-  return (dispatch) => dispatch(receiveScore(score));
-}
+export const addScore = (score) => (
+  (dispatch) => dispatch(receiveScore(score))
+);
 
-export const addQuestionNumber = (questionNumber) => {
-  return (dispatch) => dispatch(receiveQuestionNumber(questionNumber));
-}
+export const addQuestionNumber = (questionNumber) => (
+  (dispatch) => dispatch(receiveQuestionNumber(questionNumber))
+);

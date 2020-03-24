@@ -5,6 +5,6 @@ const receiveMarkedAnswer = (markedAnswer) => ({
   markedAnswer,
 });
 
-export const addMarkedAnswer = (markedAnswer) => {
-  return (dispatch) => dispatch(receiveMarkedAnswer(markedAnswer));
-}
+export const addMarkedAnswer = (markedAnswer) => (
+  (dispatch) => dispatch(receiveMarkedAnswer(markedAnswer))
+);
