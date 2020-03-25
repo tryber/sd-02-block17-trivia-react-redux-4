@@ -1,5 +1,8 @@
 import { combineReducers } from 'redux';
+import loginInputs from './Campo';
 
-const rootReducer = combineReducers({});
+const rootReducer = combineReducers({
+  loginInputs,
+});
 
 export default rootReducer;

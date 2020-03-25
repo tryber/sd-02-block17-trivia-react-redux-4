@@ -43,3 +43,6 @@
   justify-content: flex-end;
   margin-left: 800px;
 }
+ button:disabled {
+  background: rgb(61, 90, 47);
+ }
