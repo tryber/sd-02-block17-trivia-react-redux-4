@@ -6,11 +6,11 @@
   width: 100%;
 }
 
-.page_login>.content {
+.page_login > .content {
   width: 25%;
 }
 
-.page_login>.content>button {
+.page_login > .content > button {
   background-color: green;
   border-style: none;
   color: white;
