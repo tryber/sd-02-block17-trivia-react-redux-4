@@ -1,17 +1,15 @@
-import { FILLED_INPUTS } from '../actions/LoginPage';
+import { } from '../actions/LoginPage';
 
 const INITIAL_STATE = {
-  name: '',
-  email: '',
-  disabled: true,
+
 }
 
 const loginInputs = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case FILLED_INPUTS:
+    case xxx:
       return {
         ...state,
-        disabled: action.disabled,
+        xxx,
       }
     default:
       return state;
