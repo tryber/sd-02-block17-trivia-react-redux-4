@@ -1,8 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { allInputsIn } from '../../../actions/LoginPage';
-import { connect } from 'react-redux';
 import settingsBtn from '../../../imgs/settings.png';
 import './style.css';
 
@@ -12,7 +11,7 @@ class LoginPage extends React.Component {
     this.state = {
       username: '',
       email: '',
-    }
+    };
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -44,21 +43,21 @@ class LoginPage extends React.Component {
         />
       </div>
     );
-  };
+  }
 
   renderJogarButton() {
     const { username, email } = this.state;
     console.log(username, email);
     let disabled = false;
     if (username === '' || email === '') {
-      disabled = true
+      disabled = true;
     }
 
     return (
       <Link to="/game-page">
         <button className="btn-jogar" data-testid="btn-play" disabled={disabled}>JOGAR!</button>
       </Link>
-    )
+    );
   }
 
   renderSettingsButton() {
@@ -70,7 +69,7 @@ class LoginPage extends React.Component {
           </icon>
         </Link>
       </div>
-    )
+    );
   }
 
   render() {
@@ -92,12 +91,7 @@ const mapStateToProps = ({ loginInputs }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  allInputsIn: (disabled) => dispatch(allInputsIn(disabled))
+  allInputsIn: (disabled) => dispatch(allInputsIn(disabled)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
-
-LoginPage.propTypes = {
-  name: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-};
