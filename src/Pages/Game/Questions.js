@@ -66,7 +66,7 @@ class Questions extends Component {
     if (markedAnswer === results[0].correct_answer) {
       getQuestionCorrect(1);
       getQuestionsNumber(1);
-      getScore(10 + counter * difficultyScore(results[0].difficulty));
+      getScore(10 + (counter * difficultyScore(results[0].difficulty)));
     } else {
       getQuestionsNumber(1);
     }
