@@ -1,10 +1,11 @@
 .login_campo {
+  align-items: center;
   display: flex;
+  flex-direction: column;
   font-family: sans-serif;
   font-size: 25px;
-  justify-content: center;
   line-height: 47px;
-  margin-top: 80px;
+  margin: auto;
 }
 
 .login_campo > input {
@@ -19,8 +20,14 @@
   margin: 0;
   width: 325px;
 }
+.btn-div {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
 
 .btn-jogar {
+  align-items: center;
   background: rgb(134, 214, 96);
   font-size: 20px;
   height: 55px;
@@ -47,4 +54,19 @@
 
 button:disabled {
   background: rgb(61, 90, 47);
+}
+
+label {
+  text-align: center;
+}
+
+.trivia {
+  align-items: center;
+  display: block;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  width: 300px;
+  display: block;
 }

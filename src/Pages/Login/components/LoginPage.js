@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import settingsBtn from '../../../imgs/settings.png';
+import TriviaLogo from '../../../trivia.png';
 import './style.css';
 
 class LoginPage extends React.Component {
@@ -52,9 +53,11 @@ class LoginPage extends React.Component {
     }
 
     return (
-      <Link to="/game-page">
-        <button className="btn-jogar" data-testid="btn-play" disabled={disabled}>JOGAR!</button>
-      </Link>
+      <div className="btn-div">
+        <Link to="/game-page">
+          <button className="btn-jogar" data-testid="btn-play" disabled={disabled}>JOGAR!</button>
+        </Link>
+      </div>
     );
   }
 
@@ -73,10 +76,11 @@ class LoginPage extends React.Component {
   render() {
     const { loginInputs } = this.props;
     return (
-      <div className="whole-page">
+      <div>
         <div className="settingsDiv">
           {this.renderSettingsButton()}
         </div>
+        <img src={TriviaLogo} alt="Logo do jogo Trivia" className="trivia" />
         {this.renderLoginSection(loginInputs)}
         {this.renderJogarButton()}
       </div>
