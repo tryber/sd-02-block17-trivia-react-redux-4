@@ -50,7 +50,7 @@ class LoginPage extends React.Component {
     const { username, email } = this.state;
     console.log(username, email);
     let disabled = false;
-    if(username === '' || email === '') {
+    if (username === '' || email === '') {
       disabled = true
     }
 
@@ -61,13 +61,17 @@ class LoginPage extends React.Component {
     )
   }
 
-  renderSettingsButton = () => (
-    <Link to="/settings">
-      <icon className="settingsBtn" data-testid="config-button">
-        <img className="settingsIcon" src={settingsBtn} alt="settings icon" />
-      </icon>
-    </Link>
-  );
+  renderSettingsButton() {
+    return (
+      <div>
+        <Link to="/settings">
+          <icon className="settingsBtn" data-testid="config-button">
+            <img className="settingsIcon" src={settingsBtn} alt="settings icon" />
+          </icon>
+        </Link>
+      </div>
+    )
+  }
 
   render() {
     const { loginInputs } = this.props;
