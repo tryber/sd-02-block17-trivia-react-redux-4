@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-// import loginInputs from './LoginPage';
+import checkboxReducer from './checkbox';
+import questionReducer from './questions';
 
 const rootReducer = combineReducers({
-  // loginInputs,
+  checkboxReducer,
+  questionReducer
 });
 
 export default rootReducer;
