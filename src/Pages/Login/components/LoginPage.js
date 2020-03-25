@@ -21,7 +21,7 @@ class LoginPage extends React.Component {
     this.setState({ [name]: value });
   }
 
-  renderLoginSection = () => {
+  renderLoginSection() {
     return (
       <div className="login_campo">
         <label htmlFor="email">E-mail do Gravatar:</label>
