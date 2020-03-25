@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
+import Questions from './Questions';
+import Header from './Header';
+import './index.css';
 import { thunkQuestions } from '../../Actions';
 
 class Game extends Component {
@@ -18,10 +21,12 @@ class Game extends Component {
   }
 
   render() {
+    const { history } = this.props;
     return (
-      <div>
-        <p>Game</p>
+      <div className="game-content">
         {this.generateimage()}
+        <Header />
+        <Questions history={history} />
       </div>
     );
   }
@@ -44,6 +49,9 @@ const mapDispatchToProps = (dispatch) => ({
 Game.propTypes = {
   importedQuestionThunk: propTypes.func.isRequired,
   email: propTypes.string.isRequired,
+  history: propTypes.shape({
+    push: propTypes.func.isRequired,
+  }).isRequired,
 };
 
 

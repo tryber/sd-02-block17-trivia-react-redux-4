@@ -1,0 +1,30 @@
+.header-content {
+  background: rgb(196, 196, 196);
+  display: flex;
+  height: 10%;
+  justify-content: space-between;
+}
+
+.header-content > .jogador {
+  align-self: center;
+  color: black;
+  font-family: Roboto, sans-serif;
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 400;
+  height: 30px;
+  line-height: 30px;
+  width: 205px;
+}
+
+.header-content > .score {
+  align-self: center;
+  color: black;
+  font-family: Roboto, sans-serif;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  height: 35px;
+  line-height: 35px;
+  width: 143px;
+}
