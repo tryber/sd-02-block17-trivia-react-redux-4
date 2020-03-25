@@ -4,7 +4,7 @@ import questionReducer from './questions';
 
 const rootReducer = combineReducers({
   checkboxReducer,
-  questionReducer
+  questionReducer,
 });
 
 export default rootReducer;
