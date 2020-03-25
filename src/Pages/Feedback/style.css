@@ -6,6 +6,10 @@
   width: 100%;
 }
 
+.page_feedback span {
+  padding: 0 1.5%;
+}
+
 .page_feedback > .content {
   height: 100%;
   width: 100%;
@@ -43,6 +47,10 @@
 .page_feedback .body > .title {
   margin: 3% 0;
   text-align: center;
+}
+
+.page_feedback .body p {
+  width: 20%;
 }
 
 .page_feedback .body div:nth-of-type( 1 ) {
