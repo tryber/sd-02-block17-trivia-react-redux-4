@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import loginInputs from './LoginPage';
+// import loginInputs from './LoginPage';
 
 const rootReducer = combineReducers({
-  loginInputs,
+  // loginInputs,
 });
 
 export default rootReducer;
