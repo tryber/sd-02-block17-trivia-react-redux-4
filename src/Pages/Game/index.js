@@ -13,9 +13,9 @@ class Game extends Component {
     const { email } = this.props;
     const gravatarURL = 'https://www.gravatar.com/avatar/';
     return (
-      <img src={`${gravatarURL}${email}`} alt="Gravatar"/>
-    )
-  };
+      <img src={`${gravatarURL}${email}`} alt="Gravatar" />
+    );
+  }
 
   render() {
     return (
@@ -27,7 +27,15 @@ class Game extends Component {
   }
 }
 
-const mapStateToProps = ({ apiReducer: { questions, fetching }, gravatarReducer: { email } }) => ({ questions, fetching, email });
+const mapStateToProps = ({
+  apiReducer: {
+    questions,
+    fetching
+  },
+  gravatarReducer:
+  { email }
+}) =>
+  ({ questions, fetching, email });
 
 const mapDispatchToProps = (dispatch) => ({
   importedQuestionThunk: () => dispatch(thunkQuestions()),
@@ -35,6 +43,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 Game.propTypes = {
   importedQuestionThunk: propTypes.func.isRequired,
+  email: propTypes.string.isRequired,
 };
 
 

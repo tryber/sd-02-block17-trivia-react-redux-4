@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import MD5 from 'crypto-js/md5';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { catchEmail } from '../../../actions/gravatarAction';
-import MD5 from 'crypto-js/md5';
 import settingsBtn from '../../../imgs/settings.png';
 import './style.css';
 
@@ -30,13 +30,16 @@ class Campo extends React.Component {
           placeholder="Insira seu nome"
         />
         <Link to="/game-page">
-          <button className="btn-jogar" onClick={() => importedGravatarReducer(MD5(email).toString())}>JOGAR!</button>
+          <button className="btn-jogar" onClick={() => importedGravatarReducer(MD5(email).toString())}>
+            JOGAR!
+          </button>
         </Link>
       </div>
-    );
+    )
   };
 
   renderSettingsButton() {
+    console.log(this);
     return (
       <Link to="/settings">
         <div className="settingsBtn">
@@ -44,7 +47,7 @@ class Campo extends React.Component {
         </div>
       </Link>
     );
-  };
+  }
 
   render() {
     return (
@@ -59,16 +62,15 @@ class Campo extends React.Component {
 }
 
 Campo.propTypes = {
-  name: PropTypes.string,
-  type: PropTypes.string,
+  importedGravatarReducer: PropTypes.func.isRequired,
+  email: PropTypes.string,
 };
 
 Campo.defaultProps = {
-  name: '',
-  type: '',
+  email: '',
 };
 
-const mapStateToProps = ({ gravatarReducer: {email} }) => ({email});
+const mapStateToProps = ({ gravatarReducer: { email } }) => ({ email });
 
 const mapDispatchToProps = (dispatch) => ({
   importedGravatarReducer: (email) => dispatch(catchEmail(email)),

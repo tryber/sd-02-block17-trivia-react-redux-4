@@ -15,5 +15,5 @@ export const getGravatarFailure = (error) => (
 export function catchEmail(email) {
   return (dispatch) => {
     dispatch(getGravatarSuccess(email));
-  }
+  };
 }
