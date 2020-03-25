@@ -30,10 +30,10 @@ class Game extends Component {
 const mapStateToProps = ({
   apiReducer: {
     questions,
-    fetching
+    fetching,
   },
   gravatarReducer:
-  { email }
+  { email },
 }) =>
   ({ questions, fetching, email });
 

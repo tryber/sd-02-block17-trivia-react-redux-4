@@ -30,13 +30,16 @@ class Campo extends React.Component {
           placeholder="Insira seu nome"
         />
         <Link to="/game-page">
-          <button className="btn-jogar" onClick={() => importedGravatarReducer(MD5(email).toString())}>
+          <button
+            className="btn-jogar"
+            onClick={() => importedGravatarReducer(MD5(email).toString())}
+          >
             JOGAR!
           </button>
         </Link>
       </div>
-    )
-  };
+    );
+  }
 
   renderSettingsButton() {
     console.log(this);
