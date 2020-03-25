@@ -1,9 +1,11 @@
 import {
   ADD_MARKED_ANSWER,
+  SELECTED,
 } from '../actions/checkbox';
 
 const INITIAL_STATE_CHECKBOX = {
   markedAnswer: '',
+  selected: false,
 };
 
 const checkboxReducer = (state = INITIAL_STATE_CHECKBOX, action) => {
@@ -12,6 +14,11 @@ const checkboxReducer = (state = INITIAL_STATE_CHECKBOX, action) => {
       return {
         ...state,
         markedAnswer: action.markedAnswer,
+      };
+    case SELECTED:
+      return {
+        ...state,
+        selected: action.selected,
       };
     default:
       return state;
