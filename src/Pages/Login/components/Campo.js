@@ -13,27 +13,15 @@ class Campo extends React.Component {
       username: '',
       email: '',
     }
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
-    const { name, value } = event;
-    const { username, email } = this.state;
-    if(username !== '' && email !== '') {
-      this.setState({[name]: value, disabled: false})
-    }
-    this.setState({[name]: value});
-  }
-
-  isDisabled() {
-    const { name, email } = this.state;
-    if(name !== '' && email !== '') {
-      return this.setState({ disabled: false })
-    }
-    return this.setState({ disabled: true })
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
   }
 
   renderLoginSection = () => {
-    const { disabled } = this.state;
     return (
       <div className="login_campo">
         <label htmlFor="email">E-mail do Gravatar:</label>
@@ -54,12 +42,24 @@ class Campo extends React.Component {
           placeholder="Insira seu nome"
           onChange={(event) => this.handleChange(event)}
         />
-        <Link to="/game-page">
-          <button className="btn-jogar" data-testid="btn-play" disabled={disabled}>JOGAR!</button>
-        </Link>
       </div>
     );
   };
+
+  renderJogarButton() {
+    const { username, email } = this.state;
+    console.log(username, email);
+    let disabled = false;
+    if(username === '' || email === '') {
+      disabled = true
+    }
+
+    return (
+      <Link to="/game-page">
+        <button className="btn-jogar" data-testid="btn-play" disabled={disabled}>JOGAR!</button>
+      </Link>
+    )
+  }
 
   renderSettingsButton = () => (
     <Link to="/settings">
@@ -77,6 +77,7 @@ class Campo extends React.Component {
           {this.renderSettingsButton()}
         </div>
         {this.renderLoginSection(loginInputs)}
+        {this.renderJogarButton()}
       </div>
     );
   }
