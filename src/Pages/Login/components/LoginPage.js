@@ -74,14 +74,13 @@ class LoginPage extends React.Component {
   }
 
   render() {
-    const { loginInputs } = this.props;
     return (
       <div>
         <div className="settingsDiv">
           {this.renderSettingsButton()}
         </div>
         <img src={TriviaLogo} alt="Logo do jogo Trivia" className="trivia" />
-        {this.renderLoginSection(loginInputs)}
+        {this.renderLoginSection()}
         {this.renderJogarButton()}
       </div>
     );
