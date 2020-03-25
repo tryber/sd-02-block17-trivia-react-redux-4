@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { allInputsIn } from '../../../actions/LoginPage';
@@ -95,3 +96,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+
+LoginPage.propTypes = {
+  loginInputs: propTypes.any
+}
