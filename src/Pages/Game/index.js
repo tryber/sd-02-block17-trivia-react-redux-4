@@ -1,14 +1,30 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Header from './Header';
+import { connect } from 'react-redux';
+import propTypes from 'prop-types';
 import Questions from './Questions';
+import Header from './Header';
 import './index.css';
+import { thunkQuestions } from '../../Actions';
 
-export default class Game extends Component {
+class Game extends Component {
+  componentDidMount() {
+    const { importedQuestionThunk } = this.props;
+    importedQuestionThunk();
+  }
+
+  generateimage() {
+    const { email } = this.props;
+    const gravatarURL = 'https://www.gravatar.com/avatar/';
+    return (
+      <img src={`${gravatarURL}${email}`} alt="Gravatar" />
+    );
+  }
+
   render() {
     const { history } = this.props;
     return (
       <div className="game-content">
+        {this.generateimage()}
         <Header />
         <Questions history={history} />
       </div>
@@ -16,8 +32,27 @@ export default class Game extends Component {
   }
 }
 
+const mapStateToProps = ({
+  apiReducer: {
+    questions,
+    fetching,
+  },
+  gravatarReducer:
+  { email },
+}) =>
+  ({ questions, fetching, email });
+
+const mapDispatchToProps = (dispatch) => ({
+  importedQuestionThunk: () => dispatch(thunkQuestions()),
+});
+
 Game.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
+  importedQuestionThunk: propTypes.func.isRequired,
+  email: propTypes.string.isRequired,
+  history: propTypes.shape({
+    push: propTypes.func.isRequired,
   }).isRequired,
 };
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Game);
