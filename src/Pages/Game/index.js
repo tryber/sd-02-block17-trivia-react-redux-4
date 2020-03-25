@@ -9,16 +9,25 @@ class Game extends Component {
     importedQuestionThunk();
   }
 
+  generateimage() {
+    const { email } = this.props;
+    const gravatarURL = 'https://www.gravatar.com/avatar/';
+    return (
+      <img src={`${gravatarURL}${email}`} alt="Gravatar"/>
+    )
+  };
+
   render() {
     return (
       <div>
         <p>Game</p>
+        {this.generateimage()}
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ apiReducer: { questions, fetching } }) => ({ questions, fetching });
+const mapStateToProps = ({ apiReducer: { questions, fetching }, gravatarReducer: { email } }) => ({ questions, fetching, email });
 
 const mapDispatchToProps = (dispatch) => ({
   importedQuestionThunk: () => dispatch(thunkQuestions()),
