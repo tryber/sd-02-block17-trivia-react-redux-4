@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { allInputsIn } from '../../../actions/Campo';
+import { allInputsIn } from '../../../actions/LoginPage';
 import { connect } from 'react-redux';
 import settingsBtn from '../../../imgs/settings.png';
 import './style.css';
 
-class Campo extends React.Component {
+class LoginPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -91,9 +91,9 @@ const mapDispatchToProps = (dispatch) => ({
   allInputsIn: (disabled) => dispatch(allInputsIn(disabled))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Campo);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
 
-Campo.propTypes = {
+LoginPage.propTypes = {
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
 };

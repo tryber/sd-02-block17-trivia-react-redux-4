@@ -1,4 +1,4 @@
-import { FILLED_INPUTS } from '../actions/Campo';
+import { FILLED_INPUTS } from '../actions/LoginPage';
 
 const INITIAL_STATE = {
   name: '',

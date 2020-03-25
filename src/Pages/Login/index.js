@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Campo from './components/Campo';
+import LoginPage from './components/LoginPage';
 
 import './style.css';
 
@@ -9,7 +9,7 @@ export default class Login extends Component {
     return (
       <div className="page_login">
         <div className="content">
-          <Campo />
+          <LoginPage />
         </div>
       </div>
     );
