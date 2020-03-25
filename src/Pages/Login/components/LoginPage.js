@@ -1,8 +1,5 @@
 import React from 'react';
-import propTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { allInputsIn } from '../../../actions/LoginPage';
 import settingsBtn from '../../../imgs/settings.png';
 import './style.css';
 
@@ -87,16 +84,4 @@ class LoginPage extends React.Component {
   }
 }
 
-const mapStateToProps = ({ loginInputs }) => ({
-  loginInputs,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  allInputsIn: (disabled) => dispatch(allInputsIn(disabled)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
-
-LoginPage.propTypes = {
-  loginInputs: propTypes.any
-}
+export default LoginPage;
