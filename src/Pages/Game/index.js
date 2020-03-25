@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import Header from './Header';
+import Questions from './Questions';
+import './index.css';
 
 export default class Game extends Component {
   render() {
     return (
-      <div>
-        <p>Game</p>
+      <div className="game-content">
+        <Header />
+        <Questions />
       </div>
     );
   }
