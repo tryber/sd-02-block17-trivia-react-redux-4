@@ -61,13 +61,17 @@ class LoginPage extends React.Component {
     );
   }
 
-  renderSettingsButton = () => (
-    <Link to="/settings">
-      <icon className="settingsBtn" data-testid="config-button">
-        <img className="settingsIcon" src={settingsBtn} alt="settings icon" />
-      </icon>
-    </Link>
-  );
+  renderSettingsButton() {
+    return (
+      <div>
+        <Link to="/settings">
+          <icon className="settingsBtn" data-testid="config-button">
+            <img className="settingsIcon" src={settingsBtn} alt="settings icon" />
+          </icon>
+        </Link>
+      </div>
+    );
+  };
 
   render() {
     return (
