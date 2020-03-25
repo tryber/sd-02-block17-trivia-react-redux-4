@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-
 import LoginPage from './components/LoginPage';
-
-import './style.css';
 
 export default class Login extends Component {
   render() {

@@ -2,6 +2,7 @@ import {
   ADD_QUESTION_RESULTS,
   ADD_SCORE,
   ADD_QUESTION_NUMBER,
+  ADD_QUESTION_CORRECT,
 } from '../actions/questions';
 import data from '../Pages/Game/questionsMock';
 
@@ -10,6 +11,7 @@ const INITIAL_STATE_QUESTION = {
   questionsResults: data,
   score: 0,
   questionNumber: 0,
+  correct: 0,
 };
 
 const questionReducer = (state = INITIAL_STATE_QUESTION, action) => {
@@ -28,6 +30,12 @@ const questionReducer = (state = INITIAL_STATE_QUESTION, action) => {
       return {
         ...state,
         questionNumber: state.questionNumber + action.questionNumber,
+      };
+    }
+    case ADD_QUESTION_CORRECT: {
+      return {
+        ...state,
+        correct: state.correct + action.questionCorrect,
       };
     }
     default:
