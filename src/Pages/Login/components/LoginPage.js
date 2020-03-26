@@ -61,8 +61,7 @@ class LoginPage extends React.Component {
     );
   }
 
-  renderSettingsButton() {
-    console.log(this);
+  static renderSettingsButton() {
     return (
       <div>
         <Link to="/settings">
@@ -78,7 +77,7 @@ class LoginPage extends React.Component {
     return (
       <div>
         <div className="settingsDiv">
-          {this.renderSettingsButton()}
+          {LoginPage.renderSettingsButton()}
         </div>
         <img src={TriviaLogo} alt="Logo do jogo Trivia" className="trivia" />
         {this.renderLoginSection()}
