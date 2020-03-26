@@ -9,9 +9,9 @@ class LoginPage extends React.Component {
     return (
       <div>
         <Link to="/settings">
-          <icon className="settingsBtn" data-testid="config-button">
+          <i className="settingsBtn" data-testid="config-button">
             <img className="settingsIcon" src={settingsBtn} alt="settings icon" />
-          </icon>
+          </i>
         </Link>
       </div >
     );
@@ -58,7 +58,6 @@ class LoginPage extends React.Component {
 
   renderJogarButton() {
     const { username, email } = this.state;
-    console.log(username, email);
     let disabled = false;
     if (username === '' || email === '') {
       disabled = true;
