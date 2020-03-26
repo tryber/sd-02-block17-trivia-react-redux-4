@@ -4,16 +4,11 @@ import PropTypes from 'prop-types';
 
 import './style.css';
 
-const propriedade = {
-  jogador: 'Eduardo',
-  acertos: 2,
-};
-
 function situacaoRender(acertos) {
   return (
     (acertos < 3)
-      ? <h3 className="title">Podia ser melhor...</h3>
-      : <h3 className="title">Mandou bem !</h3>
+      ? <p className="title" data-testid="feedback-text">Podia ser melhor...</p>
+      : <p className="title" data-testid="feedback-text">Mandou bem!</p>
   );
 }
 
@@ -36,17 +31,17 @@ class Feedback extends Component {
 
   headerRender() {
     const { score } = this.props;
-    const { jogador } = propriedade;
+    const name = '';
     return (
       <div className="header">
         <p>
           Jogador:
           <span>
-            {jogador}
+            {name}
           </span>
         </p>
         <div className="pontos">
-          <p>
+          <p data-testid="header-score">
             Pontos:
             {score}
           </p>
@@ -59,19 +54,19 @@ class Feedback extends Component {
   }
 
   score() {
-    const { score, correct } = this.props;
+    const { score, assertions } = this.props;
     return (
       <div>
         <p>
           Você acertou
-          <span>
-            {correct}
+          <span data-testid="feedback-total-question">
+            {assertions}
           </span>
           questões
         </p>
         <p>
           Um total de
-          <span>
+          <span data-testid="feedback-total-score">
             {score}
           </span>
           pontos
@@ -84,7 +79,9 @@ class Feedback extends Component {
     const { score } = this.props;
     return (
       <div className="body">
-        {situacaoRender(score)}
+        <div>
+          {situacaoRender(score)}
+        </div>
         {this.score()}
         <div>
           <button
@@ -121,12 +118,13 @@ Feedback.propTypes = {
     push: PropTypes.func.isRequired,
   }).isRequired,
   score: PropTypes.number.isRequired,
-  correct: PropTypes.number.isRequired,
+  assertions: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   score: state.questionReducer.score,
-  correct: state.questionReducer.correct,
+  assertions: state.questionReducer.assertions,
+  gravatar: state.gravatarReducer.gravatar,
 });
 
 export default connect(mapStateToProps)(Feedback);

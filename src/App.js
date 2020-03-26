@@ -16,7 +16,7 @@ export default function App() {
         <Switch>
           <Route exact path="/" component={Login} />
           <Route exact path="/game-page" component={Game} />
-          <Route exact path="/game-feedback" component={FeedBack} />
+          <Route exact path="/feedback" component={FeedBack} />
           <Route exact path="/game-configuration" component={Configuracao} />
           <Route exact path="/game-ranking" component={Ranking} />
           <Route component={NotFound} />

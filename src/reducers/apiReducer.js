@@ -1,8 +1,9 @@
-import { GET_QUESTIONS, GET_QUESTIONS_SUCCESS, GET_QUESTIONS_FAILURE } from '../Actions';
+import { GET_QUESTIONS, GET_QUESTIONS_SUCCESS, GET_QUESTIONS_FAILURE } from '../actions';
 
 const initialState = {
   questions: [],
   fetching: true,
+  categorys: [],
 };
 
 const apiReducer = (state = initialState, action) => {

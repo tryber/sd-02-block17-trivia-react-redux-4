@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import { addSelected } from '../../../actions/dropdown';
 import './style.css';
 
-export default class Dropdown extends Component {
+class Dropdown extends Component {
   constructor(props) {
     super(props);
     this.dropdown = false;
@@ -12,7 +14,9 @@ export default class Dropdown extends Component {
   }
 
   clickHandle(e) {
+    const { getSelected } = this.props;
     this.selected.current.innerText = e.target.outerText;
+    getSelected(e.target.outerText);
     this.dropDonw();
   }
 
@@ -24,6 +28,7 @@ export default class Dropdown extends Component {
       this.list.current.style.display = 'flex';
     }
   }
+
   renderBtn() {
     return (
       <button
@@ -40,9 +45,9 @@ export default class Dropdown extends Component {
   }
 
   render() {
-    const { options } = this.props;
+    const { options, testid } = this.props;
     return (
-      <div className="comp_dropdown">
+      <div className="comp_dropdown" data-testid={testid}>
         <div className="selected">
           {this.renderBtn()}
         </div>
@@ -66,4 +71,14 @@ Dropdown.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.string.isRequired,
   ).isRequired,
+  getSelected: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = () => ({});
+
+const mapDispatchToProps = (dispatch) => ({
+  getSelected: (selected) => dispatch(addSelected(selected)),
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dropdown);
