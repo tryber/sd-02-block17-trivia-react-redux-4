@@ -4,11 +4,18 @@ import MD5 from 'crypto-js/md5';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { catchEmail } from '../../../actions/gravatarAction';
+import { thunkToken } from '../../../actions';
 import settingsBtn from '../../../imgs/settings.png';
 import './style.css';
 
 
-class Campo extends React.Component {
+class LoginPage extends React.Component {
+  generateTokenQuestions() {
+    const { importedGravatarReducer, email, importedTokenReducer } = this.props;
+    importedGravatarReducer(MD5(email).toString());
+    importedTokenReducer();
+  }
+
   renderLoginSection() {
     const { importedGravatarReducer, email } = this.props;
     return (
@@ -32,7 +39,7 @@ class Campo extends React.Component {
         <Link to="/game-page">
           <button
             className="btn-jogar"
-            onClick={() => importedGravatarReducer(MD5(email).toString())}
+            onClick={() => this.generateTokenQuestions()}
           >
             JOGAR!
           </button>
@@ -42,7 +49,6 @@ class Campo extends React.Component {
   }
 
   renderSettingsButton() {
-    console.log(this);
     return (
       <Link to="/settings">
         <div className="settingsBtn">
@@ -64,12 +70,12 @@ class Campo extends React.Component {
   }
 }
 
-Campo.propTypes = {
+LoginPage.propTypes = {
   importedGravatarReducer: PropTypes.func.isRequired,
   email: PropTypes.string,
 };
 
-Campo.defaultProps = {
+LoginPage.defaultProps = {
   email: '',
 };
 
@@ -77,6 +83,7 @@ const mapStateToProps = ({ gravatarReducer: { email } }) => ({ email });
 
 const mapDispatchToProps = (dispatch) => ({
   importedGravatarReducer: (email) => dispatch(catchEmail(email)),
+  importedTokenReducer: () => dispatch(thunkToken()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Campo);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

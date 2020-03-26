@@ -4,12 +4,12 @@ import propTypes from 'prop-types';
 import Questions from './Questions';
 import Header from './Header';
 import './index.css';
-import { thunkQuestions } from '../../Actions';
+import { thunkQuestions } from '../../actions';
 
 class Game extends Component {
   componentDidMount() {
-    const { importedQuestionThunk } = this.props;
-    importedQuestionThunk();
+    const { importedQuestionThunk, token } = this.props;
+    importedQuestionThunk(token);
   }
 
   generateimage() {
@@ -21,11 +21,12 @@ class Game extends Component {
   }
 
   render() {
-    const { history } = this.props;
+    const { history, token } = this.props;
     return (
       <div className="game-content">
         {this.generateimage()}
         <Header />
+        <h1>{token}</h1>
         <Questions history={history} />
       </div>
     );
@@ -39,11 +40,13 @@ const mapStateToProps = ({
   },
   gravatarReducer:
   { email },
+  tokenReducer:
+  { token },
 }) =>
-  ({ questions, fetching, email });
+  ({ questions, fetching, email, token });
 
 const mapDispatchToProps = (dispatch) => ({
-  importedQuestionThunk: () => dispatch(thunkQuestions()),
+  importedQuestionThunk: (token) => dispatch(thunkQuestions(token)),
 });
 
 Game.propTypes = {
