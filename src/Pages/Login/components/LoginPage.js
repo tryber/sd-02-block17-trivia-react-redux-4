@@ -79,7 +79,7 @@ class LoginPage extends React.Component {
         <div className="settingsDiv">
           {LoginPage.renderSettingsButton()}
         </div>
-        <img src={TriviaLogo} alt="Logo do jogo Trivia" className="trivia" />
+        <img src={TriviaLogo} alt="TriviaLogo" className="trivia" />
         {this.renderLoginSection()}
         {this.renderJogarButton()}
       </div>
