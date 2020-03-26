@@ -88,7 +88,7 @@ describe('Testes relacionados ao botão JOGAR! da página da página de login', 
 });
 
 describe('Testes relacionados ao botão de configurações da página da página de login', () => {
-  it('O botão de configurações deve estar presente na tela', () => {
+  it('O botão de configurações deve estar presente na tela e ser um icon', () => {
     const { getByTestId } = render(
       <MemoryRouter>
         <LoginPage />
