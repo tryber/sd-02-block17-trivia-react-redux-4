@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 import settingsBtn from '../../../imgs/settings.png';
 import TriviaLogo from '../../../trivia.png';
 import './style.css';
