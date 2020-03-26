@@ -60,7 +60,7 @@ Game.propTypes = {
 
 Game.defaultProps = {
   token: '',
-}
+};
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

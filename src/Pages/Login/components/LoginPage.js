@@ -73,6 +73,7 @@ class LoginPage extends React.Component {
 
 LoginPage.propTypes = {
   importedGravatarReducer: PropTypes.func.isRequired,
+  importedTokenReducer: PropTypes.func.isRequired,
   email: PropTypes.string,
 };
 
