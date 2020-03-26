@@ -5,6 +5,18 @@ import TriviaLogo from '../../../trivia.png';
 import './style.css';
 
 class LoginPage extends React.Component {
+  static renderSettingsButton() {
+    return (
+      <div>
+        <Link to="/settings">
+          <icon className="settingsBtn" data-testid="config-button">
+            <img className="settingsIcon" src={settingsBtn} alt="settings icon" />
+          </icon>
+        </Link>
+      </div >
+    );
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -58,18 +70,6 @@ class LoginPage extends React.Component {
           <button className="btn-jogar" data-testid="btn-play" disabled={disabled}>JOGAR!</button>
         </Link>
       </div>
-    );
-  }
-
-  static renderSettingsButton() {
-    return (
-      <div>
-        <Link to="/settings">
-          <icon className="settingsBtn" data-testid="config-button">
-            <img className="settingsIcon" src={settingsBtn} alt="settings icon" />
-          </icon>
-        </Link>
-      </div >
     );
   }
 
