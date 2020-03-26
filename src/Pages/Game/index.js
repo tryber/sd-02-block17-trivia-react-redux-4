@@ -52,10 +52,15 @@ const mapDispatchToProps = (dispatch) => ({
 Game.propTypes = {
   importedQuestionThunk: propTypes.func.isRequired,
   email: propTypes.string.isRequired,
+  token: propTypes.string,
   history: propTypes.shape({
     push: propTypes.func.isRequired,
   }).isRequired,
 };
+
+Game.defaultProps = {
+  token: '',
+}
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

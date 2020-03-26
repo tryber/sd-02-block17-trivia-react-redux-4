@@ -18,7 +18,7 @@ export const getQuestionsFailure = (error) => (
 );
 export const getToken = () => (
   { type: GET_TOKEN, loading: true }
-)
+);
 export const getTokenSuccess = (token) => (
   { type: GET_TOKEN_SUCCESS, token, loading: false }
 );

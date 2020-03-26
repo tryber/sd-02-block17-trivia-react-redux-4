@@ -49,6 +49,7 @@ class LoginPage extends React.Component {
   }
 
   renderSettingsButton() {
+    console.log(this);
     return (
       <Link to="/settings">
         <div className="settingsBtn">

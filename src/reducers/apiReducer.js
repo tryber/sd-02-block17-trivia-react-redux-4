@@ -8,7 +8,7 @@ const initialQuestions = {
 const initialToken = {
   loading: true,
   token: '',
-}
+};
 
 export const apiReducer = (state = initialQuestions, action) => {
   switch (action.type) {
@@ -54,4 +54,4 @@ export const tokenReducer = (state = initialToken, action) => {
       };
     default: return state;
   }
-}
+};
