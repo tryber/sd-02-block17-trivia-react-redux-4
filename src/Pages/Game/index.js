@@ -50,7 +50,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 Game.propTypes = {
   importedQuestionThunk: propTypes.func.isRequired,
-  email: propTypes.string.isRequired,
   token: propTypes.string,
   fetching: propTypes.bool.isRequired,
   history: propTypes.shape({
