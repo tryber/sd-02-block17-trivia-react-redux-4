@@ -20,10 +20,7 @@ class Questions extends Component {
     this.tick = this.tick.bind(this);
   }
 
-  async tick() {
-    const {
-      startTick, seconds, stopTimer, setClassButton,
-    } = this.props;
+  async tick(startTick, seconds, stopTimer, setClassButton) {
     await startTick();
     if (seconds <= 1) {
       stopTimer();
@@ -33,8 +30,10 @@ class Questions extends Component {
   }
 
   startTimer() {
-    const { setStateInterval } = this.props;
-    this.interval = setInterval(this.tick, 1000);
+    const {
+      startTick, seconds, stopTimer, setClassButton, setStateInterval,
+    } = this.props;
+    this.interval = setInterval(this.tick(startTick, seconds, stopTimer, setClassButton), 1000);
     setStateInterval(this.interval);
   }
 
@@ -78,8 +77,7 @@ class Questions extends Component {
   }
 
   render() {
-    const { questions, questionNumber, correct } = this.props;
-    console.log(correct);
+    const { questions, questionNumber } = this.props;
     if (questions.response_code === 3) return <div>Pagina Inicial</div>;
     if (questionNumber > 4) return <Redirect to="game-feedback" />;
     return (

@@ -10,27 +10,24 @@ const generateimage = (email) => {
   );
 };
 
-const Header = ({ score, email }) => {
-
-  return (
-    <header className="header-content">
-      {generateimage(email)}
-      <h1
-        data-testid="header-player-name"
-        className="jogador"
-      >
-        Jogador: nome
-      </h1>
-      <h2
-        data-testid="header-score"
-        className="score"
-      >
-        Pontos:
-        {score}
-      </h2>
-    </header>
-  );
-};
+const Header = ({ score, email }) => (
+  <header className="header-content">
+    {generateimage(email)}
+    <h1
+      data-testid="header-player-name"
+      className="jogador"
+    >
+      Jogador: nome
+    </h1>
+    <h2
+      data-testid="header-score"
+      className="score"
+    >
+      Pontos:
+      {score}
+    </h2>
+  </header>
+);
 
 const mapStateToProps = ({
   gravatarReducer: {

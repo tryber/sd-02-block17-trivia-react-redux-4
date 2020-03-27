@@ -43,9 +43,39 @@ class Checkbox extends Component {
     this.setState({ canShuffle: true });
   }
 
+  renderNextButton(newArray, difficulty, correctAnswer) {
+    const { correct, incorrect } = this.props;
+    return (
+      newArray.map((answer) => {
+        if (answer === correctAnswer) {
+          return (
+            <button
+              onClick={(e) => this.handleClickButton(e, difficulty)}
+              type="button"
+              className={`answer-content ${correct}`}
+              key={answer}
+            >
+              {answer}
+            </button>
+          );
+        }
+        return (
+          <button
+            onClick={() => this.handleClickButton()}
+            type="button"
+            className={`answer-content ${incorrect}`}
+            key={answer}
+          >
+            {answer}
+          </button>
+        );
+      })
+    );
+  }
+
   render() {
     const {
-      questions, questionNumber, correct, incorrect, canNextQuestion,
+      questions, questionNumber, canNextQuestion,
     } = this.props;
     const { canShuffle, newArray } = this.state;
     const {
@@ -55,32 +85,7 @@ class Checkbox extends Component {
       this.shuffle([correctAnswer, ...incorrectAnswer]);
     }
     if (newArray.length > 0) {
-      return (
-        newArray.map((answer) => {
-          if (answer === correctAnswer) {
-            return (
-              <button
-                onClick={(e) => this.handleClickButton(e, difficulty)}
-                type="button"
-                className={`answer-content ${correct}`}
-                key={answer}
-              >
-                {answer}
-              </button>
-            );
-          }
-          return (
-            <button
-              onClick={() => this.handleClickButton()}
-              type="button"
-              className={`answer-content ${incorrect}`}
-              key={answer}
-            >
-              {answer}
-            </button>
-          );
-        })
-      );
+      return this.renderNextButton(newArray, difficulty, correctAnswer);
     }
     return null;
   }
