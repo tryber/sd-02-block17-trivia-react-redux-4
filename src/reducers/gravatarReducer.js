@@ -7,11 +7,10 @@ const initialState = {
 
 const localStorageAdmin = (param) => {
   if (localStorage.getItem(`${param}`) === null) {
-    localStorage.setItem(`${param}`, JSON.stringify(param))
+    localStorage.setItem(`${param}`, JSON.stringify(param));
   }
-  localStorage.getItem(`${param}`)
-}
-
+  localStorage.getItem(`${param}`);
+};
 
 const gravatarReducer = (state = initialState, action) => {
   switch (action.type) {

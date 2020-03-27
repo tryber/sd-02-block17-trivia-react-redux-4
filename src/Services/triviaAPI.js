@@ -10,13 +10,10 @@ export const getQuestions = (token, category, difficulty, type) => {
       .then((response) => (
         response
           .json()
-          .then((json) => (param.ok ? Promise.resolve(json) : Promise.reject(json)))
-      ))
+          .then((json) => (response.ok ? Promise.resolve(json) : Promise.reject(json)))
+      ));
   }
-  if (difficulty !== '' && category !== '') {
-
-  }
-}
+};
 
 export const generateToken = () => (
   fetch(triviaTokenURL)
