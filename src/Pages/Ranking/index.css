@@ -1,0 +1,15 @@
+.page-title {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 40px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+.ranking-results {
+  border: solid 1px red;
+  height: 300px;
+  justify-content: center;
+  margin: auto;
+  width: 800px;
+}
