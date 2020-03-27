@@ -18,10 +18,11 @@ export const apiReducer = (state = initialQuestions, action) => {
         loading: action.loading,
       };
     case GET_QUESTIONS_SUCCESS:
+      console.log('questions Success: ', action)
       return {
         ...state,
         loading: action.loading,
-        questions: action.questions,
+        questions: action.data.results,
       };
     case GET_QUESTIONS_FAILURE:
       return {

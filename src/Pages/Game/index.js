@@ -8,8 +8,10 @@ import { thunkQuestions } from '../../actions';
 
 class Game extends Component {
   componentDidMount() {
-    const { importedQuestionThunk, token } = this.props;
+    const { importedQuestionThunk, token, email } = this.props;
+    const local = JSON.parse(localStorage)
     importedQuestionThunk(token);
+    local.find(email) ? null : localStorage.setItem(JSON.stringify(`${email}`, 'name' ))
   }
 
   generateimage() {

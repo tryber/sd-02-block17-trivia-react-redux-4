@@ -11,7 +11,7 @@ export const getQuestionsAction = (token) => (
   { type: GET_QUESTIONS, loading: true, token }
 );
 export const getQuestionsSuccess = (data) => (
-  { type: GET_QUESTIONS_SUCCESS, questions: data.results, loading: false }
+  { type: GET_QUESTIONS_SUCCESS, data, loading: false }
 );
 export const getQuestionsFailure = (error) => (
   { type: GET_QUESTIONS_FAILURE, error, loading: false }
