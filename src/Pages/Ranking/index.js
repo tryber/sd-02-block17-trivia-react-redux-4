@@ -10,3 +10,4 @@ export default class Ranking extends Component {
     );
   }
 }
+
