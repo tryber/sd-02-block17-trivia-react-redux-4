@@ -9,7 +9,9 @@ import data from '../Pages/Game/questionsMock';
 
 const INITIAL_STATE_QUESTION = {
   questionsResults: data,
+  score: 0,
   questionNumber: 0,
+  assertions: 0,
 };
 
 const questionReducer = (state = INITIAL_STATE_QUESTION, action) => {

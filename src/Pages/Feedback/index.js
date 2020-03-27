@@ -30,7 +30,7 @@ class Feedback extends Component {
   }
 
   headerRender() {
-    const { score } = this.props;
+    const { player: { score } } = this.props;
     const name = '';
     return (
       <div className="header">
@@ -54,7 +54,7 @@ class Feedback extends Component {
   }
 
   score() {
-    const { score, assertions } = this.props;
+    const { player: { score, assertions } } = this.props;
     return (
       <div>
         <p>
@@ -76,7 +76,7 @@ class Feedback extends Component {
   }
 
   bodyRender() {
-    const { score } = this.props;
+    const { player: { score } } = this.props;
     return (
       <div className="body">
         <div>
@@ -122,9 +122,10 @@ Feedback.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  score: state.questionReducer.score,
-  assertions: state.questionReducer.assertions,
-  gravatar: state.gravatarReducer.gravatar,
+  player: state.gravatarReducer.player,
+  // score: state.questionReducer.score,
+  // assertions: state.questionReducer.assertions,
+  // gravatar: state.gravatarReducer.gravatar,
 });
 
 export default connect(mapStateToProps)(Feedback);
