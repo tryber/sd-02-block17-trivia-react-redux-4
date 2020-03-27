@@ -1,110 +1,92 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
-import {
-  addQuestions, addQuestionNumber, addScore, addQuestionCorrect,
-} from '../../actions/questions';
-import { addSelected } from '../../actions/checkbox';
-import { addReset, addCounter } from '../../actions/timer';
-
 import Timer from './Timer';
 import Checkbox from './Checkbox';
 import './Questions.css';
 
+import { addQuestionNumber } from '../../actions/questions';
+import { addClassButton } from '../../actions/checkbox';
+import {
+  setAddInterval, addStartTimer, addTick, setStopTimer,
+} from '../../actions/timer';
 
-function difficultyScore(difficulty) {
-  switch (difficulty) {
-    case 'hard':
-      return 3;
-    case 'medium':
-      return 2;
-    case 'easy':
-      return 1;
-    default:
-      return 0;
-  }
-}
 
 class Questions extends Component {
   constructor(props) {
     super(props);
-    this.nextQuestion = this.nextQuestion.bind(this);
+    this.startTimer = this.startTimer.bind(this);
+    this.tick = this.tick.bind(this);
   }
 
-  componentDidUpdate() {
-    const { counter } = this.props;
-    if (counter === 0) {
-      this.isSelected();
-    }
-  }
-
-  nextQuestion() {
+  async tick() {
     const {
-      selected,
+      startTick, seconds, stopTimer, setClassButton,
     } = this.props;
-
-    if (selected) {
-      this.isSelected();
+    await startTick();
+    if (seconds <= 1) {
+      stopTimer();
+      clearInterval(this.interval);
+      setClassButton('correct-answer', 'incorrect-answer', true);
     }
   }
 
-  isSelected() {
-    const {
-      markedAnswer,
-      questionNumber,
-      questionsResults,
-      getQuestionsNumber,
-      getQuestionCorrect,
-      getSelected,
-      getReset,
-      getScore,
-      history,
-      counter,
-    } = this.props;
+  startTimer() {
+    const { setStateInterval } = this.props;
+    this.interval = setInterval(this.tick, 1000);
+    setStateInterval(this.interval);
+  }
 
-    const { results } = questionsResults[questionNumber];
-    if (markedAnswer === results[0].correct_answer) {
-      getQuestionCorrect(1);
-      getQuestionsNumber(1);
-      getScore(10 + (counter * difficultyScore(results[0].difficulty)));
-    } else {
-      getQuestionsNumber(1);
-    }
-    if (questionNumber >= 4) {
-      history.push('/game-feedback');
-    }
-    getSelected(false);
-    getReset();
+  handleClickButton() {
+    const { setQuestionNumber, setClassButton, getStartTime } = this.props;
+    getStartTime();
+    this.startTimer();
+    setQuestionNumber();
+    setClassButton('', '', false);
+  }
+
+  QuestionBox() {
+    const { questions, questionNumber } = this.props;
+    const { category, question } = questions.results[questionNumber];
+    return (
+      <div className="question-content">
+        <div data-testid="question-category" className="question-header">{category}</div>
+        <div className="question-body">{question}</div>
+      </div>
+    );
+  }
+
+  AnswerBox() {
+    const { canNextQuestion } = this.props;
+    return (
+      <div className="answers-content">
+        <Checkbox />
+        {(canNextQuestion)
+          ? (
+            <button
+              onClick={() => this.handleClickButton()}
+              className="next-button"
+              type="button"
+            >
+              Próximo
+            </button>
+          )
+          : null}
+      </div>
+    );
   }
 
   render() {
-    const {
-      questionNumber, questionsResults,
-    } = this.props;
-    const { results } = questionsResults[questionNumber];
+    const { questions, questionNumber, correct } = this.props;
+    console.log(correct);
+    if (questions.response_code === 3) return <div>Pagina Inicial</div>;
+    if (questionNumber > 4) return <Redirect to="game-feedback" />;
     return (
       <div className="game-container">
-        <div className="question-content">
-          <div className="question-header">
-            <Timer />
-            <h2 className="category">{results[0].category}</h2>
-          </div>
-          <div className="question-body">
-            <h3 className="question">{results[0].question}</h3>
-          </div>
-        </div>
-        <div className="answers-content">
-          <Checkbox questionNumber={questionNumber} />
-          <div className="next-button-content">
-            <button
-              className="next-button"
-              type="button"
-              onClick={({ target }) => this.nextQuestion(target)}
-            >
-              Proxima
-            </button>
-          </div>
-        </div>
+        {this.QuestionBox()}
+        <Timer />
+        {this.AnswerBox()}
       </div>
     );
   }
@@ -112,50 +94,40 @@ class Questions extends Component {
 
 const mapStateToProps = ({
   timerReducer: {
-    counter,
+    seconds,
   },
   checkboxReducer: {
-    markedAnswer,
-    selected,
+    canNextQuestion,
   },
   questionReducer: {
-    questionsResults,
-    score,
     questionNumber,
-    correct,
+  },
+  apiReducer: {
+    questions,
   },
 }) => ({
-  markedAnswer,
-  questionsResults,
-  score,
+  seconds,
+  canNextQuestion,
   questionNumber,
-  correct,
-  selected,
-  counter,
+  questions,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getQuestions: (data) => dispatch(addQuestions(data)),
-  getScore: (score) => dispatch(addScore(score)),
-  getQuestionsNumber: (questionNumber) => dispatch(addQuestionNumber(questionNumber)),
-  getQuestionCorrect: (questionCorrect) => dispatch(addQuestionCorrect(questionCorrect)),
-  getSelected: (selected) => dispatch(addSelected(selected)),
-  getReset: () => dispatch(addReset()),
-  getAddCounter: (counter) => dispatch(addCounter(counter)),
+  startTick: () => dispatch(addTick()),
+  stopTimer: () => dispatch(setStopTimer()),
+  getStartTime: () => dispatch(addStartTimer()),
+  setStateInterval: (interval) => dispatch(setAddInterval(interval)),
+  setQuestionNumber: () => dispatch(addQuestionNumber()),
+  setClassButton: (correct, incorrect, nextButton) => (
+    dispatch(addClassButton(correct, incorrect, nextButton))
+  ),
 });
 
 Questions.propTypes = {
-  markedAnswer: propTypes.string,
-  questionResults: propTypes.instanceOf(Array),
+  seconds: propTypes.number,
+  canNextQuestion: propTypes.bool,
   questionNumber: propTypes.number,
-  score: propTypes.number,
-  getScore: propTypes.func,
-  getQuestionsNumber: propTypes.func,
-  getQuestions: propTypes.func,
-  getQuestionCorrect: propTypes.func,
-  getSelected: propTypes.func,
-  getReset: propTypes.func,
-  getAddCounter: propTypes.func,
+  questions: propTypes.instanceOf(Array),
 }.isRequired;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Questions);

@@ -4,7 +4,8 @@ import propTypes from 'prop-types';
 import Questions from './Questions';
 import Header from './Header';
 import './index.css';
-import { thunkQuestions } from '../../Actions';
+
+import { thunkQuestions } from '../../actions';
 
 class Game extends Component {
   componentDidMount() {
@@ -12,19 +13,18 @@ class Game extends Component {
     importedQuestionThunk();
   }
 
-  generateimage() {
-    const { email } = this.props;
-    const gravatarURL = 'https://www.gravatar.com/avatar/';
-    return (
-      <img src={`${gravatarURL}${email}`} alt="Gravatar" />
-    );
-  }
-
   render() {
-    const { history } = this.props;
+    const { history, fetching } = this.props;
+    if (fetching) {
+      return (
+        <div className="game-content">
+          <Header />
+          <div>LOADING...</div>
+        </div>
+      );
+    }
     return (
       <div className="game-content">
-        {this.generateimage()}
         <Header />
         <Questions history={history} />
       </div>
@@ -39,8 +39,7 @@ const mapStateToProps = ({
   },
   gravatarReducer:
   { email },
-}) =>
-  ({ questions, fetching, email });
+}) => ({ questions, fetching, email });
 
 const mapDispatchToProps = (dispatch) => ({
   importedQuestionThunk: () => dispatch(thunkQuestions()),
@@ -48,7 +47,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 Game.propTypes = {
   importedQuestionThunk: propTypes.func.isRequired,
-  email: propTypes.string.isRequired,
+  fetching: propTypes.bool.isRequired,
   history: propTypes.shape({
     push: propTypes.func.isRequired,
   }).isRequired,

@@ -6,7 +6,6 @@ const initialState = {
 };
 
 const gravatarReducer = (state = initialState, action) => {
-  console.log(action);
   switch (action.type) {
     case GET_GRAVATAR:
       return {

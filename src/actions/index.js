@@ -8,7 +8,7 @@ export const getQuestionsAction = () => (
   { type: GET_QUESTIONS, loading: true }
 );
 export const getQuestionsSuccess = (data) => (
-  { type: GET_QUESTIONS_SUCCESS, questions: data.results }
+  { type: GET_QUESTIONS_SUCCESS, questions: data }
 );
 export const getQuestionsFailure = (error) => (
   { type: GET_QUESTIONS_FAILURE, error }

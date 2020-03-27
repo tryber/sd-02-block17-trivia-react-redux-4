@@ -2,62 +2,73 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 
-import { addReset, addCounter } from '../../actions/timer';
+import {
+  addStartTimer, addTick, setStopTimer, setAddInterval,
+} from '../../actions/timer';
+import { addClassButton } from '../../actions/checkbox';
 
 class Timer extends Component {
   constructor(props) {
     super(props);
-    this.myTimer = this.myTimer.bind(this);
+    this.tick = this.tick.bind(this);
+    this.startTimer = this.startTimer.bind(this);
   }
 
-  componentDidMount() {
-    this.myTimer();
+  async componentDidMount() {
+    const { getStartTime } = this.props;
+    await getStartTime();
+    this.startTimer();
   }
 
-  componentDidUpdate() {
-    const { getReset, counter } = this.props;
-    if (counter === 10) {
-      getReset();
-      this.myTimer();
+  async tick() {
+    const {
+      startTick, seconds, stopTimer, setClassButton,
+    } = this.props;
+    await startTick();
+    if (seconds <= 1) {
+      stopTimer();
+      clearInterval(this.interval);
+      setClassButton('correct-answer', 'incorrect-answer', true);
     }
   }
 
-  myTimer() {
-    const { getAddCounter, counter } = this.props;
-    setTimeout(() => {
-      if (counter > 1) {
-        this.myTimer();
-        getAddCounter(1);
-      }
-    }, 1000);
+  startTimer() {
+    const { setStateInterval } = this.props;
+    this.interval = setInterval(this.tick, 1000);
+    setStateInterval(this.interval);
   }
 
   render() {
-    const { counter } = this.props;
+    const { seconds } = this.props;
     return (
-      <div className="comp_timer">
-        <p>
-          Counter:
-          <span>
-            {counter}
-          </span>
-        </p>
+      <div data-testid="timer" className="comp_timer">
+        Counter:
+        {seconds}
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  counter: state.timerReducer.counter,
+const mapStateToProps = ({
+  timerReducer: {
+    seconds,
+  },
+}) => ({
+  seconds,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getReset: () => dispatch(addReset()),
-  getAddCounter: (counter) => dispatch(addCounter(counter)),
+  setStateInterval: (interval) => dispatch(setAddInterval(interval)),
+  getStartTime: () => dispatch(addStartTimer()),
+  startTick: () => dispatch(addTick()),
+  stopTimer: () => dispatch(setStopTimer()),
+  setClassButton: (correct, incorrect, canNextButton) => (
+    dispatch(addClassButton(correct, incorrect, canNextButton))
+  ),
 });
 
 Timer.propTypes = {
-  counter: propTypes.number.isRequired,
+  seconds: propTypes.number.isRequired,
 }.isRequired;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timer);

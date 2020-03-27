@@ -1,28 +1,46 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import './Header.css';
 
-class Header extends Component {
-  render() {
-    const { score } = this.props;
-    return (
-      <header className="header-content">
-        <h1 className="jogador">Jogador: nome</h1>
-        <h2 className="score">
-          Pontos:
-          {score}
-        </h2>
-      </header>
-    );
-  }
-}
+const generateimage = (email) => {
+  const gravatarURL = 'https://www.gravatar.com/avatar/';
+  return (
+    <img src={`${gravatarURL}${email}`} alt="Gravatar" />
+  );
+};
+
+const Header = ({ score, email }) => {
+
+  return (
+    <header className="header-content">
+      {generateimage(email)}
+      <h1
+        data-testid="header-player-name"
+        className="jogador"
+      >
+        Jogador: nome
+      </h1>
+      <h2
+        data-testid="header-score"
+        className="score"
+      >
+        Pontos:
+        {score}
+      </h2>
+    </header>
+  );
+};
 
 const mapStateToProps = ({
+  gravatarReducer: {
+    email,
+  },
   questionReducer: {
     score,
   },
 }) => ({
+  email,
   score,
 });
 

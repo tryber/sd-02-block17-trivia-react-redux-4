@@ -1,20 +1,38 @@
-export const RESET_TIMER = 'RESET_TIMER';
-export const ADD_COUNTER = 'ADD_COUNTER';
+export const START_TIMER = 'START_TIMER';
+export const STOP_TIMER = 'STOP_TIMER';
+export const TICK = 'TICK';
+export const SET_INTERVAL = 'SET_INTERVAL';
 
-const receiveReset = (counter) => ({
-  type: RESET_TIMER,
-  counter,
+const receiveStartTimer = (startTime) => ({
+  type: START_TIMER,
+  startTime,
 });
 
-const receiveAddCounter = (counter) => ({
-  type: ADD_COUNTER,
-  counter,
+const receiveTick = () => ({
+  type: TICK,
 });
 
-export const addCounter = (counter) => (
-  (dispatch) => dispatch(receiveAddCounter(counter))
+const receiveStopTimer = () => ({
+  type: STOP_TIMER,
+});
+
+const receiveInterval = (interval) => ({
+  type: SET_INTERVAL,
+  interval,
+});
+
+export const addStartTimer = () => (
+  (dispatch) => dispatch(receiveStartTimer(30))
 );
 
-export const addReset = () => (
-  (dispatch) => dispatch(receiveReset(10))
+export const addTick = () => (
+  (dispatch) => dispatch(receiveTick())
+);
+
+export const setStopTimer = () => (
+  (dispatch) => dispatch(receiveStopTimer())
+);
+
+export const setAddInterval = (interval) => (
+  (dispatch) => dispatch(receiveInterval(interval))
 );

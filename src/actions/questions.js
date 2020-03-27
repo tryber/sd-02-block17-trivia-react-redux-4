@@ -8,9 +8,10 @@ const receiveQuestions = (questions) => ({
   questions,
 });
 
-const receiveScore = (score) => ({
+const receiveScore = (score, questionCorrect) => ({
   type: ADD_SCORE,
   score,
+  questionCorrect,
 });
 
 const receiveQuestionNumber = (questionNumber) => ({
@@ -18,23 +19,14 @@ const receiveQuestionNumber = (questionNumber) => ({
   questionNumber,
 });
 
-const receiveQuestionCorrect = (questionCorrect) => ({
-  type: ADD_QUESTION_CORRECT,
-  questionCorrect,
-});
-
-export const addQuestionCorrect = (questionCorrect) => (
-  (dispatch) => dispatch(receiveQuestionCorrect(questionCorrect))
-);
-
 export const addQuestions = (questions) => (
   (dispatch) => dispatch(receiveQuestions(questions))
 );
 
-export const addScore = (score) => (
-  (dispatch) => dispatch(receiveScore(score))
+export const addScore = (score, questionCorrect) => (
+  (dispatch) => dispatch(receiveScore(score, questionCorrect))
 );
 
-export const addQuestionNumber = (questionNumber) => (
-  (dispatch) => dispatch(receiveQuestionNumber(questionNumber))
+export const addQuestionNumber = () => (
+  (dispatch) => dispatch(receiveQuestionNumber(1))
 );

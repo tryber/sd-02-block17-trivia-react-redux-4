@@ -1,60 +1,134 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
-import data from './questionsMock';
-import { addMarkedAnswer, addSelected } from '../../actions/checkbox';
+import { addClassButton } from '../../actions/checkbox';
+import { addScore } from '../../actions/questions';
+import { setStopTimer } from '../../actions/timer';
 import './Checkbox.css';
 
 class Checkbox extends Component {
   constructor(props) {
     super(props);
-    this.handleChangeAnswer = this.handleChangeAnswer.bind(this);
+    this.state = {
+      newArray: [],
+      canShuffle: true,
+      difficulty: {
+        hard: 3,
+        medium: 2,
+        easy: 1,
+      },
+    };
   }
 
-  handleChangeAnswer(target) {
-    const { getAddMarkedAnswer, getSelected } = this.props;
-    getAddMarkedAnswer(target.innerText);
-    getSelected(true);
+  shuffle(array) {
+    const newArray = array;
+    for (let i = newArray.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    this.setState({ newArray, canShuffle: false });
+  }
+
+  async handleClickButton(e, level) {
+    const {
+      setClassButton, setScore, interval, stopTimer, seconds,
+    } = this.props;
+    const { difficulty } = this.state;
+    if (e) {
+      setScore(10 + (seconds * difficulty[level]), 1);
+    }
+    stopTimer();
+    clearInterval(interval);
+    await setClassButton('correct-answer', 'incorrect-answer', true);
+    this.setState({ canShuffle: true });
   }
 
   render() {
-    const { questionNumber } = this.props;
-    const { results } = data[questionNumber];
-    const answers = [results[0].correct_answer, ...results[0].incorrect_answers];
-    return (
-      <div className="flex-container">
-        {answers.map((answer) => (
-          <button
-            type="button"
-            key={answer}
-            className="answer-content"
-            onClick={({ target }) => this.handleChangeAnswer(target)}
-          >
-            {answer}
-          </button>
-        ))}
-      </div>
-    );
+    const {
+      questions, questionNumber, correct, incorrect, canNextQuestion,
+    } = this.props;
+    const { canShuffle, newArray } = this.state;
+    const {
+      correct_answer: correctAnswer, incorrect_answers: incorrectAnswer, difficulty,
+    } = questions.results[questionNumber];
+    if (!canNextQuestion && canShuffle) {
+      this.shuffle([correctAnswer, ...incorrectAnswer]);
+    }
+    if (newArray.length > 0) {
+      return (
+        newArray.map((answer) => {
+          if (answer === correctAnswer) {
+            return (
+              <button
+                onClick={(e) => this.handleClickButton(e, difficulty)}
+                type="button"
+                className={`answer-content ${correct}`}
+                key={answer}
+              >
+                {answer}
+              </button>
+            );
+          }
+          return (
+            <button
+              onClick={() => this.handleClickButton()}
+              type="button"
+              className={`answer-content ${incorrect}`}
+              key={answer}
+            >
+              {answer}
+            </button>
+          );
+        })
+      );
+    }
+    return null;
   }
 }
 
+
 const mapDispatchToProps = (dispatch) => ({
-  getAddMarkedAnswer: (answer) => dispatch(addMarkedAnswer(answer)),
-  getSelected: (selected) => dispatch(addSelected(selected)),
+  stopTimer: () => dispatch(setStopTimer()),
+  setClassButton: (correct, incorrect, nextButton) => (
+    dispatch(addClassButton(correct, incorrect, nextButton))
+  ),
+  setScore: (score, questionCorrect) => dispatch(addScore(score, questionCorrect)),
 });
 
 const mapStateToProps = ({
+  timerReducer: {
+    interval,
+    seconds,
+  },
   checkboxReducer: {
-    markedAnswer,
+    correct,
+    incorrect,
+    canNextQuestion,
+  },
+  questionReducer: {
+    questionNumber,
+  },
+  apiReducer: {
+    questions,
   },
 }) => ({
-  markedAnswer,
+  interval,
+  seconds,
+  correct,
+  incorrect,
+  canNextQuestion,
+  questionNumber,
+  questions,
 });
 
 Checkbox.propTypes = {
-  markedAnswer: propTypes.string,
+  interval: propTypes.number,
+  seconds: propTypes.number,
+  correct: propTypes.string,
+  incorrect: propTypes.string,
+  canNextQuestion: propTypes.bool,
   questionNumber: propTypes.number,
-  getAddMarkedAnswer: propTypes.func,
+  questions: propTypes.instanceOf(Array),
 }.isRequired;
 
 
