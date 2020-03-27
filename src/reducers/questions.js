@@ -18,6 +18,17 @@ const INITIAL_STATE_QUESTION = {
   questionNumber: 0,
 };
 
+const getScore = (state, action) => (
+  {
+    ...state,
+    player: {
+      ...state.player,
+      score: state.player.score + action.score,
+      assertions: state.player.assertions + action.questionCorrect,
+    },
+  }
+);
+
 const questionReducer = (state = INITIAL_STATE_QUESTION, action) => {
   switch (action.type) {
     case ADD_QUESTION_RESULTS:
@@ -26,14 +37,7 @@ const questionReducer = (state = INITIAL_STATE_QUESTION, action) => {
         questionsResults: action.questions,
       };
     case ADD_SCORE:
-      return {
-        ...state,
-        player: {
-          ...state.player,
-          score: state.player.score + action.score,
-          assertions: state.player.assertions + action.questionCorrect,
-        },
-      };
+      return getScore(state, action);
     case ADD_QUESTION_NUMBER: {
       return {
         ...state,
