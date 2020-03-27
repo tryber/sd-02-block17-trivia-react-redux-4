@@ -4,7 +4,7 @@ import propTypes from 'prop-types';
 import Questions from './Questions';
 import Header from './Header';
 import './index.css';
-import { thunkQuestions } from '../../Actions';
+import { thunkQuestions } from '../../actions';
 
 class Game extends Component {
   componentDidMount() {
