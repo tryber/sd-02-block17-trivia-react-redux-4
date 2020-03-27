@@ -11,7 +11,7 @@ const localStorageAdmin = (param) => {
   }
   localStorage.getItem(`${param}`);
 };
-// INSERIR FUNÇÃO PRA COLOCAR EMAIL E NOME NO LOCALSTORAGE; 
+// INSERIR FUNÇÃO PRA COLOCAR EMAIL E NOME NO LOCALSTORAGE;
 // SE EXISTE UM IGUAL, TRAZ.
 // SE NÃO EXISTIR, PUSH PRO LOCALSTORAGE.
 // SUGESTÃO DE JULIO: localStorage.setItem(action.email, JSON.stringfy(action.email)) ;
