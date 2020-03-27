@@ -72,6 +72,7 @@ Dropdown.propTypes = {
     PropTypes.string.isRequired,
   ).isRequired,
   getSelected: PropTypes.func.isRequired,
+  testid: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = () => ({});

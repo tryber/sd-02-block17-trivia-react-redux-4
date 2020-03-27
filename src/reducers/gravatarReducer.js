@@ -2,12 +2,6 @@ import { GET_GRAVATAR, GET_GRAVATAR_SUCCESS, GET_GRAVATAR_FAILURE } from '../act
 
 const initialState = {
   gravatar: '',
-  player: {
-    name: '',
-    assertions: 0,
-    score: 0,
-    gravatarEmail: '',
-  },
 };
 
 const gravatarReducer = (state = initialState, action) => {
