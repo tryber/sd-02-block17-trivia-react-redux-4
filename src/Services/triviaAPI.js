@@ -1,21 +1,25 @@
 const triviaTokenURL = 'https://opentdb.com/api_token.php?command=request';
-const triviaQuestionsURL = 'https://opentdb.com/api.php?amount=5&token=';
+const triviaQuestionsURL = 'https://opentdb.com/api.php?amount=5';
 
-const getQuestions = (token) => (
-  fetch(`${triviaQuestionsURL}${token}`)
-    .then((response) => (
-      response
-        .json()
-        .then((json) => (response.ok ? Promise.resolve(json) : Promise.reject(json)))
-    )));
+export const getQuestions = (token, category, difficulty, type) => {
+  const andCategory = `&category=${category}`;
+  const andDifficulty = `&difficulty=${difficulty}`;
+  const andType = `&type=${type}`;
+  if (difficulty !== '') {
+    fetch(`${triviaQuestionsURL}${andCategory}${andDifficulty}${andType}&token=${token}`)
+      .then((response) => (
+        response
+          .json()
+          .then((json) => (response.ok ? Promise.resolve(json) : Promise.reject(json)))
+      ));
+  }
+};
 
-const generateToken = () => (
+export const generateToken = () => (
   fetch(triviaTokenURL)
     .then((response) => (
       response
         .json()
         .then((json) => (response.ok ? Promise.resolve(json) : Promise.reject(json)))
-        .then((data) => getQuestions(data.token))
+        .then((data) => (data.token))
     )));
-
-export default generateToken;

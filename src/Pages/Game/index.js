@@ -4,17 +4,16 @@ import propTypes from 'prop-types';
 import Questions from './Questions';
 import Header from './Header';
 import './index.css';
-
 import { thunkQuestions } from '../../actions';
 
 class Game extends Component {
   componentDidMount() {
-    const { importedQuestionThunk } = this.props;
-    importedQuestionThunk();
+    const { importedQuestionThunk, token } = this.props;
+    importedQuestionThunk(token);
   }
 
   render() {
-    const { history, fetching } = this.props;
+    const { history, token, fetching } = this.props;
     if (fetching) {
       return (
         <div className="game-content">
@@ -26,6 +25,7 @@ class Game extends Component {
     return (
       <div className="game-content">
         <Header />
+        <h1>{token}</h1>
         <Questions history={history} />
       </div>
     );
@@ -39,18 +39,26 @@ const mapStateToProps = ({
   },
   gravatarReducer:
   { email },
-}) => ({ questions, fetching, email });
+  tokenReducer:
+  { token },
+}) =>
+  ({ questions, fetching, email, token });
 
 const mapDispatchToProps = (dispatch) => ({
-  importedQuestionThunk: () => dispatch(thunkQuestions()),
+  importedQuestionThunk: (token) => dispatch(thunkQuestions(token)),
 });
 
 Game.propTypes = {
   importedQuestionThunk: propTypes.func.isRequired,
+  token: propTypes.string,
   fetching: propTypes.bool.isRequired,
   history: propTypes.shape({
     push: propTypes.func.isRequired,
   }).isRequired,
+};
+
+Game.defaultProps = {
+  token: '',
 };
 
 
