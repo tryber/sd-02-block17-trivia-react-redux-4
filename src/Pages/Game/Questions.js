@@ -20,8 +20,9 @@ class Questions extends Component {
     this.tick = this.tick.bind(this);
   }
 
-  async tick(startTick, seconds, stopTimer, setClassButton) {
-    await startTick();
+  tick(startTick, stopTimer, setClassButton) {
+    const { seconds } = this.props;
+    startTick();
     if (seconds <= 1) {
       stopTimer();
       clearInterval(this.interval);
@@ -31,18 +32,20 @@ class Questions extends Component {
 
   startTimer() {
     const {
-      startTick, seconds, stopTimer, setClassButton, setStateInterval,
+      startTick, stopTimer, setClassButton, setStateInterval,
     } = this.props;
-    this.interval = setInterval(this.tick(startTick, seconds, stopTimer, setClassButton), 1000);
+    this.interval = setInterval(() => (
+      this.tick(startTick, stopTimer, setClassButton)
+    ), 1000);
     setStateInterval(this.interval);
   }
 
   handleClickButton() {
     const { setQuestionNumber, setClassButton, getStartTime } = this.props;
     getStartTime();
-    this.startTimer();
     setQuestionNumber();
     setClassButton('', '', false);
+    this.startTimer();
   }
 
   QuestionBox() {

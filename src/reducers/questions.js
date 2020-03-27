@@ -2,15 +2,20 @@ import {
   ADD_QUESTION_RESULTS,
   ADD_SCORE,
   ADD_QUESTION_NUMBER,
+  ADD_NAME_EMAIL,
 } from '../actions/questions';
 import data from '../Pages/Game/questionsMock';
 
 
 const INITIAL_STATE_QUESTION = {
   questionsResults: data,
-  score: 0,
+  player: {
+    name: '',
+    assertions: 0,
+    score: 0,
+    gravatarEmail: '',
+  },
   questionNumber: 0,
-  correct: 0,
 };
 
 const questionReducer = (state = INITIAL_STATE_QUESTION, action) => {
@@ -23,8 +28,11 @@ const questionReducer = (state = INITIAL_STATE_QUESTION, action) => {
     case ADD_SCORE:
       return {
         ...state,
-        score: state.score + action.score,
-        correct: state.correct + action.questionCorrect,
+        player: {
+          ...state.player,
+          score: state.player.score + action.score,
+          assertions: state.player.assertions + action.questionCorrect,
+        },
       };
     case ADD_QUESTION_NUMBER: {
       return {
@@ -34,6 +42,15 @@ const questionReducer = (state = INITIAL_STATE_QUESTION, action) => {
         classIncorrect: action.classIncorrect,
       };
     }
+    case ADD_NAME_EMAIL:
+      return {
+        ...state,
+        player: {
+          ...state.player,
+          name: action.name,
+          gravatarEmail: action.email,
+        },
+      };
     default:
       return state;
   }
