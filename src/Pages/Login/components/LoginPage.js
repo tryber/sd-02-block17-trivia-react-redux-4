@@ -45,7 +45,6 @@ class LoginPage extends React.Component {
   }
 
   renderLoginSection() {
-    const { importedGravatarReducer } = this.props;
     return (
       <div className="login_campo">
         <label htmlFor="email">E-mail do Gravatar:</label>
@@ -111,11 +110,6 @@ class LoginPage extends React.Component {
 LoginPage.propTypes = {
   importedGravatarReducer: PropTypes.func.isRequired,
   importedTokenReducer: PropTypes.func.isRequired,
-  email: PropTypes.string,
-};
-
-LoginPage.defaultProps = {
-  email: '',
 };
 
 const mapStateToProps = ({ gravatarReducer: { email } }) => ({ email });
