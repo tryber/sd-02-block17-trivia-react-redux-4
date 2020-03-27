@@ -1,20 +1,12 @@
-export const ADD_MARKED_ANSWER = 'ADD_MARKED_ANSWER';
-export const SELECTED = 'SELECTED';
+export const ADD_CLASS_BUTTON = 'ADD_CLASS_BUTTON';
 
-const receiveMarkedAnswer = (markedAnswer) => ({
-  type: ADD_MARKED_ANSWER,
-  markedAnswer,
+const receiveAddClassButton = (correct, incorrect, canNextQuestion) => ({
+  type: ADD_CLASS_BUTTON,
+  correct,
+  incorrect,
+  canNextQuestion,
 });
 
-const receiveSelected = (selected) => ({
-  type: SELECTED,
-  selected,
-});
-
-export const addMarkedAnswer = (markedAnswer) => (
-  (dispatch) => dispatch(receiveMarkedAnswer(markedAnswer))
-);
-
-export const addSelected = (selected) => (
-  (dispatch) => dispatch(receiveSelected(selected))
+export const addClassButton = (correct, incorrect, canNextQuestion) => (
+  (dispatch) => dispatch(receiveAddClassButton(correct, incorrect, canNextQuestion))
 );

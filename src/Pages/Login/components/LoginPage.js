@@ -14,7 +14,7 @@ class LoginPage extends React.Component {
             <img className="settingsIcon" src={settingsBtn} alt="settings icon" />
           </i>
         </Link>
-      </div >
+      </div>
     );
   }
 
@@ -67,7 +67,14 @@ class LoginPage extends React.Component {
     return (
       <div className="btn-div">
         <Link to="/game-page">
-          <button className="btn-jogar" data-testid="btn-play" disabled={disabled}>JOGAR!</button>
+          <button
+            type="button"
+            className="btn-jogar"
+            data-testid="btn-play"
+            disabled={disabled}
+          >
+            JOGAR!
+          </button>
         </Link>
       </div>
     );
