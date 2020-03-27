@@ -12,19 +12,18 @@ class Game extends Component {
     importedQuestionThunk(token);
   }
 
-  generateimage() {
-    const { email } = this.props;
-    const gravatarURL = 'https://www.gravatar.com/avatar/';
-    return (
-      <img src={`${gravatarURL}${email}`} alt="Gravatar" />
-    );
-  }
-
   render() {
-    const { history, token } = this.props;
+    const { history, token, fetching } = this.props;
+    if (fetching) {
+      return (
+        <div className="game-content">
+          <Header />
+          <div>LOADING...</div>
+        </div>
+      );
+    }
     return (
       <div className="game-content">
-        {this.generateimage()}
         <Header />
         <h1>{token}</h1>
         <Questions history={history} />
@@ -53,6 +52,7 @@ Game.propTypes = {
   importedQuestionThunk: propTypes.func.isRequired,
   email: propTypes.string.isRequired,
   token: propTypes.string,
+  fetching: propTypes.bool.isRequired,
   history: propTypes.shape({
     push: propTypes.func.isRequired,
   }).isRequired,

@@ -6,18 +6,46 @@ import { connect } from 'react-redux';
 import { catchEmail } from '../../../actions/gravatarAction';
 import { thunkToken } from '../../../actions';
 import settingsBtn from '../../../imgs/settings.png';
+import TriviaLogo from '../../../trivia.png';
 import './style.css';
 
-
 class LoginPage extends React.Component {
+  static renderSettingsButton() {
+    return (
+      <div>
+        <Link to="/settings">
+          <i className="settingsBtn" data-testid="config-button">
+            <img className="settingsIcon" src={settingsBtn} alt="settings icon" />
+          </i>
+        </Link>
+      </div>
+    );
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+      email: '',
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.generateTokenQuestions = this.generateTokenQuestions.bind(this);
+  }
+
   generateTokenQuestions() {
-    const { importedGravatarReducer, email, importedTokenReducer } = this.props;
+    const { email } = this.state;
+    const { importedGravatarReducer, importedTokenReducer } = this.props;
     importedGravatarReducer(MD5(email).toString());
     importedTokenReducer();
   }
 
+  handleChange(event) {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  }
+
   renderLoginSection() {
-    const { importedGravatarReducer, email } = this.props;
+    const { importedGravatarReducer } = this.props;
     return (
       <div className="login_campo">
         <label htmlFor="email">E-mail do Gravatar:</label>
@@ -25,20 +53,38 @@ class LoginPage extends React.Component {
           id="email"
           name="email"
           type="text"
-          value={email}
-          onChange={(e) => importedGravatarReducer(e.target.value)}
+          data-testid="input-gravatar-email"
           placeholder="Insira seu e-mail Gravatar"
+          onChange={(event) => this.handleChange(event)}
         />
         <label htmlFor="name">Nome do Jogador:</label>
         <input
           id="name"
-          name="name"
+          name="username"
           type="name"
+          data-testid="input-player-name"
           placeholder="Insira seu nome"
+          onChange={(event) => this.handleChange(event)}
         />
-        <Link to="/game-page">
+      </div>
+    );
+  }
+
+  renderJogarButton() {
+    const { username, email } = this.state;
+    let disabled = false;
+    if (username === '' || email === '') {
+      disabled = true;
+    }
+
+    return (
+      <div className="btn-div">
+        <Link to="/game">
           <button
+            type="button"
             className="btn-jogar"
+            data-testid="btn-play"
+            disabled={disabled}
             onClick={() => this.generateTokenQuestions()}
           >
             JOGAR!
@@ -48,24 +94,15 @@ class LoginPage extends React.Component {
     );
   }
 
-  renderSettingsButton() {
-    console.log(this);
-    return (
-      <Link to="/settings">
-        <div className="settingsBtn">
-          <img className="settingsIcon" src={settingsBtn} alt="settings icon" />
-        </div>
-      </Link>
-    );
-  }
-
   render() {
     return (
-      <div className="whole-page">
+      <div>
         <div className="settingsDiv">
-          {this.renderSettingsButton()}
+          {LoginPage.renderSettingsButton()}
         </div>
+        <img src={TriviaLogo} alt="TriviaLogo" className="trivia" />
         {this.renderLoginSection()}
+        {this.renderJogarButton()}
       </div>
     );
   }
