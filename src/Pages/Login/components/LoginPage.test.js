@@ -1,5 +1,5 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, Router } from 'react-router-dom';
 import { render, cleanup, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { createMemoryHistory } from 'history';
@@ -74,13 +74,13 @@ describe('Testes relacionados ao botão JOGAR! da página da página de login', 
   });
 
   it('O botão JOGAR! o ser clicado deve direcionar à página de jogo', () => {
+    const history = createMemoryHistory();
     const { getByTestId } = render(
-      <MemoryRouter>
+      <Router history={history}>
         <LoginPage />
-      </MemoryRouter>,
+      </Router>,
     );
     const jogarButton = getByTestId('btn-play');
-    const history = createMemoryHistory();
 
     fireEvent.click(jogarButton);
     expect(history.location.pathname).toBe('/game-page');
@@ -103,9 +103,9 @@ describe('Testes relacionados ao botão de configurações da página da página
   it('O botão de configurações deve direcionar para a página de configurações ao ser clicado', () => {
     const history = createMemoryHistory();
     const { getByTestId } = render(
-      <MemoryRouter>
+      <Router history={history}>
         <LoginPage />
-      </MemoryRouter>,
+      </Router>,
     );
     const settingsButton = getByTestId('config-button');
 
