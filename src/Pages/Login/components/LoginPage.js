@@ -10,9 +10,9 @@ class LoginPage extends React.Component {
     return (
       <div>
         <Link to="/settings">
-          <icon className="settingsBtn" data-testid="config-button">
+          <i className="settingsBtn" data-testid="config-button">
             <img className="settingsIcon" src={settingsBtn} alt="settings icon" />
-          </icon>
+          </i>
         </Link>
       </div>
     );
@@ -86,7 +86,7 @@ class LoginPage extends React.Component {
         <div className="settingsDiv">
           {LoginPage.renderSettingsButton()}
         </div>
-        <img src={TriviaLogo} alt="Logo do jogo Trivia" className="trivia" />
+        <img src={TriviaLogo} alt="TriviaLogo" className="trivia" />
         {this.renderLoginSection()}
         {this.renderJogarButton()}
       </div>
