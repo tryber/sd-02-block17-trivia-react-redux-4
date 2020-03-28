@@ -1,14 +1,11 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import '@testing-library/jest-dom/extend-expect';
-import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
 import { render } from '@testing-library/react';
 
 import store from '../../store';
 import Configuracao from './index';
 
-const categorys = ['coisa1', 'coisa2'];
 const difficulty = [
   'easy',
   'medium',
@@ -24,7 +21,7 @@ describe('Page Configuracao', () => {
   test('Renderização inicial', () => {
     const { getByText, getByTestId } = render(
       <Provider store={store}>
-        <Configuracao categorys={categorys} />
+        <Configuracao />
       </Provider>,
     );
 
@@ -48,17 +45,5 @@ describe('Page Configuracao', () => {
       const bool = difficulty.some((item) => item === btns2[i].innerHTML);
       expect(bool).toBe(true);
     }
-  });
-
-  test('Rota "/feedback"', () => {
-    const history = createMemoryHistory();
-
-    render(
-      <Router history={history}>
-        <Provider store={store}>
-          <Configuracao categorys={categorys} />
-        </Provider>
-      </Router>,
-    );
   });
 });

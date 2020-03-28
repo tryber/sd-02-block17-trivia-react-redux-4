@@ -3,6 +3,7 @@ import {
   ADD_SCORE,
   ADD_QUESTION_NUMBER,
   ADD_NAME_EMAIL,
+  RESET_QUESTION_REDUCER,
 } from '../actions/questions';
 import data from '../Pages/Game/questionsMock';
 
@@ -54,6 +55,16 @@ const questionReducer = (state = INITIAL_STATE_QUESTION, action) => {
           name: action.name,
           gravatarEmail: action.email,
         },
+      };
+    case RESET_QUESTION_REDUCER:
+      return {
+        ...state,
+        player: {
+          ...action.player,
+          name: state.player.name,
+          gravatarEmail: state.player.gravatarEmail,
+        },
+        questionNumber: action.questionNumber,
       };
     default:
       return state;
