@@ -110,6 +110,7 @@ class LoginPage extends React.Component {
 
 LoginPage.propTypes = {
   importedGravatarReducer: PropTypes.func.isRequired,
+  setName: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ gravatarReducer: { email } }) => ({ email });
