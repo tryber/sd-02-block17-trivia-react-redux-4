@@ -19,6 +19,7 @@ import Feedback from './index';
 //     assertions: 1,
 //   });
 // });
+
 describe('Page Feedback', () => {
   test('Componenets render', () => {
     const history = createMemoryHistory();

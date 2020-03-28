@@ -7,9 +7,47 @@ import './style.css';
 
 function situacaoRender(assertions) {
   return (
-    (assertions < 3)
-      ? <p className="title" data-testid="feedback-text">Podia ser melhor...</p>
-      : <p className="title" data-testid="feedback-text">Mandou bem!</p>
+    (assertions >= 3)
+      ? <p className="title" data-testid="feedback-text">Mandou bem!</p>
+      : <p className="title" data-testid="feedback-text">Podia ser melhor...</p>
+  );
+}
+
+function scoreRender() {
+  const state = localStorage.getItem('state');
+  const { player: { score, assertions } } = JSON.parse(state);
+  return (
+    <div>
+      <p data-testid="feedback-total-question">
+        {`Você acertou ${assertions} questões`}
+      </p>
+      <p data-testid="feedback-total-score">
+        {`Um total de ${score} pontos`}
+      </p>
+    </div>
+  );
+}
+
+function headerRender() {
+  const state = localStorage.getItem('state');
+  const { player: { score, name } } = JSON.parse(state);
+  return (
+    <div className="header">
+      <p>
+        Jogador:
+        <span>
+          {name}
+        </span>
+      </p>
+      <div className="pontos">
+        <p data-testid="header-score">
+          {`Pontos: ${score}`}
+        </p>
+        <i className="material-icons">
+          fiber_manual_record
+        </i>
+      </div>
+    </div>
   );
 }
 
@@ -31,50 +69,15 @@ class Feedback extends Component {
     history.push('/ranking');
   }
 
-  headerRender() {
-    const { player: { score, name } } = this.props;
-    return (
-      <div className="header">
-        <p>
-          Jogador:
-          <span>
-            {name}
-          </span>
-        </p>
-        <div className="pontos">
-          <p data-testid="header-score">
-            {`Pontos: ${score}`}
-          </p>
-          <i className="material-icons">
-            fiber_manual_record
-          </i>
-        </div>
-      </div>
-    );
-  }
-
-  score() {
-    const { player: { score, assertions } } = this.props;
-    return (
-      <div>
-        <p data-testid="feedback-total-question">
-          {`Você acertou ${assertions} questões`}
-        </p>
-        <p data-testid="feedback-total-score">
-          {`Um total de ${score} pontos`}
-        </p>
-      </div>
-    );
-  }
-
   bodyRender() {
-    const { player: { assertions } } = this.props;
+    const state = localStorage.getItem('state');
+    const { player: { assertions } } = JSON.parse(state);
     return (
       <div className="body">
         <div>
           {situacaoRender(assertions)}
         </div>
-        {this.score()}
+        {scoreRender()}
         <div>
           <button
             type="button"
@@ -97,7 +100,7 @@ class Feedback extends Component {
     return (
       <div className="page_feedback">
         <div className="content">
-          {this.headerRender()}
+          {headerRender()}
           {this.bodyRender()}
         </div>
       </div>

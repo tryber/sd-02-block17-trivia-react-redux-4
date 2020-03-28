@@ -80,10 +80,16 @@ class Questions extends Component {
   }
 
   render() {
-    const { questions, questionNumber, player } = this.props;
-    console.log(player);
+    const { questions, questionNumber } = this.props;
+    const { player } = this.props;
     if (questions.response_code === 3) return <div>Pagina Inicial</div>;
-    if (questionNumber > 4) return <Redirect to="feedback" />;
+    if (questionNumber > 4) {
+      const obj = {
+        player,
+      };
+      localStorage.setItem('state', JSON.stringify(obj));
+      return <Redirect to="feedback" />;
+    }
     return (
       <div className="game-container">
         {this.QuestionBox()}
