@@ -21,17 +21,16 @@ class Feedback extends Component {
 
   redirectGame() {
     const { history } = this.props;
-    history.push('/game-page');
+    history.push('/game');
   }
 
   redirectRanking() {
     const { history } = this.props;
-    history.push('/game-ranking');
+    history.push('/ranking');
   }
 
   headerRender() {
-    const { player: { score } } = this.props;
-    const name = '';
+    const { player: { score, name } } = this.props;
     return (
       <div className="header">
         <p>

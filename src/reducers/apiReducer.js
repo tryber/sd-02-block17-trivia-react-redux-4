@@ -2,12 +2,12 @@ import {
   GET_QUESTIONS,
   GET_QUESTIONS_SUCCESS,
   GET_QUESTIONS_FAILURE,
-  GET_TOKEN,
-  GET_TOKEN_SUCCESS, GET_TOKEN_FAILURE,
+  GET_TOKEN, GET_TOKEN_SUCCESS,
+  GET_TOKEN_FAILURE,
 } from '../actions';
 
 const initialQuestions = {
-  questions: [],
+  questions: {},
   loading: true,
 };
 
@@ -27,7 +27,7 @@ export const apiReducer = (state = initialQuestions, action) => {
       return {
         ...state,
         loading: action.loading,
-        questions: action.data.results,
+        questions: action.data,
       };
     case GET_QUESTIONS_FAILURE:
       return {
