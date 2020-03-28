@@ -2,18 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import { addResetQuestionsReucer } from '../../actions/questions';
 import './style.css';
 
-const propriedade = {
-  jogador: 'Eduardo',
-  acertos: 2,
-};
-
-function situacaoRender(acertos) {
+function situacaoRender(assertions) {
   return (
-    (acertos < 3)
-      ? <h3 className="title">Podia ser melhor...</h3>
-      : <h3 className="title">Mandou bem !</h3>
+    (assertions < 3)
+      ? <p className="title" data-testid="feedback-text">Podia ser melhor...</p>
+      : <p className="title" data-testid="feedback-text">Mandou bem!</p>
   );
 }
 
@@ -25,30 +21,29 @@ class Feedback extends Component {
   }
 
   redirectGame() {
-    const { history } = this.props;
-    history.push('/game-page');
+    const { history, getResetQuestions } = this.props;
+    getResetQuestions();
+    history.push('/game');
   }
 
   redirectRanking() {
     const { history } = this.props;
-    history.push('/game-ranking');
+    history.push('/ranking');
   }
 
   headerRender() {
-    const { score } = this.props;
-    const { jogador } = propriedade;
+    const { player: { score, name } } = this.props;
     return (
       <div className="header">
         <p>
           Jogador:
           <span>
-            {jogador}
+            {name}
           </span>
         </p>
         <div className="pontos">
-          <p>
-            Pontos:
-            {score}
+          <p data-testid="header-score">
+            {`Pontos: ${score}`}
           </p>
           <i className="material-icons">
             fiber_manual_record
@@ -59,32 +54,26 @@ class Feedback extends Component {
   }
 
   score() {
-    const { score, correct } = this.props;
+    const { player: { score, assertions } } = this.props;
     return (
       <div>
-        <p>
-          Você acertou
-          <span>
-            {correct}
-          </span>
-          questões
+        <p data-testid="feedback-total-question">
+          {`Você acertou ${assertions} questões`}
         </p>
-        <p>
-          Um total de
-          <span>
-            {score}
-          </span>
-          pontos
+        <p data-testid="feedback-total-score">
+          {`Um total de ${score} pontos`}
         </p>
       </div>
     );
   }
 
   bodyRender() {
-    const { score } = this.props;
+    const { player: { assertions } } = this.props;
     return (
       <div className="body">
-        {situacaoRender(score)}
+        <div>
+          {situacaoRender(assertions)}
+        </div>
         {this.score()}
         <div>
           <button
@@ -120,13 +109,21 @@ Feedback.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
-  score: PropTypes.number.isRequired,
-  correct: PropTypes.number.isRequired,
+  player: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    assertions: PropTypes.number.isRequired,
+    score: PropTypes.number.isRequired,
+    gravatarEmail: PropTypes.string.isRequired,
+  }).isRequired,
+  getResetQuestions: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  score: state.questionReducer.score,
-  correct: state.questionReducer.correct,
+  player: state.questionReducer.player,
 });
 
-export default connect(mapStateToProps)(Feedback);
+const mapDispatchToProps = (dispatch) => ({
+  getResetQuestions: () => dispatch(addResetQuestionsReucer()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Feedback);

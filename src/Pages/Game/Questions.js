@@ -83,7 +83,7 @@ class Questions extends Component {
     const { questions, questionNumber, player } = this.props;
     console.log(player);
     if (questions.response_code === 3) return <div>Pagina Inicial</div>;
-    if (questionNumber > 4) return <Redirect to="game-feedback" />;
+    if (questionNumber > 4) return <Redirect to="feedback" />;
     return (
       <div className="game-container">
         {this.QuestionBox()}

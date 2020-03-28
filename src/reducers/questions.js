@@ -3,6 +3,7 @@ import {
   ADD_SCORE,
   ADD_QUESTION_NUMBER,
   ADD_NAME_EMAIL,
+  RESET_QUESTION_REDUCER,
 } from '../actions/questions';
 import data from '../Pages/Game/questionsMock';
 
@@ -29,6 +30,40 @@ const getScore = (state, action) => (
   }
 );
 
+const getAddNameEmail = (state, action) => (
+  {
+    ...state,
+    player: {
+      ...state.player,
+      name: action.name,
+      gravatarEmail: action.email,
+    },
+  }
+);
+
+const getAddQuestionNumber = (state, action) => (
+  {
+    ...state,
+    player: {
+      ...state.player,
+      name: action.name,
+      gravatarEmail: action.email,
+    },
+  }
+);
+
+const getResetQuestionReducer = (state, action) => (
+  {
+    ...state,
+    player: {
+      ...action.player,
+      name: state.player.name,
+      gravatarEmail: state.player.gravatarEmail,
+    },
+    questionNumber: action.questionNumber,
+  }
+);
+
 const questionReducer = (state = INITIAL_STATE_QUESTION, action) => {
   switch (action.type) {
     case ADD_QUESTION_RESULTS:
@@ -39,22 +74,12 @@ const questionReducer = (state = INITIAL_STATE_QUESTION, action) => {
     case ADD_SCORE:
       return getScore(state, action);
     case ADD_QUESTION_NUMBER: {
-      return {
-        ...state,
-        questionNumber: state.questionNumber + action.questionNumber,
-        classCorrect: action.classCorrect,
-        classIncorrect: action.classIncorrect,
-      };
+      return getAddQuestionNumber(state, action);
     }
     case ADD_NAME_EMAIL:
-      return {
-        ...state,
-        player: {
-          ...state.player,
-          name: action.name,
-          gravatarEmail: action.email,
-        },
-      };
+      return getAddNameEmail(state, action);
+    case RESET_QUESTION_REDUCER:
+      return getResetQuestionReducer(state, action);
     default:
       return state;
   }
