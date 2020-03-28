@@ -4,10 +4,11 @@ import MD5 from 'crypto-js/md5';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { catchEmail } from '../../../actions/gravatarAction';
-import { thunkToken } from '../../../actions';
 import settingsBtn from '../../../imgs/settings.png';
 import TriviaLogo from '../../../trivia.png';
 import './style.css';
+
+import { addNameAndEmail } from '../../../actions/questions';
 
 class LoginPage extends React.Component {
   static renderSettingsButton() {
@@ -33,10 +34,10 @@ class LoginPage extends React.Component {
   }
 
   generateTokenQuestions() {
-    const { email } = this.state;
-    const { importedGravatarReducer, importedTokenReducer } = this.props;
+    const { email, username } = this.state;
+    const { importedGravatarReducer, setName } = this.props;
     importedGravatarReducer(MD5(email).toString());
-    importedTokenReducer();
+    setName(username);
   }
 
   handleChange(event) {
@@ -109,14 +110,13 @@ class LoginPage extends React.Component {
 
 LoginPage.propTypes = {
   importedGravatarReducer: PropTypes.func.isRequired,
-  importedTokenReducer: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ gravatarReducer: { email } }) => ({ email });
 
 const mapDispatchToProps = (dispatch) => ({
   importedGravatarReducer: (email) => dispatch(catchEmail(email)),
-  importedTokenReducer: () => dispatch(thunkToken()),
+  setName: (name) => dispatch(addNameAndEmail(name, '')),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

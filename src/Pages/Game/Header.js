@@ -14,7 +14,7 @@ const generateimage = (email, setNameAndEmail, name) => {
 };
 
 const Header = ({
-  score, email, setNameAndEmail, name = 'Julio',
+  score, email, setNameAndEmail, name,
 }) => (
   <header className="header-content">
     {generateimage(email, setNameAndEmail, name)}
@@ -41,10 +41,12 @@ const mapStateToProps = ({
   },
   questionReducer: {
     player: {
+      name,
       score,
     },
   },
 }) => ({
+  name,
   email,
   score,
 });

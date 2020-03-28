@@ -80,7 +80,8 @@ class Questions extends Component {
   }
 
   render() {
-    const { questions, questionNumber } = this.props;
+    const { questions, questionNumber, player } = this.props;
+    console.log(player);
     if (questions.response_code === 3) return <div>Pagina Inicial</div>;
     if (questionNumber > 4) return <Redirect to="game-feedback" />;
     return (
@@ -102,6 +103,7 @@ const mapStateToProps = ({
   },
   questionReducer: {
     questionNumber,
+    player,
   },
   apiReducer: {
     questions,
@@ -110,6 +112,7 @@ const mapStateToProps = ({
   seconds,
   canNextQuestion,
   questionNumber,
+  player,
   questions,
 });
 
