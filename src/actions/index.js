@@ -10,11 +10,11 @@ export const GET_TOKEN_FAILURE = 'GET_TOKEN_FAILURE';
 export const getQuestionsAction = (token) => (
   { type: GET_QUESTIONS, loading: true, token }
 );
-export const getQuestionsSuccess = (data) => {
-  return (
-    { type: GET_QUESTIONS_SUCCESS, data, loading: false }
-  );
-};
+
+export const getQuestionsSuccess = (data) => (
+  { type: GET_QUESTIONS_SUCCESS, data, loading: false }
+);
+
 export const getQuestionsFailure = (error) => (
   { type: GET_QUESTIONS_FAILURE, error, loading: false }
 );
