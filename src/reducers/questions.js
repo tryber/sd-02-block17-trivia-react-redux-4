@@ -44,11 +44,9 @@ const getAddNameEmail = (state, action) => (
 const getAddQuestionNumber = (state, action) => (
   {
     ...state,
-    player: {
-      ...state.player,
-      name: action.name,
-      gravatarEmail: action.email,
-    },
+    questionNumber: state.questionNumber + action.questionNumber,
+    classCorrect: action.classCorrect,
+    classIncorrect: action.classIncorrect,
   }
 );
 
