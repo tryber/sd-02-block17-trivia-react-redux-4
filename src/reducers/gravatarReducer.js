@@ -1,8 +1,20 @@
 import { GET_GRAVATAR, GET_GRAVATAR_SUCCESS, GET_GRAVATAR_FAILURE } from '../actions/gravatarAction';
 
 const initialState = {
-  gravatar: '',
+  nome: '',
+  email: '',
 };
+
+const localStorageAdmin = (param) => {
+  if (localStorage.getItem(`${param}`) === null) {
+    localStorage.setItem(`${param}`, JSON.stringify(param));
+  }
+  localStorage.getItem(`${param}`);
+};
+// INSERIR FUNÇÃO PRA COLOCAR EMAIL E NOME NO LOCALSTORAGE;
+// SE EXISTE UM IGUAL, TRAZ.
+// SE NÃO EXISTIR, PUSH PRO LOCALSTORAGE.
+// SUGESTÃO DE JULIO: localStorage.setItem(action.email, JSON.stringfy(action.email)) ;
 
 const gravatarReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -12,10 +24,11 @@ const gravatarReducer = (state = initialState, action) => {
         fetching: true,
       };
     case GET_GRAVATAR_SUCCESS:
+      localStorageAdmin(action.email);
       return {
         ...state,
         fetching: false,
-        gravatar: action.gravatar,
+        name: action.name,
         email: action.email,
       };
     case GET_GRAVATAR_FAILURE:

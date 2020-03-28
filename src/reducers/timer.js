@@ -1,20 +1,37 @@
-import { RESET_TIMER, ADD_COUNTER } from '../actions/timer';
+import {
+  START_TIMER, STOP_TIMER, TICK, SET_INTERVAL,
+} from '../actions/timer';
 
-const INITIAL_STATE_CHECKBOX = {
-  counter: 10,
+const INITIAL_STATE_TIMER = {
+  seconds: 0,
+  startTime: 0,
+  status: 'paused',
+  interval: '',
 };
 
-const timerReducer = (state = INITIAL_STATE_CHECKBOX, action) => {
+const timerReducer = (state = INITIAL_STATE_TIMER, action) => {
   switch (action.type) {
-    case RESET_TIMER:
+    case START_TIMER:
       return {
         ...state,
-        counter: action.counter,
+        startTime: action.startTime,
+        seconds: action.startTime,
+        status: 'counting down',
       };
-    case ADD_COUNTER:
+    case STOP_TIMER:
       return {
         ...state,
-        counter: state.counter - action.counter,
+        status: 'paused',
+      };
+    case TICK:
+      return {
+        ...state,
+        seconds: (state.seconds - 1),
+      };
+    case SET_INTERVAL:
+      return {
+        ...state,
+        interval: action.interval,
       };
     default:
       return state;

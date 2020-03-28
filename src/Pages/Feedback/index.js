@@ -119,13 +119,16 @@ Feedback.propTypes = {
   }).isRequired,
   score: PropTypes.number.isRequired,
   assertions: PropTypes.number.isRequired,
+  player: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    assertions: PropTypes.number.isRequired,
+    score: PropTypes.number.isRequired,
+    gravatarEmail: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  player: state.gravatarReducer.player,
-  // score: state.questionReducer.score,
-  // assertions: state.questionReducer.assertions,
-  // gravatar: state.gravatarReducer.gravatar,
+  player: state.questionReducer.player,
 });
 
 export default connect(mapStateToProps)(Feedback);
