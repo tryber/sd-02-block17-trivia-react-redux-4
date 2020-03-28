@@ -31,25 +31,54 @@ class Configuracao extends Component {
     getCategorys(array);
   }
 
-  render() {
+  renderCategoria() {
     const { categorys } = this.props;
-    // console.log('categorys' + categorys)
+    return (
+      <div className="campo">
+        <p>Categoria:</p>
+        <Dropdown
+          options={categorys}
+          type="category"
+          testid="question-category-dropdown"
+        />
+      </div>
+    );
+  }
+
+  renderDifficulty() {
+    return (
+      <div className="campo">
+        <p>Dificuldade:</p>
+        <Dropdown
+          options={this.difficulty}
+          type="difficulty"
+          testid="question-difficulty-dropdown"
+        />
+      </div>
+    );
+  }
+
+  renderTipo() {
+    return (
+      <div className="campo">
+        <p>Tipo:</p>
+        <Dropdown
+          options={this.type}
+          type="type"
+          testid="question-type-dropdown"
+        />
+      </div>
+    );
+  }
+
+  render() {
     return (
       <div className="page_config">
         <p ref={this.ref} />
         <div className="content">
-          <div className="campo">
-            <p>Categoria:</p>
-            <Dropdown options={categorys} type="category" testid="question-category-dropdown" />
-          </div>
-          <div className="campo">
-            <p>Dificuldade:</p>
-            <Dropdown options={this.difficulty} type="difficulty" testid="question-difficulty-dropdown" />
-          </div>
-          <div className="campo">
-            <p>Tipo:</p>
-            <Dropdown options={this.type} type="type" testid="question-type-dropdown" />
-          </div>
+          {this.renderCategoria()}
+          {this.renderDifficulty()}
+          {this.renderTipo()}
         </div>
       </div>
     );
