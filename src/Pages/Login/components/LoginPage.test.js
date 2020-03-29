@@ -8,7 +8,6 @@ import LoginPage from './LoginPage';
 afterEach(cleanup);
 
 it('A logo do jogo deve estar presente na página', () => {
-  
   const { getByAltText } = render(
     <MemoryRouter>
       <LoginPage />
@@ -28,7 +27,7 @@ describe('Testes relacionados aos inputs da página de login', () => {
       </MemoryRouter>,
     );
     const emailInput = getByTestId('input-gravatar-email');
-    expect(emailInput).toBeInTheDocument;
+    expect(emailInput).toBeInTheDocument();
     expect(emailInput.tagName).toEqual('INPUT');
     expect(emailInput.innerHTML).toBe('');
   });
@@ -41,7 +40,7 @@ describe('Testes relacionados aos inputs da página de login', () => {
     );
     const usernameInput = getByTestId('input-player-name');
 
-    expect(usernameInput).toBeInTheDocument;
+    expect(usernameInput).toBeInTheDocument();
     expect(usernameInput.tagName).toEqual('INPUT');
     expect(usernameInput.innerHTML).toBe('');
   });
@@ -56,7 +55,7 @@ describe('Testes relacionados ao botão JOGAR! da página da página de login', 
     );
     const jogarButton = getByTestId('btn-play');
 
-    expect(jogarButton).toBeInTheDocument;
+    expect(jogarButton).toBeInTheDocument();
     expect(jogarButton.tagName).toEqual('BUTTON');
     expect(jogarButton).toHaveTextContent('JOGAR!');
   });
@@ -96,7 +95,7 @@ describe('Testes relacionados ao botão de configurações da página da página
     );
     const settingsButton = getByTestId('config-button');
 
-    expect(settingsButton).toBeInTheDocument;
+    expect(settingsButton).toBeInTheDocument();
     expect(settingsButton.tagName).toEqual('I');
   });
 

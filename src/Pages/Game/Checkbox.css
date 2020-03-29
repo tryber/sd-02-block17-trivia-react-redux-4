@@ -9,9 +9,13 @@
 .answer-content {
   background: rgb(196, 196, 196);
   font-size: 1.6em;
-  height: 10%;
+  text-align: center;
 }
 
-.answer-content:focus {
-  background-color: blue;
+.correct-answer {
+  background-color: green;
+}
+
+.incorrect-answer {
+  background-color: red;
 }

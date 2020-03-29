@@ -25,16 +25,15 @@ Cypress.Commands.add("addRanking", (ranking = []) => {
 })
 
 Cypress.Commands.add('setToken', () => {
-    cy.request({
-        method: 'GET',
-        url: 'https://opentdb.com/api_token.php?command=request',
-    })
-        .then((resp) => {
-            console.log({resp})
-            window.localStorage.setItem('token', resp.body.token)
-        })
-
-})
+  cy.request({
+    method: 'GET',
+    url: 'https://opentdb.com/api_token.php?command=request',
+  })
+    .then((resp) => {
+      console.log({ resp });
+      window.localStorage.setItem('token', resp.body.token);
+    });
+});
 //
 //
 // -- This is a child command --

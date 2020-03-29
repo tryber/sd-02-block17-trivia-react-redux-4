@@ -4,27 +4,28 @@ import propTypes from 'prop-types';
 import Questions from './Questions';
 import Header from './Header';
 import './index.css';
-import { thunkQuestions } from '../../actions';
+
+import { thunkQuestions, thunkToken } from '../../actions';
 
 class Game extends Component {
   componentDidMount() {
-    const { importedQuestionThunk } = this.props;
-    importedQuestionThunk();
-  }
-
-  generateimage() {
-    const { email } = this.props;
-    const gravatarURL = 'https://www.gravatar.com/avatar/';
-    return (
-      <img src={`${gravatarURL}${email}`} alt="Gravatar" />
-    );
+    const { importedQuestionThunk, importedTokenReducer } = this.props;
+    importedTokenReducer()
+      .then(({ token }) => importedQuestionThunk(token));
   }
 
   render() {
-    const { history } = this.props;
+    const { history, loading } = this.props;
+    if (loading) {
+      return (
+        <div className="game-content">
+          <Header />
+          <div>LOADING...</div>
+        </div>
+      );
+    }
     return (
       <div className="game-content">
-        {this.generateimage()}
         <Header />
         <Questions history={history} />
       </div>
@@ -35,24 +36,31 @@ class Game extends Component {
 const mapStateToProps = ({
   apiReducer: {
     questions,
-    fetching,
+    loading,
   },
   gravatarReducer:
   { email },
-}) =>
-  ({ questions, fetching, email });
+  tokenReducer:
+  { token },
+}) => ({
+  questions,
+  loading,
+  email,
+  token,
+});
 
 const mapDispatchToProps = (dispatch) => ({
-  importedQuestionThunk: () => dispatch(thunkQuestions()),
+  importedTokenReducer: () => dispatch(thunkToken()),
+  importedQuestionThunk: (token) => dispatch(thunkQuestions(token)),
 });
 
 Game.propTypes = {
+  importedTokenReducer: propTypes.func.isRequired,
   importedQuestionThunk: propTypes.func.isRequired,
-  email: propTypes.string.isRequired,
+  loading: propTypes.bool.isRequired,
   history: propTypes.shape({
     push: propTypes.func.isRequired,
   }).isRequired,
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);
