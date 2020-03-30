@@ -14,7 +14,13 @@ class Ranking extends Component {
     return (
       <ul>
         <li>
-          {name} - {score} pontos
+          {name}
+          {' '}
+          -
+          {' '}
+          {score}
+          {' '}
+          pontos
         </li>
       </ul>
     );
