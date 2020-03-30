@@ -1,15 +1,12 @@
 import { GET_GRAVATAR, GET_GRAVATAR_SUCCESS, GET_GRAVATAR_FAILURE } from '../actions/gravatarAction';
 
 const initialState = {
-  nome: '',
   email: '',
+  token: '',
 };
 
-const localStorageAdmin = (param) => {
-  if (localStorage.getItem(`${param}`) === null) {
-    localStorage.setItem(`${param}`, JSON.stringify(param));
-  }
-  localStorage.getItem(`${param}`);
+const localStorageAdmin = (email, token) => {
+  localStorage.setItem(`${email}`, JSON.stringify(token));
 };
 // INSERIR FUNÇÃO PRA COLOCAR EMAIL E NOME NO LOCALSTORAGE;
 // SE EXISTE UM IGUAL, TRAZ.
@@ -24,12 +21,12 @@ const gravatarReducer = (state = initialState, action) => {
         fetching: true,
       };
     case GET_GRAVATAR_SUCCESS:
-      localStorageAdmin(action.email);
+      localStorageAdmin(action.email, action.token);
       return {
         ...state,
         fetching: false,
-        name: action.name,
         email: action.email,
+        token: action.token,
       };
     case GET_GRAVATAR_FAILURE:
       return {

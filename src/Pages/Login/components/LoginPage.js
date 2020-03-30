@@ -9,6 +9,8 @@ import TriviaLogo from '../../../trivia.png';
 import './style.css';
 
 import { addNameAndEmail } from '../../../actions/questions';
+import { thunkQuestions, thunkToken } from '../../../actions';
+
 
 class LoginPage extends React.Component {
   static renderSettingsButton() {
@@ -35,8 +37,18 @@ class LoginPage extends React.Component {
 
   generateTokenQuestions() {
     const { email, username } = this.state;
-    const { importedGravatarReducer, setName } = this.props;
-    importedGravatarReducer(MD5(email).toString());
+    const {
+      importedGravatarReducer,
+      setName,
+      questions,
+      importedTokenReducer,
+      importedQuestionThunk,
+    } = this.props;
+    importedGravatarReducer(MD5(email).toString(), email);
+    if (questions.response_code === 3) {
+      importedTokenReducer()
+        .then(({ token }) => (importedQuestionThunk(token)));
+    }
     setName(username);
   }
 
@@ -111,12 +123,18 @@ class LoginPage extends React.Component {
 LoginPage.propTypes = {
   importedGravatarReducer: PropTypes.func.isRequired,
   setName: PropTypes.func.isRequired,
+  questions: PropTypes.instanceOf(Array).isRequired,
 };
 
-const mapStateToProps = ({ gravatarReducer: { email } }) => ({ email });
+const mapStateToProps = ({
+  gravatarReducer: { email },
+  apiReducer: { questions },
+}) => ({ email, questions });
 
 const mapDispatchToProps = (dispatch) => ({
-  importedGravatarReducer: (email) => dispatch(catchEmail(email)),
+  importedQuestionThunk: (token) => dispatch(thunkQuestions(token)),
+  importedTokenReducer: () => dispatch(thunkToken()),
+  importedGravatarReducer: (token, email) => dispatch(catchEmail(token, email)),
   setName: (name) => dispatch(addNameAndEmail(name, '')),
 });
 

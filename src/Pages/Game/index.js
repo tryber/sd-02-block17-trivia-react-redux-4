@@ -9,9 +9,13 @@ import { thunkQuestions, thunkToken } from '../../actions';
 
 class Game extends Component {
   componentDidMount() {
-    const { importedQuestionThunk, importedTokenReducer } = this.props;
-    importedTokenReducer()
-      .then(({ token }) => importedQuestionThunk(token));
+    const { importedQuestionThunk, importedTokenReducer, email } = this.props;
+    const tokenExist = JSON.parse(localStorage.getItem(email));
+    if (!tokenExist) {
+      importedTokenReducer()
+        .then(({ token }) => (importedQuestionThunk(token)));
+    }
+    importedQuestionThunk(tokenExist);
   }
 
   render() {
@@ -55,6 +59,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 Game.propTypes = {
+  email: propTypes.string.isRequired,
   importedTokenReducer: propTypes.func.isRequired,
   importedQuestionThunk: propTypes.func.isRequired,
   loading: propTypes.bool.isRequired,

@@ -80,9 +80,11 @@ class Questions extends Component {
   }
 
   render() {
-    const { questions, questionNumber, player } = this.props;
-    console.log(player);
-    if (questions.response_code === 3) return <div>Pagina Inicial</div>;
+    const { questions, questionNumber, email } = this.props;
+    if (questions.response_code === 3) {
+      localStorage.removeItem(email);
+      return <Redirect to="/" />;
+    }
     if (questionNumber > 4) return <Redirect to="game-feedback" />;
     return (
       <div className="game-container">
@@ -108,12 +110,15 @@ const mapStateToProps = ({
   apiReducer: {
     questions,
   },
+  gravatarReducer:
+  { email },
 }) => ({
   seconds,
   canNextQuestion,
   questionNumber,
   player,
   questions,
+  email,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -128,6 +133,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 Questions.propTypes = {
+  email: propTypes.string,
   seconds: propTypes.number,
   canNextQuestion: propTypes.bool,
   questionNumber: propTypes.number,
