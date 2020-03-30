@@ -16,7 +16,9 @@ export default class Ranking extends Component {
       <div>
         <h3 className="page-title">Ranking</h3>
         <div className="ranking-results">
-          TESTE
+          <ul>
+            <li></li>
+          </ul>
         </div>
       </div>
     );
