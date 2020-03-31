@@ -112,12 +112,6 @@ Feedback.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
-  player: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    assertions: PropTypes.number.isRequired,
-    score: PropTypes.number.isRequired,
-    gravatarEmail: PropTypes.string.isRequired,
-  }).isRequired,
   getResetQuestions: PropTypes.func.isRequired,
 };
 
