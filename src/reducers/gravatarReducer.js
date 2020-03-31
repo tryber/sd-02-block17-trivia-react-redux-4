@@ -5,9 +5,9 @@ const initialState = {
   token: '',
 };
 
-const localStorageAdmin = (email, token) => {
-  localStorage.setItem(email, JSON.stringify(token));
-};
+// const localStorageAdmin = (email, token) => {
+//   localStorage.setItem(token, JSON.stringify(token));
+// };
 // INSERIR FUNÇÃO PRA COLOCAR EMAIL E NOME NO LOCALSTORAGE;
 // SE EXISTE UM IGUAL, TRAZ.
 // SE NÃO EXISTIR, PUSH PRO LOCALSTORAGE.
@@ -21,7 +21,7 @@ const gravatarReducer = (state = initialState, action) => {
         fetching: true,
       };
     case GET_GRAVATAR_SUCCESS:
-      //localStorageAdmin(action.email, action.token);
+      // localStorageAdmin(action.email, action.token);
       return {
         ...state,
         fetching: false,
