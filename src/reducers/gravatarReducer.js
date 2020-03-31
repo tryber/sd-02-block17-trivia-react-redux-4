@@ -6,12 +6,16 @@ const initialState = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b122da35f543538179521132cb92395a3fbd4093
 const localStorageAdmin = (param) => {
   if (localStorage.getItem(`${param}`) === null) {
     localStorage.setItem('player', JSON.stringify(param));
   }
   localStorage.getItem(`${param}`);
 };
+<<<<<<< HEAD
 =======
 // const localStorageAdmin = (email, token) => {
 //   localStorage.setItem(token, JSON.stringify(token));
@@ -21,6 +25,8 @@ const localStorageAdmin = (param) => {
 // SE NÃO EXISTIR, PUSH PRO LOCALSTORAGE.
 // SUGESTÃO DE JULIO: localStorage.setItem(action.email, JSON.stringfy(action.email)) ;
 >>>>>>> master
+=======
+>>>>>>> b122da35f543538179521132cb92395a3fbd4093
 
 const gravatarReducer = (state = initialState, action) => {
   switch (action.type) {

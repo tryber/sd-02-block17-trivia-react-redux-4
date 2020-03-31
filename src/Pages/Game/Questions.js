@@ -87,15 +87,21 @@ class Questions extends Component {
 
   render() {
 <<<<<<< HEAD
+<<<<<<< HEAD
     const { questions, questionNumber, player } = this.props;
     console.log(questions);
     if (questions.response_code === 3) return <div>Pagina Inicial</div>;
 =======
+=======
+>>>>>>> b122da35f543538179521132cb92395a3fbd4093
     const { questions, questionNumber } = this.props;
     if (questions.response_code === 3) {
       return <Redirect to="/" />;
     }
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> b122da35f543538179521132cb92395a3fbd4093
     if (questionNumber > 4) return <Redirect to="feedback" />;
     return (
       <div className="game-container">
