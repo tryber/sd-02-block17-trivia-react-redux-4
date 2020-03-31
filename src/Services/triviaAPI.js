@@ -14,10 +14,12 @@ export const getQuestions = (token, category, difficulty, type) => {
 };
 
 export const generateToken = () => (
-  fetch(triviaTokenURL)
-    .then((response) => (
-      response
-        .json()
-        .then((json) => (response.ok ? Promise.resolve(json) : Promise.reject(json)))
-        .then((data) => (data.token))
-    )));
+  (
+    fetch(triviaTokenURL)
+      .then((response) => (
+        response
+          .json()
+          .then((json) => (response.ok ? Promise.resolve(json) : Promise.reject(json)))
+          .then((data) => (data.token))
+      )))
+);
