@@ -17,6 +17,8 @@ const types = [
   'True / False',
 ];
 
+jest.mock('node-fetch');
+
 describe('Page Configuracao', () => {
   test('Renderização inicial', () => {
     const { getByText, getByTestId } = render(

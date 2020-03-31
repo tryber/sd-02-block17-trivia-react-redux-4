@@ -6,19 +6,7 @@ import { createMemoryHistory } from 'history';
 
 import store from '../../store';
 import Feedback from './index';
-// import { addScore } from '../../actions/questions';
 
-
-// test('Test action addScore', () => {
-//   const score = 1;
-//   const questionCorrect = 1;
-
-//   expect(addScore(score, questionCorrect)).toEqual({
-//     type: 'ADD_SCORE',
-//     score: 1,
-//     assertions: 1,
-//   });
-// });
 
 describe('Page Feedback', () => {
   test('Componenets render', () => {
