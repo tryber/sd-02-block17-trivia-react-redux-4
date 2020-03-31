@@ -9,7 +9,7 @@ import TriviaLogo from '../../../trivia.png';
 import './style.css';
 
 import { addNameAndEmail } from '../../../actions/questions';
-import { thunkQuestions, thunkToken } from '../../../actions';
+import { thunkQuestions, thunkToken, getQuestionsAction } from '../../../actions';
 
 
 class LoginPage extends React.Component {
@@ -44,10 +44,16 @@ class LoginPage extends React.Component {
       importedTokenReducer,
       importedQuestionThunk,
     } = this.props;
+    const existToken = JSON.parse(localStorage.getItem(email));
     importedGravatarReducer(MD5(email).toString(), email);
-    if (questions.response_code === 3) {
+    if (!existToken || questions.response_code === 3) {
       importedTokenReducer()
-        .then(({ token }) => (importedQuestionThunk(token)));
+        .then(({ token }) => {
+          localStorage.setItem(email, JSON.stringify(token));
+          return (importedQuestionThunk(token));
+        });
+    } else {
+      importedQuestionThunk(existToken);
     }
     setName(username);
   }
@@ -88,7 +94,6 @@ class LoginPage extends React.Component {
     if (username === '' || email === '') {
       disabled = true;
     }
-
     return (
       <div className="btn-div">
         <Link to="/game">
@@ -121,17 +126,20 @@ class LoginPage extends React.Component {
 }
 
 LoginPage.propTypes = {
+  importedQuestionThunk: PropTypes.func.isRequired,
+  importedTokenReducer: PropTypes.func.isRequired,
   importedGravatarReducer: PropTypes.func.isRequired,
   setName: PropTypes.func.isRequired,
-  questions: PropTypes.instanceOf(Array).isRequired,
+  questions: PropTypes.instanceOf(Object).isRequired,
 };
 
 const mapStateToProps = ({
-  gravatarReducer: { email },
+  gravatarReducer: { email, token },
   apiReducer: { questions },
-}) => ({ email, questions });
+}) => ({ email, questions, token });
 
 const mapDispatchToProps = (dispatch) => ({
+  loadingDispatch: () => dispatch(getQuestionsAction()),
   importedQuestionThunk: (token) => dispatch(thunkQuestions(token)),
   importedTokenReducer: () => dispatch(thunkToken()),
   importedGravatarReducer: (token, email) => dispatch(catchEmail(token, email)),
