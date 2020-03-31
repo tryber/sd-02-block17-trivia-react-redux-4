@@ -90,7 +90,7 @@ class Questions extends Component {
     if (questions.response_code === 3) {
       return <Redirect to="/" />;
     }
-    if (questionNumber > 4) return <Redirect to="game-feedback" />;
+    if (questionNumber > 4) return <Redirect to="feedback" />;
     return (
       <div className="game-container">
         {this.QuestionBox()}
