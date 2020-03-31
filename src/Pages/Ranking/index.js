@@ -9,14 +9,9 @@ import './index.css';
 // O ranking deve ser armazenado no navegador através do localStorage.
 
 class Ranking extends Component {
-  componentDidMount() {
-    const teste = {
-      name: "giorgia.2006@gmail.com",
-      score: 168,
-      gravatarEmail: "https://www.gravatar.com/avatar/giorgia.2006@gmail.com",
-    };
-    // const { player } = teste;
-    const { name, score, gravatarEmail: picture } = teste;
+  addPlayerLocalStorage() {
+    const { player } = this.props;
+    const { name, score, gravatarEmail: picture } = player;
     const newPlayer = { name, score, picture };
     console.log(newPlayer);
     const newRanking = JSON.parse(localStorage.getItem('ranking')) || [];
@@ -25,20 +20,23 @@ class Ranking extends Component {
   }
 
   montaPlayer() {
+    this.addPlayerLocalStorage();
     const catchPlayer = JSON.parse(localStorage.getItem('ranking')) || [];
     return (
       <ul>
-        {catchPlayer.map((ranking) => {
-          console.log(ranking);
-          // return (<li>
-          //     {name}
-          //     {' '}
-          //     -
-          //     {' '}
-          //     {score}
-          //     {' '}
-          //     pontos
-          //   </li>)
+        {catchPlayer.map(({ name, score, picture }) => {
+          return (
+            <li>
+              <img src={picture} alt="Gravatar" />
+              {name}
+              {' '}
+              -
+              {' '}
+              {score}
+              {' '}
+              pontos
+            </li>
+          );
         })}
       </ul>
     );
