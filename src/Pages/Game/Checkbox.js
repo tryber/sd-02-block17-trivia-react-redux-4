@@ -46,12 +46,13 @@ class Checkbox extends Component {
   renderNextButton(newArray, difficulty, correctAnswer) {
     const { correct, incorrect } = this.props;
     return (
-      newArray.map((answer) => {
+      newArray.map((answer, index) => {
         if (answer === correctAnswer) {
           return (
             <button
               onClick={(e) => this.handleClickButton(e, difficulty)}
               type="button"
+              data-testid="correct-answer"
               className={`answer-content ${correct}`}
               key={answer}
             >
@@ -63,6 +64,7 @@ class Checkbox extends Component {
           <button
             onClick={() => this.handleClickButton()}
             type="button"
+            data-testid={`wrong-answer-${index}`}
             className={`answer-content ${incorrect}`}
             key={answer}
           >

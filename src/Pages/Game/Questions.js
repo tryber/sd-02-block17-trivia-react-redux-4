@@ -11,6 +11,7 @@ import { addClassButton } from '../../actions/checkbox';
 import {
   setAddInterval, addStartTimer, addTick, setStopTimer,
 } from '../../actions/timer';
+import { getQuestionsAction } from '../../actions';
 
 
 class Questions extends Component {
@@ -18,6 +19,11 @@ class Questions extends Component {
     super(props);
     this.startTimer = this.startTimer.bind(this);
     this.tick = this.tick.bind(this);
+  }
+
+  componentWillUnmount() {
+    const { setLoadingTrue } = this.props;
+    setLoadingTrue();
   }
 
   tick(startTick, stopTimer, setClassButton) {
@@ -54,7 +60,7 @@ class Questions extends Component {
     return (
       <div className="question-content">
         <div data-testid="question-category" className="question-header">{category}</div>
-        <div className="question-body">{question}</div>
+        <div data-testid="question-text" className="question-body">{question}</div>
       </div>
     );
   }
@@ -80,9 +86,10 @@ class Questions extends Component {
   }
 
   render() {
-    const { questions, questionNumber, player } = this.props;
-    console.log(questions);
-    if (questions.response_code === 3) return <div>Pagina Inicial</div>;
+    const { questions, questionNumber } = this.props;
+    if (questions.response_code === 3) {
+      return <Redirect to="/" />;
+    }
     if (questionNumber > 4) return <Redirect to="feedback" />;
     return (
       <div className="game-container">
@@ -108,15 +115,19 @@ const mapStateToProps = ({
   apiReducer: {
     questions,
   },
+  gravatarReducer:
+  { email },
 }) => ({
   seconds,
   canNextQuestion,
   questionNumber,
   player,
   questions,
+  email,
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  setLoadingTrue: () => dispatch(getQuestionsAction()),
   startTick: () => dispatch(addTick()),
   stopTimer: () => dispatch(setStopTimer()),
   getStartTime: () => dispatch(addStartTimer()),
@@ -128,6 +139,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 Questions.propTypes = {
+  email: propTypes.string,
   seconds: propTypes.number,
   canNextQuestion: propTypes.bool,
   questionNumber: propTypes.number,
