@@ -11,11 +11,11 @@ const difficulty = [
   'medium',
   'hard',
 ];
+
 const types = [
   'Multiple Choice',
   'True / False',
 ];
-
 
 describe('Page Configuracao', () => {
   test('Renderização inicial', () => {
