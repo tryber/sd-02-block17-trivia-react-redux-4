@@ -81,7 +81,7 @@ class Questions extends Component {
 
   render() {
     const { questions, questionNumber, player } = this.props;
-    console.log(player);
+    console.log(questions);
     if (questions.response_code === 3) return <div>Pagina Inicial</div>;
     if (questionNumber > 4) return <Redirect to="feedback" />;
     return (

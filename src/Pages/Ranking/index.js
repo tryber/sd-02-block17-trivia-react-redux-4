@@ -9,6 +9,15 @@ import './index.css';
 // O ranking deve ser armazenado no navegador através do localStorage.
 
 class Ranking extends Component {
+  // componentDidMount {
+  //   const { player } = this.props;
+  //   const { name, socre, gravatarEmail: picture } = player;
+  //   const newPlayer = [{name, score, picture}]
+  //   const newRanking = JSON.parse(localStorage.getItem('ranking')) || [];
+  //   newRanking.push(newPlayer);
+  //   localStorage.setItem('ranking', JSON.stringfy(newRanking));
+  //   }
+
   montaPlayer() {
     const { name, score } = this.props.player;
     return (
@@ -48,5 +57,6 @@ Ranking.propTypes = {
   player: propTypes.shape({
     name: propTypes.string.isRequired,
     score: propTypes.number.isRequired,
+    gravatarEmail: propTypes.string.isRequired,
   }).isRequired,
 };
