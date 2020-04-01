@@ -21,21 +21,28 @@ class Ranking extends Component {
 
   montaPlayer() {
     this.addPlayerLocalStorage();
+    const gravatarImg = (picture, position) => (
+      <img
+        data-testid={`profile-picture-${position}`}
+        className="gravatar-img"
+        src={picture}
+        alt="Player pictures"
+      />
+    );
     const catchPlayer = JSON.parse(localStorage.getItem('ranking')) || [];
     return (
       <ul>
-        {catchPlayer.map(({ name, score, picture }) => (
-          <li>
-            <img src={picture} alt="Gravatar" />
-            {name}
-            {' '}
-            -
-            {' '}
-            {score}
-            {' '}
-            pontos
-          </li>
-        ))}
+        {catchPlayer.map(({ name, score, picture }, index) => {
+          const position = index + 1;
+          return (
+            <li>
+              {gravatarImg(picture, position)}
+              <span data-testid={`${name}-${position}`} className="nome-jogador">
+                {name} - {score} pontos
+              </span>
+            </li>
+          );
+        })}
       </ul>
     );
   }
