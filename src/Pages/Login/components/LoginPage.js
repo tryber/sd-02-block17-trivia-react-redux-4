@@ -41,13 +41,13 @@ class LoginPage extends React.Component {
       importedGravatarReducer,
       setName,
       questions,
-      importedTokenReducer,
+      getUserToken,
       importedQuestionThunk,
     } = this.props;
     const existToken = JSON.parse(localStorage.getItem(email));
     importedGravatarReducer(MD5(email).toString(), email);
     if (!existToken || questions.response_code === 3) {
-      importedTokenReducer()
+      getUserToken()
         .then(({ token }) => {
           localStorage.setItem(email, JSON.stringify(token));
           return (importedQuestionThunk(token));
@@ -127,7 +127,7 @@ class LoginPage extends React.Component {
 
 LoginPage.propTypes = {
   importedQuestionThunk: PropTypes.func.isRequired,
-  importedTokenReducer: PropTypes.func.isRequired,
+  getUserToken: PropTypes.func.isRequired,
   importedGravatarReducer: PropTypes.func.isRequired,
   setName: PropTypes.func.isRequired,
   questions: PropTypes.instanceOf(Object).isRequired,
@@ -141,7 +141,7 @@ const mapStateToProps = ({
 const mapDispatchToProps = (dispatch) => ({
   loadingDispatch: () => dispatch(getQuestionsAction()),
   importedQuestionThunk: (token) => dispatch(thunkQuestions(token)),
-  importedTokenReducer: () => dispatch(thunkToken()),
+  getUserToken: () => dispatch(thunkToken()),
   importedGravatarReducer: (token, email) => dispatch(catchEmail(token, email)),
   setName: (name) => dispatch(addNameAndEmail(name, '')),
 });

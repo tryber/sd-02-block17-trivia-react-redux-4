@@ -5,6 +5,16 @@ import '@testing-library/jest-dom/extend-expect';
 import { createMemoryHistory } from 'history';
 import LoginPage from './LoginPage';
 
+// jest.spyOn(global, 'fetch')
+//   .mockImplementation(() => Promise.resolve({
+//     status: 200,
+//     json: () => Promise.resolve({
+//       response_code: 0,
+//       response_message: 'Token Generated Successfully!',
+//       token: 'f00cb469ce38726ee00a7c6836761b0a4fb808181a125dcde6d50a9f3c9127b6',
+//     }),
+//   }));
+
 afterEach(cleanup);
 
 it('A logo do jogo deve estar presente na página', () => {
@@ -82,7 +92,7 @@ describe('Testes relacionados ao botão JOGAR! da página da página de login', 
     const jogarButton = getByTestId('btn-play');
 
     fireEvent.click(jogarButton);
-    expect(history.location.pathname).toBe('/game-page');
+    expect(history.location.pathname).toBe('/game');
   });
 });
 
