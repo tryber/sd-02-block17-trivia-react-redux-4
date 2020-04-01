@@ -10,17 +10,13 @@ class Ranking extends Component {
         data-testid={`profile-picture-${position}`}
         className="gravatar-img"
         src={picture}
-        alt="Player pictures"
+        alt="Player avatar at Gravatar"
       />
     );
     const catchPlayer = JSON.parse(localStorage.getItem('ranking')) || [];
     const sortedCatchPlayer = catchPlayer.sort((a, b) => {
-      if (a.score > b.score) {
-        return -1;
-      }
-      if (a.score < b.score) {
-        return 1;
-      }
+      if (a.score > b.score) return -1;
+      if (a.score < b.score) return 1;
       return 0;
     });
 
