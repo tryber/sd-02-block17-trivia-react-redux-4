@@ -3,11 +3,6 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './index.css';
 
-// Deve-se mostrar uma lista com a imagem de perfil vinda do Gravatar,
-// nome e pontuação das pessoas que jogaram em ordem decrescente
-// (da maior pontuação para a menor);
-// O ranking deve ser armazenado no navegador através do localStorage.
-
 class Ranking extends Component {
   static montaPlayer() {
     const gravatarImg = (picture, position) => (
@@ -19,9 +14,19 @@ class Ranking extends Component {
       />
     );
     const catchPlayer = JSON.parse(localStorage.getItem('ranking')) || [];
+    const sortedCatchPlayer = catchPlayer.sort((a, b) => {
+      if (a.score > b.score) {
+        return -1;
+      }
+      if (a.score < b.score) {
+        return 1;
+      }
+      return 0;
+    });
+
     return (
       <ul>
-        {catchPlayer.map(({ name, score, picture }, index) => {
+        {sortedCatchPlayer.map(({ name, score, picture }, index) => {
           const position = index + 1;
           return (
             <li>
