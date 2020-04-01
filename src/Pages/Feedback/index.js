@@ -51,11 +51,36 @@ function headerRender() {
   );
 }
 
+function verificaNome(name, newRanking) {
+  return newRanking.reduce((acc, player, ind) => {
+    if (player.name === name) { return ind; }
+    return acc;
+  }, -2);
+}
+
+function addPlayerLocalStorage() {
+  const state = localStorage.getItem('state');
+  const { player: { name, score, gravatarEmail: picture } } = JSON.parse(state);
+  const newPlayer = { name, score, picture };
+  const newRanking = JSON.parse(localStorage.getItem('ranking')) || [];
+  const ind = verificaNome(name, newRanking);
+  if (ind === -2) {
+    newRanking.push(newPlayer);
+  } else {
+    newRanking[ind] = { ...newPlayer };
+  }
+  localStorage.setItem('ranking', JSON.stringify(newRanking));
+}
+
 class Feedback extends Component {
   constructor(props) {
     super(props);
     this.redirectRanking = this.redirectRanking.bind(this);
     this.redirectGame = this.redirectGame.bind(this);
+  }
+
+  componentDidMount() {
+    addPlayerLocalStorage();
   }
 
   redirectGame() {
