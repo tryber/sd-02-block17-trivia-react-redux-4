@@ -1,12 +1,28 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import { render } from '@testing-library/react';
+import { render, fireEvent, cleanup } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createMemoryHistory } from 'history';
 
 import store from '../../store';
 import Feedback from './index';
 
+afterEach(() => {
+  window.localStorage.removeItem('state');
+  cleanup();
+});
+
+beforeEach(() => {
+  const obj = {
+    player: {
+      name: '',
+      assertions: 0,
+      score: 0,
+      gravatarEmail: '',
+    },
+  };
+  window.localStorage.setItem('state', JSON.stringify(obj));
+});
 
 describe('Page Feedback', () => {
   test('Componenets render', () => {
@@ -26,5 +42,29 @@ describe('Page Feedback', () => {
       .innerHTML).toBe('Pontos: 0');
     expect(getByTestId('feedback-text')
       .innerHTML).toBe('Podia ser melhor...');
+  });
+
+  test('redirect to "/ranking"', () => {
+    const history = createMemoryHistory();
+    const { getByText } = render(
+      <Provider store={store}>
+        <Feedback history={history} />
+      </Provider>,
+    );
+
+    fireEvent.click(getByText('Ver Ranking'));
+    expect(history.location.pathname).toBe('/ranking');
+  });
+
+  test('redirect to "/game"', () => {
+    const history = createMemoryHistory();
+    const { getByText } = render(
+      <Provider store={store}>
+        <Feedback history={history} />
+      </Provider>,
+    );
+
+    fireEvent.click(getByText('Jogar Novamente'));
+    expect(history.location.pathname).toBe('/game');
   });
 });

@@ -51,8 +51,13 @@ function headerRender() {
   );
 }
 
+<<<<<<< HEAD
 export function addPlayerLocalStorage() {
   const player = localStorage.getItem('ranking');
+=======
+function addPlayerLocalStorage() {
+  const player = localStorage.getItem('state');
+>>>>>>> master
   const { name, score, gravatarEmail: picture } = player;
   const newPlayer = { name, score, picture };
   const newRanking = JSON.parse(localStorage.getItem('ranking')) || [];
