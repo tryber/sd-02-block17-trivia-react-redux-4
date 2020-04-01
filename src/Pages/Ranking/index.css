@@ -30,9 +30,9 @@ li {
 }
 
 .gravatar-img {
+  height: 34px;
   position: absolute;
   width: 34px;
-  height: 34px;
 }
 
 .nome-jogador {
