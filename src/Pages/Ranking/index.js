@@ -24,20 +24,18 @@ class Ranking extends Component {
     const catchPlayer = JSON.parse(localStorage.getItem('ranking')) || [];
     return (
       <ul>
-        {catchPlayer.map(({ name, score, picture }) => {
-          return (
-            <li>
-              <img src={picture} alt="Gravatar" />
-              {name}
-              {' '}
-              -
-              {' '}
-              {score}
-              {' '}
-              pontos
-            </li>
-          );
-        })}
+        {catchPlayer.map(({ name, score, picture }) => (
+          <li>
+            <img src={picture} alt="Gravatar" />
+            {name}
+            {' '}
+            -
+            {' '}
+            {score}
+            {' '}
+            pontos
+          </li>
+        ))}
       </ul>
     );
   }
