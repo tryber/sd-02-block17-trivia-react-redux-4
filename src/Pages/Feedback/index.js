@@ -17,7 +17,7 @@ function scoreRender() {
   const state = localStorage.getItem('state');
   const { player: { score, assertions } } = JSON.parse(state);
   return (
-    <div>
+    <div className="middle-of-the-page">
       <p data-testid="feedback-total-question">
         {`Você acertou ${assertions} questões`}
       </p>
@@ -103,7 +103,7 @@ class Feedback extends Component {
           {situacaoRender(assertions)}
         </div>
         {scoreRender()}
-        <div>
+        <div className="body">
           <button
             type="button"
             onClick={this.redirectRanking}

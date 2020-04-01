@@ -1,3 +1,13 @@
+.trivia-logo {
+  align-items: center;
+  display: block;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  width: 300px;
+}
+
 .page-title {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 40px;
@@ -7,7 +17,6 @@
 }
 
 .ranking-results {
-  border: solid 1px red;
   height: 300px;
   justify-content: center;
   margin: auto;
@@ -19,14 +28,17 @@ ul {
 }
 
 li {
-  background-color: rgb(196, 196, 196);
   border-radius: 2px;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 25px;
   height: 49px;
   line-height: 47px;
   padding: 8px;
-  width: 625px;
+  width: 800px;
+}
+
+ul > li {
+  border: black 1px solid;
 }
 
 .gravatar-img {
@@ -37,4 +49,19 @@ li {
 
 .nome-jogador {
   font-size: 20px;
+  position: absolute;
+  padding-left: 45px;
+}
+
+.ending-div {
+  justify-content: center;
+  display: flex;
+}
+
+.botao-voltar {
+  border-radius: 3px;
+  box-shadow: black 0.1em 0.1em 0.1em 0.1em;
+  font-size: 20px;
+  margin: 30px;
+  padding: 5px;
 }

@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import TriviaLogo from '../../trivia.png';
 import './index.css';
 
 class Ranking extends Component {
+  static renderGameLogo() {
+    return (
+      <div>
+        <img src={TriviaLogo} className="trivia-logo" alt="Trivia Logo" />
+      </div>
+    );
+  }
+
   static montaPlayer() {
     const gravatarImg = (picture, position) => (
       <img
@@ -37,12 +47,24 @@ class Ranking extends Component {
     );
   }
 
+  static renderVoltarButton() {
+    return (
+      <div className="ending-div">
+        <Link to="/feedback">
+          <button type="button" className="botao-voltar">Voltar</button>
+        </Link>
+      </div>
+    );
+  }
+
   render() {
     return (
       <div>
-        <h3 className="page-title">Ranking</h3>
         <div className="ranking-results">
+          {Ranking.renderGameLogo()}
+          <h3 className="page-title">Ranking</h3>
           {Ranking.montaPlayer()}
+          {Ranking.renderVoltarButton()}
         </div>
       </div>
     );
