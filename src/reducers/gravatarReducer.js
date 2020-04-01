@@ -5,13 +5,6 @@ const initialState = {
   token: '',
 };
 
-const localStorageAdmin = (param) => {
-  if (localStorage.getItem(`${param}`) === null) {
-    localStorage.setItem('ranking', JSON.stringify(param));
-  }
-  localStorage.getItem(`${param}`);
-};
-
 const gravatarReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_GRAVATAR:
@@ -20,7 +13,6 @@ const gravatarReducer = (state = initialState, action) => {
         fetching: true,
       };
     case GET_GRAVATAR_SUCCESS:
-      localStorageAdmin(action.email, action.token);
       return {
         ...state,
         fetching: false,

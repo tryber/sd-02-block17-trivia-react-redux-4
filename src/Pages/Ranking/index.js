@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addPlayerLocalStorage } from '../Feedback/index';
 import './index.css';
 
 // Deve-se mostrar uma lista com a imagem de perfil vinda do Gravatar,
@@ -11,7 +10,6 @@ import './index.css';
 
 class Ranking extends Component {
   static montaPlayer() {
-    addPlayerLocalStorage();
     const gravatarImg = (picture, position) => (
       <img
         data-testid={`profile-picture-${position}`}

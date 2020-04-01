@@ -58,7 +58,7 @@ function verificaNome(name, newRanking) {
   }, -2);
 }
 
-export function addPlayerLocalStorage() {
+function addPlayerLocalStorage() {
   const state = localStorage.getItem('state');
   const { player: { name, score, gravatarEmail: picture } } = JSON.parse(state);
   const newPlayer = { name, score, picture };
