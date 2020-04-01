@@ -41,7 +41,7 @@ function headerRender() {
         </span>
       </p>
       <div className="pontos">
-        <p className="title" data-testid="header-score">
+        <p className="header-texts" data-testid="header-score">
           {`Pontos: ${score}`}
         </p>
         <i className="material-icons">
