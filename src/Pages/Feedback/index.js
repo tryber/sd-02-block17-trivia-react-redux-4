@@ -14,8 +14,8 @@ function situacaoRender(assertions) {
 }
 
 function scoreRender() {
-  const state = localStorage.getItem('state');
-  const { player: { score, assertions } } = JSON.parse(state);
+  const ranking = localStorage.getItem('ranking');
+  const { player: { score, assertions } } = JSON.parse(ranking);
   return (
     <div>
       <p data-testid="feedback-total-question">
@@ -29,8 +29,8 @@ function scoreRender() {
 }
 
 function headerRender() {
-  const state = localStorage.getItem('state');
-  const { player: { score, name } } = JSON.parse(state);
+  const ranking = localStorage.getItem('ranking');
+  const { player: { score, name } } = JSON.parse(ranking);
   return (
     <div className="header">
       <p>
@@ -52,7 +52,7 @@ function headerRender() {
 }
 
 export function addPlayerLocalStorage() {
-  const player = localStorage.getItem('state');
+  const player = localStorage.getItem('ranking');
   const { name, score, gravatarEmail: picture } = player;
   const newPlayer = { name, score, picture };
   const newRanking = JSON.parse(localStorage.getItem('ranking')) || [];
@@ -84,8 +84,8 @@ class Feedback extends Component {
   }
 
   bodyRender() {
-    const state = localStorage.getItem('state');
-    const { player: { assertions } } = JSON.parse(state);
+    const ranking = localStorage.getItem('ranking');
+    const { player: { assertions } } = JSON.parse(ranking);
     return (
       <div className="body">
         <div>
