@@ -51,7 +51,7 @@ function headerRender() {
   );
 }
 
-function addPlayerLocalStorage() {
+export function addPlayerLocalStorage() {
   const player = localStorage.getItem('state');
   const { name, score, gravatarEmail: picture } = player;
   const newPlayer = { name, score, picture };
