@@ -14,8 +14,8 @@ function situacaoRender(assertions) {
 }
 
 function scoreRender() {
-  const ranking = localStorage.getItem('ranking');
-  const { player: { score, assertions } } = JSON.parse(ranking);
+  const state = localStorage.getItem('state');
+  const { player: { score, assertions } } = JSON.parse(state);
   return (
     <div>
       <p data-testid="feedback-total-question">
@@ -29,8 +29,8 @@ function scoreRender() {
 }
 
 function headerRender() {
-  const ranking = localStorage.getItem('ranking');
-  const { player: { score, name } } = JSON.parse(ranking);
+  const state = localStorage.getItem('state');
+  const { player: { score, name } } = JSON.parse(state);
   return (
     <div className="header">
       <p>
@@ -51,20 +51,26 @@ function headerRender() {
   );
 }
 
-<<<<<<< HEAD
-export function addPlayerLocalStorage() {
-  const player = localStorage.getItem('ranking');
-=======
-function addPlayerLocalStorage() {
-  const player = localStorage.getItem('state');
->>>>>>> master
-  const { name, score, gravatarEmail: picture } = player;
-  const newPlayer = { name, score, picture };
-  const newRanking = JSON.parse(localStorage.getItem('ranking')) || [];
-  newRanking.push(newPlayer);
-  localStorage.setItem('ranking', JSON.stringify(newRanking));
+function verificaNome(name, newRanking) {
+  return newRanking.reduce((acc, player, ind) => {
+    if (player.name === name) { return ind; }
+    return acc;
+  }, -1);
 }
 
+export function addPlayerLocalStorage() {
+  const state = localStorage.getItem('state');
+  const { player: { name, score, gravatarEmail: picture } } = JSON.parse(state);
+  const newPlayer = { name, score, picture };
+  const newRanking = JSON.parse(localStorage.getItem('ranking')) || [];
+  const ind = verificaNome(name, newRanking);
+  if (ind === -1) {
+    newRanking.push(newPlayer);
+  } else {
+    newRanking[ind] = { ...newPlayer };
+  }
+  localStorage.setItem('ranking', JSON.stringify(newRanking));
+}
 
 class Feedback extends Component {
   constructor(props) {
@@ -89,8 +95,8 @@ class Feedback extends Component {
   }
 
   bodyRender() {
-    const ranking = localStorage.getItem('ranking');
-    const { player: { assertions } } = JSON.parse(ranking);
+    const state = localStorage.getItem('state');
+    const { player: { assertions } } = JSON.parse(state);
     return (
       <div className="body">
         <div>
