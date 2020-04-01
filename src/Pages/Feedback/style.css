@@ -91,9 +91,25 @@ button {
   width: 60%;
 }
 
+.header-texts {
+  font-size: 25px;
+}
+
 .title {
   font-size: 25px;
   justify-content: center;
   margin: auto;
   padding-top: 15px;
+}
+
+button:hover {
+  background-color:rgb(134, 214, 96);
+  cursor: pointer;
+}
+
+.middle-of-the-page {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  padding-bottom: 20px;
 }

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
 import { addResetQuestionsReucer } from '../../actions/questions';
+
+import TriviaLogo from '../../trivia.png';
 import './style.css';
 
 function situacaoRender(assertions) {
@@ -18,10 +19,10 @@ function scoreRender() {
   const { player: { score, assertions } } = JSON.parse(state);
   return (
     <div className="middle-of-the-page">
-      <p data-testid="feedback-total-question">
+      <p className="title" data-testid="feedback-total-question">
         {`Você acertou ${assertions} questões`}
       </p>
-      <p data-testid="feedback-total-score">
+      <p className="title" data-testid="feedback-total-score">
         {`Um total de ${score} pontos`}
       </p>
     </div>
@@ -33,14 +34,14 @@ function headerRender() {
   const { player: { score, name } } = JSON.parse(state);
   return (
     <div className="header">
-      <p>
+      <p className="header-texts">
         Jogador:
         <span>
           {name}
         </span>
       </p>
       <div className="pontos">
-        <p data-testid="header-score">
+        <p className="title" data-testid="header-score">
           {`Pontos: ${score}`}
         </p>
         <i className="material-icons">
@@ -77,6 +78,14 @@ class Feedback extends Component {
     super(props);
     this.redirectRanking = this.redirectRanking.bind(this);
     this.redirectGame = this.redirectGame.bind(this);
+  }
+
+  static renderGameLogo() {
+    return (
+      <div>
+        <img src={TriviaLogo} className="trivia-logo" alt="Trivia Logo" />
+      </div>
+    );
   }
 
   componentDidMount() {
@@ -126,6 +135,7 @@ class Feedback extends Component {
       <div className="page_feedback">
         <div className="content">
           {headerRender()}
+          {Feedback.renderGameLogo()}
           {this.bodyRender()}
         </div>
       </div>
