@@ -51,11 +51,25 @@ function headerRender() {
   );
 }
 
+function addPlayerLocalStorage() {
+  const player = localStorage.getItem('state');
+  const { name, score, gravatarEmail: picture } = player;
+  const newPlayer = { name, score, picture };
+  const newRanking = JSON.parse(localStorage.getItem('ranking')) || [];
+  newRanking.push(newPlayer);
+  localStorage.setItem('ranking', JSON.stringify(newRanking));
+}
+
+
 class Feedback extends Component {
   constructor(props) {
     super(props);
     this.redirectRanking = this.redirectRanking.bind(this);
     this.redirectGame = this.redirectGame.bind(this);
+  }
+
+  componentDidMount() {
+    addPlayerLocalStorage();
   }
 
   redirectGame() {
