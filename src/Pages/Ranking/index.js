@@ -10,7 +10,7 @@ import './index.css';
 // O ranking deve ser armazenado no navegador através do localStorage.
 
 class Ranking extends Component {
-  montaPlayer() {
+  static montaPlayer() {
     addPlayerLocalStorage();
     const gravatarImg = (picture, position) => (
       <img
@@ -43,7 +43,7 @@ class Ranking extends Component {
       <div>
         <h3 className="page-title">Ranking</h3>
         <div className="ranking-results">
-          {this.montaPlayer()}
+          {Ranking.montaPlayer()}
         </div>
       </div>
     );
