@@ -6,7 +6,7 @@ import {
   GET_TOKEN_FAILURE,
 } from '../actions';
 
-const initialQuestions = {
+export const initialQuestions = {
   questions: {},
   loading: true,
 };

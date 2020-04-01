@@ -7,8 +7,8 @@ export const GET_TOKEN = 'GET_TOKEN';
 export const GET_TOKEN_SUCCESS = 'GET_TOKEN_SUCCESS';
 export const GET_TOKEN_FAILURE = 'GET_TOKEN_FAILURE';
 
-export const getQuestionsAction = (token) => (
-  { type: GET_QUESTIONS, loading: true, token }
+export const getQuestionsAction = () => (
+  { type: GET_QUESTIONS, loading: true }
 );
 
 export const getQuestionsSuccess = (data) => (
@@ -30,7 +30,7 @@ export const getTokenFailure = (error) => (
 
 export function thunkQuestions(token) {
   return (dispatch) => {
-    dispatch(getQuestionsAction(token));
+    dispatch(getQuestionsAction());
     return getQuestions(token)
       .then(
         (data) => dispatch(getQuestionsSuccess(data)),
