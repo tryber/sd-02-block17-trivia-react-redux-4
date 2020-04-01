@@ -95,7 +95,7 @@ class Questions extends Component {
       const obj = {
         player,
       };
-      localStorage.setItem('ranking', JSON.stringify(obj));
+      localStorage.setItem('ranking', JSON.stringify([{ name: obj.name, score: obj.score, picture: obj.picture}]));
       return <Redirect to="feedback" />;
     }
 
