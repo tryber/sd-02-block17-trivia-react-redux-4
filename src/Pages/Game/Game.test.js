@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import {
-  render, fireEvent, cleanup, waitFor,
+  render, fireEvent, cleanup, wait,
 } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
@@ -155,7 +155,7 @@ describe('testing game page', () => {
 
     fireEvent.click(nextButton);
     //console.log(store.getState().apiReducer.questions.results[store.getState().questionReducer.questionNumber]);
-    await waitFor(() => {
+    await wait(() => {
       expect(getByText(/Homo Ergaster/i)).toBeInTheDocument();
     });
 
