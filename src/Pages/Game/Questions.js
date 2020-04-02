@@ -97,7 +97,7 @@ class Questions extends Component {
         player,
       };
       localStorage.setItem('state', JSON.stringify(obj));
-      return <Redirect to="feedback" />;
+      return <Redirect to="/feedback" />;
     }
 
     return (
