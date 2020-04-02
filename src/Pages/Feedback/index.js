@@ -74,18 +74,18 @@ function addPlayerLocalStorage() {
 }
 
 class Feedback extends Component {
-  constructor(props) {
-    super(props);
-    this.redirectRanking = this.redirectRanking.bind(this);
-    this.redirectGame = this.redirectGame.bind(this);
-  }
-
   static renderGameLogo() {
     return (
       <div>
         <img src={TriviaLogo} className="trivia-logo" alt="Trivia Logo" />
       </div>
     );
+  }
+
+  constructor(props) {
+    super(props);
+    this.redirectRanking = this.redirectRanking.bind(this);
+    this.redirectGame = this.redirectGame.bind(this);
   }
 
   componentDidMount() {

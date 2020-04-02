@@ -49,13 +49,13 @@ ul > li {
 
 .nome-jogador {
   font-size: 20px;
-  position: absolute;
   padding-left: 45px;
+  position: absolute;
 }
 
 .ending-div {
-  justify-content: center;
   display: flex;
+  justify-content: center;
 }
 
 .botao-voltar {

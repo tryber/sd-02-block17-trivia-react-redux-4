@@ -10,20 +10,6 @@ import TriviaLogo from '../../trivia.png';
 import './style.css';
 
 class Configuracao extends Component {
-  constructor(props) {
-    super(props);
-    this.ref = React.createRef();
-    this.difficulty = [
-      'easy',
-      'medium',
-      'hard',
-    ];
-    this.type = [
-      'Multiple Choice',
-      'True / False',
-    ];
-  }
-
   static renderGameLogo() {
     return (
       <div>
@@ -40,6 +26,20 @@ class Configuracao extends Component {
         </Link>
       </div>
     );
+  }
+
+  constructor(props) {
+    super(props);
+    this.ref = React.createRef();
+    this.difficulty = [
+      'easy',
+      'medium',
+      'hard',
+    ];
+    this.type = [
+      'Multiple Choice',
+      'True / False',
+    ];
   }
 
   async componentDidMount() {

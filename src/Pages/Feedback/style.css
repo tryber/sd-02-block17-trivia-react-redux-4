@@ -40,6 +40,13 @@
   margin-right: 0;
 }
 
+.title {
+  font-size: 25px;
+  justify-content: center;
+  margin: auto;
+  padding-top: 15px;
+}
+
 .page_feedback .body > .title {
   margin: 3% 0;
 }
@@ -55,6 +62,14 @@
 .page_feedback .body div:nth-of-type( 2 ) {
   display: flex;
   flex-direction: column;
+}
+
+.feedback-buttons {
+  border-radius: 3px;
+  box-shadow: black 0.1em 0.1em 0.1em 0.1em;
+  font-size: 20px;
+  margin: 10px;
+  padding: 5px;
 }
 
 .page_feedback .body div:nth-of-type( 2 ) button:nth-of-type( 1 ) {
@@ -75,14 +90,6 @@
   width: 50%;
 }
 
-button {
-  border-radius: 3px;
-  box-shadow: black 0.1em 0.1em 0.1em 0.1em;
-  font-size: 20px;
-  margin: 10px;
-  padding: 5px;
-}
-
 .body {
   display: flex;
   flex-direction: column;
@@ -95,15 +102,8 @@ button {
   font-size: 25px;
 }
 
-.title {
-  font-size: 25px;
-  justify-content: center;
-  margin: auto;
-  padding-top: 15px;
-}
-
 .feedback-buttons:hover {
-  background-color:rgb(134, 214, 96);
+  background-color: rgb(134, 214, 96);
   cursor: pointer;
 }
 
