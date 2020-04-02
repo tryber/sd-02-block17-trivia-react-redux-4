@@ -1,78 +1,46 @@
-const data = [
-  {
-    results: [
-      {
-        category: 'Politica',
-        type: 'multiple',
-        difficulty: 'easy',
-        question: 'What is the first weapon you acquire in Half-Life?',
-        correct_answer: 'A crowbar',
-        incorrect_answers: [
-          'A pistol',
-          'The H.E.V suit',
-          'Your fists',
-        ],
-      },
-    ],
+const questionsMock = {
+  response_code: 0,
+  results: [{
+    category: 'Entertainment: Board Games',
+    correct_answer: '40',
+    difficulty: 'easy',
+    incorrect_answers: ['28', '55', '36'],
+    question: 'How many spaces are there on a standard Monopoly board?',
+    type: 'multiple',
   },
   {
-    results: [
-      {
-        category: 'Games',
-        type: 'boolean',
-        difficulty: 'hard',
-        question: 'TF2: Sentry rocket damage falloff is calculated based on the distance between the sentry and the enemy, not the engineer and the enemy',
-        correct_answer: 'False',
-        incorrect_answers: [
-          'True',
-        ],
-      },
-    ],
+    category: 'Animals',
+    correct_answer: 'Homo Sapiens',
+    difficulty: 'easy',
+    incorrect_answers: ['Homo Ergaster', 'Homo Erectus', 'Homo Neanderthalensis'],
+    question: 'What is the scientific name for modern day humans?',
+    type: 'multiple',
   },
   {
-    results: [
-      {
-        category: 'Historia',
-        type: 'boolean',
-        difficulty: 'hard',
-        question: 'TF2: Sentry rocket damage falloff is calculated based on the distance between the sentry and the enemy, not the engineer and the enemy',
-        correct_answer: 'False',
-        incorrect_answers: [
-          'True',
-        ],
-      },
-    ],
+    category: 'Animals',
+    correct_answer: 'Canis Lupus',
+    difficulty: 'hard',
+    incorrect_answers: ['Canis Aureus', 'Canis Latrans', 'Canis Lupus Lycaon'],
+    question: 'What is the Gray Wolf&#039;s scientific name?',
+    type: 'multiple',
   },
   {
-    results: [
-      {
-        category: 'Matematica',
-        type: 'multiple',
-        difficulty: 'normal',
-        question: 'What is the first weapon you acquire in Half-Life?',
-        correct_answer: 'A crowbar',
-        incorrect_answers: [
-          'A pistol',
-          'The H.E.V suit',
-          'Your fists',
-        ],
-      },
-    ],
+    category: 'Entertainment: Cartoon & Animations',
+    correct_answer: 'Sadie and Lars',
+    difficulty: 'easy',
+    incorrect_answers: ['Steven and James', 'Erik and Julie', 'Bob and May'],
+    question: 'In the show &quot;Steven Universe&quot;, who are the main two employees of The Big Donut?',
+    type: 'multiple',
   },
   {
-    results: [
-      {
-        category: 'Cultura',
-        type: 'boolean',
-        difficulty: 'hard',
-        question: 'Teste 5',
-        correct_answer: 'True',
-        incorrect_answers: [
-          'False',
-        ],
-      },
-    ],
+    category: 'Mythology',
+    correct_answer: '&#039;Oro',
+    difficulty: 'medium',
+    incorrect_answers: ['Hina', 'Kohara', 'Māui'],
+    question: 'Who is the god of war in Polynesian mythology?',
+    type: 'multiple',
   },
-];
+  ],
+};
 
-export default data;
+export default questionsMock;

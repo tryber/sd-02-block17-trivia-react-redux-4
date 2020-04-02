@@ -12,10 +12,24 @@
   text-align: center;
 }
 
-.correct-answer {
+.correct-answer:disabled {
   background-color: green;
+  color: black;
 }
 
-.incorrect-answer {
+.incorrect-answer:disabled {
   background-color: red;
+  color: black;
+}
+
+.focused-correct-answer:disabled {
+  background-color: green;
+  border: 2px solid blue;
+  color: black;
+}
+
+.focused-incorrect-answer:disabled {
+  background-color: red;
+  border: 2px solid blue;
+  color: black;
 }
