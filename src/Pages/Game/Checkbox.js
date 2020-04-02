@@ -17,6 +17,8 @@ class Checkbox extends Component {
         medium: 2,
         easy: 1,
       },
+      disabled: false,
+      focusedAnswer: '',
     };
   }
 
@@ -26,34 +28,44 @@ class Checkbox extends Component {
       const j = Math.floor(Math.random() * (i + 1));
       [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
     }
-    this.setState({ newArray, canShuffle: false });
+    this.setState({ newArray, canShuffle: false, disabled: false });
   }
 
-  async handleClickButton(e, level) {
+  async handleClickButton(e, canAddScore, level) {
     const {
       setClassButton, setScore, interval, stopTimer, seconds,
     } = this.props;
     const { difficulty } = this.state;
-    if (e) {
+    if (canAddScore) {
       setScore(10 + (seconds * difficulty[level]), 1);
     }
     stopTimer();
     clearInterval(interval);
+    this.setState({
+      focusedAnswer: e.target.innerHTML,
+    });
     await setClassButton('correct-answer', 'incorrect-answer', true);
-    this.setState({ canShuffle: true });
+    this.setState({
+      canShuffle: true,
+      disabled: true,
+    });
   }
 
   renderNextButton(newArray, difficulty, correctAnswer) {
     const { correct, incorrect } = this.props;
+    const { disabled, focusedAnswer } = this.state;
     return (
       newArray.map((answer, index) => {
         if (answer === correctAnswer) {
           return (
             <button
-              onClick={(e) => this.handleClickButton(e, difficulty)}
+              onClick={(e) => this.handleClickButton(e, true, difficulty)}
               type="button"
               data-testid="correct-answer"
-              className={`answer-content ${correct}`}
+              disabled={disabled}
+              className={(focusedAnswer === correctAnswer)
+                ? 'answer-content focused-correct-answer'
+                : `answer-content ${correct}`}
               key={answer}
             >
               {answer}
@@ -62,10 +74,13 @@ class Checkbox extends Component {
         }
         return (
           <button
-            onClick={() => this.handleClickButton()}
+            onClick={(e) => this.handleClickButton(e, false)}
             type="button"
             data-testid={`wrong-answer-${index}`}
-            className={`answer-content ${incorrect}`}
+            disabled={disabled}
+            className={(focusedAnswer === answer)
+              ? 'answer-content focused-incorrect-answer'
+              : `answer-content ${incorrect}`}
             key={answer}
           >
             {answer}

@@ -89,6 +89,7 @@ class Questions extends Component {
     const { questions, questionNumber } = this.props;
     const { player } = this.props;
     if (questions.response_code === 3) {
+      alert('Token expirado');
       return <Redirect to="/" />;
     }
     if (questionNumber > 4) {

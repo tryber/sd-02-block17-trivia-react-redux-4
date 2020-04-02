@@ -41,23 +41,7 @@ const gameInitialState = {
     incorrect: '',
     canNextQuestion: false,
   },
-  setLoadingTrue: jest.fn(),
-  startTick: jest.fn(),
-  stopTimer: jest.fn(),
-  getStartTime: jest.fn(),
-  setStateInterval: jest.fn(),
-  setQuestionNumber: jest.fn(),
-  setClassButton: jest.fn('correct-answer', 'incorrect-answer', true),
 };
-
-const { apiReducer: {
-  questions,
-},
-} = gameInitialState;
-
-const { category, question } = questions.results[2];
-
-console.log(category);
 
 const onLoading = {
   ...gameInitialState,
@@ -106,7 +90,7 @@ describe('testing game page', () => {
     expect(playerScore.innerHTML).toBe('Pontos:0');
   });
   test('game questions after Loading', async () => {
-    const { store, getByTestId, getAllByTestId, getByText } = renderWithRedux(<Game />,
+    const { getByTestId, getAllByTestId, queryByText } = renderWithRedux(<Game />,
       { initialState: gameInitialState });
 
     const {
@@ -131,8 +115,8 @@ describe('testing game page', () => {
     expect(questionText).toBeInTheDocument();
     expect(questionText.innerHTML).toBe(question);
 
-    let correctAnswer = getByTestId(/correct-answer/i);
-    let incorrectAnswers = getAllByTestId(/wrong-answer/i);
+    const correctAnswer = getByTestId(/correct-answer/i);
+    const incorrectAnswers = getAllByTestId(/wrong-answer/i);
 
     expect(correctAnswer).toBeInTheDocument();
     expect(correctAnswer.innerHTML).toBe(correct_answer);
@@ -150,27 +134,12 @@ describe('testing game page', () => {
 
     expect(playerScore.innerHTML).toBe(`Pontos:${10 + (seconds * difficulty[level])}`);
 
-    const nextButton = getByText(/Próximo/i);
+    const nextButton = queryByText(/Próximo/i);
     expect(nextButton).toBeInTheDocument();
 
     fireEvent.click(nextButton);
-    //console.log(store.getState().apiReducer.questions.results[store.getState().questionReducer.questionNumber]);
     await wait(() => {
-      expect(getByText(/Homo Ergaster/i)).toBeInTheDocument();
+      expect(queryByText(/Homo Ergaster/i)).toBeInTheDocument();
     });
-
-
-    //   test('click o correct answer', () => {
-    //     const { getByTestId, getAllByTestId } = renderWithRedux(<Game />,
-    //       { initialState: clickOnCorrectAnswer });
-    //     // expect().toBeInTheDocument();
-    //     // expect().toBe();
-
-    //     // expect().toBeInTheDocument();
-    //     // expect().toBe();
-
-    //     // expect().toBeInTheDocument();
-    //     // expect().toBe();
-    //   });
   });
 });
