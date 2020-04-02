@@ -50,9 +50,11 @@ class LoginPage extends React.Component {
       getUserToken()
         .then(({ token }) => {
           localStorage.setItem(email, JSON.stringify(token));
+          localStorage.setItem('token', JSON.stringify(token));
           return (importedQuestionThunk(token));
         });
     } else {
+      localStorage.setItem('token', JSON.stringify(existToken));
       importedQuestionThunk(existToken);
     }
     setName(username);
