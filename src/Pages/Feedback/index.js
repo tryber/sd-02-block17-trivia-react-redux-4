@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
 import { addResetQuestionsReucer } from '../../actions/questions';
+
+import TriviaLogo from '../../trivia.png';
 import './style.css';
 
 function situacaoRender(assertions) {
@@ -17,11 +18,11 @@ function scoreRender() {
   const state = localStorage.getItem('state');
   const { player: { score, assertions } } = JSON.parse(state);
   return (
-    <div>
-      <p data-testid="feedback-total-question">
+    <div className="middle-of-the-page">
+      <p className="title" data-testid="feedback-total-question">
         {`Você acertou ${assertions} questões`}
       </p>
-      <p data-testid="feedback-total-score">
+      <p className="title" data-testid="feedback-total-score">
         {`Um total de ${score} pontos`}
       </p>
     </div>
@@ -33,14 +34,14 @@ function headerRender() {
   const { player: { score, name } } = JSON.parse(state);
   return (
     <div className="header">
-      <p>
+      <p className="header-texts">
         Jogador:
         <span>
           {name}
         </span>
       </p>
       <div className="pontos">
-        <p data-testid="header-score">
+        <p className="header-texts" data-testid="header-score">
           {`Pontos: ${score}`}
         </p>
         <i className="material-icons">
@@ -73,6 +74,14 @@ function addPlayerLocalStorage() {
 }
 
 class Feedback extends Component {
+  static renderGameLogo() {
+    return (
+      <div>
+        <img src={TriviaLogo} className="trivia-logo" alt="Trivia Logo" />
+      </div>
+    );
+  }
+
   constructor(props) {
     super(props);
     this.redirectRanking = this.redirectRanking.bind(this);
@@ -86,7 +95,7 @@ class Feedback extends Component {
   redirectGame() {
     const { history, getResetQuestions } = this.props;
     getResetQuestions();
-    history.push('/game');
+    history.push('/');
   }
 
   redirectRanking() {
@@ -103,16 +112,18 @@ class Feedback extends Component {
           {situacaoRender(assertions)}
         </div>
         {scoreRender()}
-        <div>
+        <div className="body">
           <button
             type="button"
             onClick={this.redirectRanking}
+            className="feedback-buttons"
           >
             Ver Ranking
           </button>
           <button
             type="button"
             onClick={this.redirectGame}
+            className="feedback-buttons"
           >
             Jogar Novamente
           </button>
@@ -126,6 +137,7 @@ class Feedback extends Component {
       <div className="page_feedback">
         <div className="content">
           {headerRender()}
+          {Feedback.renderGameLogo()}
           {this.bodyRender()}
         </div>
       </div>
