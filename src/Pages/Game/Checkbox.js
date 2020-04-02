@@ -51,42 +51,59 @@ class Checkbox extends Component {
     });
   }
 
-  renderNextButton(newArray, difficulty, correctAnswer) {
-    const { correct, incorrect } = this.props;
-    const { disabled, focusedAnswer } = this.state;
+  nextButton(
+    difficulty, correctAnswer, correct, incorrect, focusedAnswer, disabledButton, answer, index,
+  ) {
+    if (answer === correctAnswer) {
+      return (
+        <button
+          onClick={(e) => this.handleClickButton(e, true, difficulty)}
+          type="button"
+          data-testid="correct-answer"
+          disabled={disabledButton}
+          className={(focusedAnswer === correctAnswer)
+            ? 'answer-content focused-correct-answer'
+            : `answer-content ${correct}`}
+          key={answer}
+        >
+          {answer}
+        </button>
+      );
+    }
     return (
-      newArray.map((answer, index) => {
-        if (answer === correctAnswer) {
-          return (
-            <button
-              onClick={(e) => this.handleClickButton(e, true, difficulty)}
-              type="button"
-              data-testid="correct-answer"
-              disabled={disabled}
-              className={(focusedAnswer === correctAnswer)
-                ? 'answer-content focused-correct-answer'
-                : `answer-content ${correct}`}
-              key={answer}
-            >
-              {answer}
-            </button>
-          );
-        }
-        return (
-          <button
-            onClick={(e) => this.handleClickButton(e, false)}
-            type="button"
-            data-testid={`wrong-answer-${index}`}
-            disabled={disabled}
-            className={(focusedAnswer === answer)
-              ? 'answer-content focused-incorrect-answer'
-              : `answer-content ${incorrect}`}
-            key={answer}
-          >
-            {answer}
-          </button>
-        );
-      })
+      <button
+        onClick={(e) => this.handleClickButton(e, false)}
+        type="button"
+        data-testid={`wrong-answer-${index}`}
+        disabled={disabledButton}
+        className={(focusedAnswer === answer)
+          ? 'answer-content focused-incorrect-answer'
+          : `answer-content ${incorrect}`}
+        key={answer}
+      >
+        {answer}
+      </button>
+    );
+  }
+
+  renderNextButton(newArray, difficulty, correctAnswer) {
+    const { correct, incorrect, seconds } = this.props;
+    const { disabled, focusedAnswer } = this.state;
+    let disabledButton = disabled;
+    if (seconds <= 1) disabledButton = true;
+    return (
+      newArray.map((answer, index) => (
+        this.nextButton(
+          difficulty,
+          correctAnswer,
+          correct,
+          incorrect,
+          focusedAnswer,
+          disabledButton,
+          answer,
+          index,
+        )
+      ))
     );
   }
 
