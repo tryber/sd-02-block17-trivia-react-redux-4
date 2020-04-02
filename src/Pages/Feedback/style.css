@@ -102,7 +102,7 @@ button {
   padding-top: 15px;
 }
 
-button:hover {
+.feedback-buttons:hover {
   background-color:rgb(134, 214, 96);
   cursor: pointer;
 }

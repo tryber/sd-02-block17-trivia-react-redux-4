@@ -65,3 +65,8 @@ ul > li {
   margin: 30px;
   padding: 5px;
 }
+
+.botao-voltar:hover {
+  background-color:rgb(134, 214, 96);
+  cursor: pointer;
+}

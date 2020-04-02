@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import { addCategorys } from '../../actions/categorysAPI';
 import getCategory from '../../Services/configAPI';
 import Dropdown from './Components/Dropdown';
+import TriviaLogo from '../../trivia.png';
 import './style.css';
 
 class Configuracao extends Component {
@@ -20,6 +22,24 @@ class Configuracao extends Component {
       'Multiple Choice',
       'True / False',
     ];
+  }
+
+  static renderGameLogo() {
+    return (
+      <div>
+        <img src={TriviaLogo} className="trivia-logo" alt="Trivia Logo" />
+      </div>
+    );
+  }
+
+  static renderVoltarButton() {
+    return (
+      <div className="ending-div">
+        <Link to="/">
+          <button type="button" className="botao-voltar">Voltar</button>
+        </Link>
+      </div>
+    );
   }
 
   async componentDidMount() {
@@ -76,9 +96,11 @@ class Configuracao extends Component {
       <div className="page_config">
         <p ref={this.ref} />
         <div className="content">
+          {Configuracao.renderGameLogo()}
           {this.renderCategoria()}
           {this.renderDifficulty()}
           {this.renderTipo()}
+          {Configuracao.renderVoltarButton()}
         </div>
       </div>
     );

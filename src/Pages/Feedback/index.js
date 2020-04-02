@@ -95,7 +95,7 @@ class Feedback extends Component {
   redirectGame() {
     const { history, getResetQuestions } = this.props;
     getResetQuestions();
-    history.push('/game');
+    history.push('/');
   }
 
   redirectRanking() {
@@ -116,12 +116,14 @@ class Feedback extends Component {
           <button
             type="button"
             onClick={this.redirectRanking}
+            className="feedback-buttons"
           >
             Ver Ranking
           </button>
           <button
             type="button"
             onClick={this.redirectGame}
+            className="feedback-buttons"
           >
             Jogar Novamente
           </button>
