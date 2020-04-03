@@ -1,7 +1,5 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { Router, MemoryRouter } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import {
@@ -12,7 +10,6 @@ import '@testing-library/jest-dom/extend-expect';
 import rootReducer from '../../reducers';
 import questionMock from './questionsMock';
 
-import App from '../../App';
 import Game from './index';
 
 const difficulty = {

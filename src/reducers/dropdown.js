@@ -15,7 +15,7 @@ const dropdownReducer = (state = INITIAL_STATE_CHECKBOX, action) => {
     case CATEGORY:
       return {
         ...state,
-        category: action.seleted,
+        category: action.selected,
       };
     case DIFFICULTY:
       return {

@@ -88,6 +88,10 @@ class Questions extends Component {
   render() {
     const { questions, questionNumber } = this.props;
     const { player } = this.props;
+    if (questions.results.length === 0) {
+      alert('Essas configurações nao retornam questões');
+      return <Redirect to="/" />;
+    }
     if (questions.response_code === 3) {
       alert('Token expirado');
       return <Redirect to="/" />;
