@@ -35,7 +35,7 @@ class LoginPage extends React.Component {
     this.generateTokenQuestions = this.generateTokenQuestions.bind(this);
   }
 
-  async generateTokenQuestions() {
+  generateTokenQuestions() {
     const { email, username } = this.state;
     const {
       importedGravatarReducer,
@@ -47,17 +47,16 @@ class LoginPage extends React.Component {
       category,
       type,
     } = this.props;
-    const existToken = JSON.parse(localStorage.getItem(email));
-    await importedGravatarReducer(MD5(email).toString(), email);
+    const existToken = localStorage.getItem('token');
+    importedGravatarReducer(MD5(email).toString(), email);
     if (!existToken || questions.response_code === 3) {
       getUserToken()
         .then(({ token }) => {
-          localStorage.setItem(email, JSON.stringify(token));
-          localStorage.setItem('token', JSON.stringify(token));
+          localStorage.setItem('token', token);
           return (importedQuestionThunk(token, category, difficulty, type));
         });
     } else {
-      localStorage.setItem('token', JSON.stringify(existToken));
+      localStorage.setItem('token', existToken);
       importedQuestionThunk(existToken, category, difficulty, type);
     }
     setName(username);

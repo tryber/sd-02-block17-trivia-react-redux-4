@@ -6,7 +6,7 @@ import {
 
 const INITIAL_STATE_CHECKBOX = {
   difficulty: '',
-  category: '',
+  category: 0,
   type: '',
 };
 

@@ -8,8 +8,9 @@ import { addNameAndEmail } from '../../actions/questions';
 const generateimage = (token, setNameAndEmail, name) => {
   const gravatarURL = 'https://www.gravatar.com/avatar/';
   setNameAndEmail(name, `${gravatarURL}${token}`);
+  const emailToken = token || '';
   return (
-    <img src={`${gravatarURL}${token}`} alt="Gravatar" />
+    <img src={`${gravatarURL}${emailToken}`} alt="Gravatar" />
   );
 };
 

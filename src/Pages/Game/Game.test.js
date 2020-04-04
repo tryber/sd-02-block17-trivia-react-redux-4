@@ -1,5 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import {
@@ -65,7 +67,7 @@ function renderWithRedux(
   };
 }
 
-const questionsFlow = (getByTestId, getAllByTestId, queryByText, questions, controle) => {
+const questionsFlow = (getByTestId, getAllByTestId, queryByText, questions) => {
   const {
     category,
     question,
@@ -114,7 +116,7 @@ const questionsFlow = (getByTestId, getAllByTestId, queryByText, questions, cont
   const nextButton = queryByText(/Próximo/i);
   expect(nextButton).toBeInTheDocument();
 
-  if (controle) fireEvent.click(nextButton);
+  fireEvent.click(nextButton);
 };
 
 afterEach(cleanup);
@@ -146,20 +148,23 @@ describe('testing game page', () => {
   });
 
   test('game questions after Loading', async () => {
+    const history = createMemoryHistory();
     const { getByTestId, getAllByTestId, queryByText } = renderWithRedux(
-      <Game />,
+      <Router history={history}>
+        <Game />
+      </Router>,
       { initialState: gameInitialState },
     );
 
-    await questionsFlow(getByTestId, getAllByTestId, queryByText, questionMock.results[0], true);
+    await questionsFlow(getByTestId, getAllByTestId, queryByText, questionMock.results[0]);
     await wait(() => expect(getByTestId(/correct-answer/i)).toBeInTheDocument());
-    await questionsFlow(getByTestId, getAllByTestId, queryByText, questionMock.results[1], true);
+    await questionsFlow(getByTestId, getAllByTestId, queryByText, questionMock.results[1]);
     await wait(() => expect(getByTestId(/correct-answer/i)).toBeInTheDocument());
-    await questionsFlow(getByTestId, getAllByTestId, queryByText, questionMock.results[2], true);
+    await questionsFlow(getByTestId, getAllByTestId, queryByText, questionMock.results[2]);
     await wait(() => expect(getByTestId(/correct-answer/i)).toBeInTheDocument());
-    await questionsFlow(getByTestId, getAllByTestId, queryByText, questionMock.results[3], true);
+    await questionsFlow(getByTestId, getAllByTestId, queryByText, questionMock.results[3]);
     await wait(() => expect(getByTestId(/correct-answer/i)).toBeInTheDocument());
-    await questionsFlow(getByTestId, getAllByTestId, queryByText, questionMock.results[4], false);
-    await wait(() => expect(getByTestId(/correct-answer/i)).toBeInTheDocument());
+    await questionsFlow(getByTestId, getAllByTestId, queryByText, questionMock.results[4]);
+    expect(history.location.pathname).toBe('/feedback');
   });
 });
