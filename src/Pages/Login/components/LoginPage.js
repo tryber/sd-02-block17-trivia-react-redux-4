@@ -130,7 +130,6 @@ LoginPage.propTypes = {
   getUserToken: PropTypes.func.isRequired,
   importedGravatarReducer: PropTypes.func.isRequired,
   setName: PropTypes.func.isRequired,
-  questions: PropTypes.instanceOf(Object).isRequired,
 };
 
 const mapStateToProps = ({
