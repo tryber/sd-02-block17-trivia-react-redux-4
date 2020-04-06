@@ -40,25 +40,18 @@ class LoginPage extends React.Component {
     const {
       importedGravatarReducer,
       setName,
-      questions,
       getUserToken,
       importedQuestionThunk,
       difficulty,
       category,
       type,
     } = this.props;
-    const token = localStorage.getItem('token');
     importedGravatarReducer(MD5(email).toString(), email);
-    if (questions.response_code === 3) {
-      getUserToken()
-        .then(() => {
-          localStorage.setItem('token', token);
-          return (importedQuestionThunk(token, category, difficulty, type));
-        });
-    } else {
-      localStorage.setItem('token', token);
-      importedQuestionThunk(token, category, difficulty, type);
-    }
+    getUserToken()
+      .then(({ token }) => {
+        localStorage.setItem('token', token);
+        return (importedQuestionThunk(token, category, difficulty, type));
+      });
     setName(username);
   }
 
