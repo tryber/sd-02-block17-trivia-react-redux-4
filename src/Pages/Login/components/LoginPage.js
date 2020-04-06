@@ -47,17 +47,17 @@ class LoginPage extends React.Component {
       category,
       type,
     } = this.props;
-    const existToken = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     importedGravatarReducer(MD5(email).toString(), email);
-    if (!existToken || questions.response_code === 3) {
+    if (questions.response_code === 3) {
       getUserToken()
         .then(({ token }) => {
           localStorage.setItem('token', token);
           return (importedQuestionThunk(token, category, difficulty, type));
         });
     } else {
-      localStorage.setItem('token', existToken);
-      importedQuestionThunk(existToken, category, difficulty, type);
+      localStorage.setItem('token', token);
+      importedQuestionThunk(token, category, difficulty, type);
     }
     setName(username);
   }
