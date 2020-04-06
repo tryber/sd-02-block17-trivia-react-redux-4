@@ -57,7 +57,7 @@ class Questions extends Component {
 
   QuestionBox() {
     const { questions, questionNumber } = this.props;
-    const { category, question } = questions.results[questionNumber];
+    const { category = null, question } = questions.results[questionNumber];
     return (
       <div className="question-content">
         <div data-testid="question-category" className="question-header">{category}</div>
