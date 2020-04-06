@@ -51,7 +51,7 @@ class LoginPage extends React.Component {
     importedGravatarReducer(MD5(email).toString(), email);
     if (questions.response_code === 3) {
       getUserToken()
-        .then((token) => {
+        .then(() => {
           localStorage.setItem('token', token);
           return (importedQuestionThunk(token, category, difficulty, type));
         });
