@@ -13,10 +13,14 @@ class Dropdown extends Component {
     this.selected = React.createRef();
   }
 
-  clickHandle(e) {
+  clickHandle(e, categoryId) {
+    const actionType = e.target.id.split('-', 2)[1].toUpperCase();
     const { getSelected } = this.props;
+    if (e.target.id.match('category')) getSelected(actionType, categoryId + 9);
+    if (e.target.id.match('difficulty')) getSelected(actionType, e.target.outerText.toLowerCase());
+    const type = e.target.outerText.match(/Multiple/i) ? 'multiple' : 'boolean';
+    if (e.target.id.match('type')) getSelected(actionType, type);
     this.selected.current.innerText = e.target.outerText;
-    getSelected(e.target.outerText);
     this.dropDonw();
   }
 
@@ -52,11 +56,12 @@ class Dropdown extends Component {
           {this.renderBtn()}
         </div>
         <div className="list" ref={this.list}>
-          {options.map((option) => (
+          {options.map((option, index) => (
             <button
+              id={testid}
               key={option}
               type="button"
-              onClick={(e) => this.clickHandle(e)}
+              onClick={(e) => this.clickHandle(e, index)}
             >
               {option}
             </button>
@@ -78,7 +83,7 @@ Dropdown.propTypes = {
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = (dispatch) => ({
-  getSelected: (selected) => dispatch(addSelected(selected)),
+  getSelected: (actionType, selected) => dispatch(addSelected(actionType, selected)),
 });
 
 

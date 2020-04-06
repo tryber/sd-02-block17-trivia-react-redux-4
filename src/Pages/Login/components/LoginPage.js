@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import MD5 from 'crypto-js/md5';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { catchEmail } from '../../../actions/gravatarAction';
 import settingsBtn from '../../../imgs/settings.png';
 import TriviaLogo from '../../../trivia.png';
 import './style.css';
 
+import { catchEmail } from '../../../actions/gravatarAction';
 import { addNameAndEmail } from '../../../actions/questions';
 import { thunkQuestions, thunkToken, getQuestionsAction } from '../../../actions';
 
@@ -43,19 +43,21 @@ class LoginPage extends React.Component {
       questions,
       getUserToken,
       importedQuestionThunk,
+      difficulty,
+      category,
+      type,
     } = this.props;
-    const existToken = JSON.parse(localStorage.getItem(email));
+    const existToken = localStorage.getItem('token');
     importedGravatarReducer(MD5(email).toString(), email);
     if (!existToken || questions.response_code === 3) {
       getUserToken()
         .then(({ token }) => {
-          localStorage.setItem(email, JSON.stringify(token));
-          localStorage.setItem('token', JSON.stringify(token));
-          return (importedQuestionThunk(token));
+          localStorage.setItem('token', token);
+          return (importedQuestionThunk(token, category, difficulty, type));
         });
     } else {
-      localStorage.setItem('token', JSON.stringify(existToken));
-      importedQuestionThunk(existToken);
+      localStorage.setItem('token', existToken);
+      importedQuestionThunk(existToken, category, difficulty, type);
     }
     setName(username);
   }
@@ -128,6 +130,9 @@ class LoginPage extends React.Component {
 }
 
 LoginPage.propTypes = {
+  category: PropTypes.number.isRequired,
+  difficulty: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
   importedQuestionThunk: PropTypes.func.isRequired,
   getUserToken: PropTypes.func.isRequired,
   importedGravatarReducer: PropTypes.func.isRequired,
@@ -138,11 +143,25 @@ LoginPage.propTypes = {
 const mapStateToProps = ({
   gravatarReducer: { email, token },
   apiReducer: { questions },
-}) => ({ email, questions, token });
+  dropdownReducer: {
+    difficulty,
+    category,
+    type,
+  },
+}) => ({
+  email,
+  questions,
+  token,
+  difficulty,
+  category,
+  type,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   loadingDispatch: () => dispatch(getQuestionsAction()),
-  importedQuestionThunk: (token) => dispatch(thunkQuestions(token)),
+  importedQuestionThunk: (token, category, difficulty, type) => (
+    dispatch(thunkQuestions(token, category, difficulty, type))
+  ),
   getUserToken: () => dispatch(thunkToken()),
   importedGravatarReducer: (token, email) => dispatch(catchEmail(token, email)),
   setName: (name) => dispatch(addNameAndEmail(name, '')),

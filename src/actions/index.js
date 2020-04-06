@@ -28,10 +28,10 @@ export const getTokenFailure = (error) => (
   { type: GET_TOKEN_FAILURE, error, loading: false }
 );
 
-export function thunkQuestions(token) {
+export function thunkQuestions(token, category, difficulty, type) {
   return (dispatch) => {
     dispatch(getQuestionsAction());
-    return getQuestions(token)
+    return getQuestions(token, category, difficulty, type)
       .then(
         (data) => dispatch(getQuestionsSuccess(data)),
         (error) => dispatch(getQuestionsFailure(error.message)),

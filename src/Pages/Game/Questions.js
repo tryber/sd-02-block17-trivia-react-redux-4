@@ -22,13 +22,14 @@ class Questions extends Component {
   }
 
   componentWillUnmount() {
-    const { setLoadingTrue } = this.props;
+    const { setLoadingTrue, interval } = this.props;
+    clearInterval(interval);
     setLoadingTrue();
   }
 
-  tick(startTick, stopTimer, setClassButton) {
+  async tick(startTick, stopTimer, setClassButton) {
     const { seconds } = this.props;
-    startTick();
+    await startTick();
     if (seconds <= 1) {
       stopTimer();
       clearInterval(this.interval);
@@ -89,7 +90,7 @@ class Questions extends Component {
     const { questions, questionNumber } = this.props;
     const { player } = this.props;
     if (questions.response_code === 3) {
-      alert('Token expirado');
+      alert('Token expirado ou Nao existem questoes para essas configurações');
       return <Redirect to="/" />;
     }
     if (questionNumber > 4) {
@@ -97,7 +98,7 @@ class Questions extends Component {
         player,
       };
       localStorage.setItem('state', JSON.stringify(obj));
-      return <Redirect to="feedback" />;
+      return <Redirect to="/feedback" />;
     }
 
     return (
@@ -113,6 +114,7 @@ class Questions extends Component {
 const mapStateToProps = ({
   timerReducer: {
     seconds,
+    interval,
   },
   checkboxReducer: {
     canNextQuestion,
@@ -127,6 +129,7 @@ const mapStateToProps = ({
   gravatarReducer:
   { email },
 }) => ({
+  interval,
   seconds,
   canNextQuestion,
   questionNumber,

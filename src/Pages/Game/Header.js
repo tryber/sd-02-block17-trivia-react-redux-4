@@ -5,19 +5,20 @@ import './Header.css';
 
 import { addNameAndEmail } from '../../actions/questions';
 
-const generateimage = (email, setNameAndEmail, name) => {
+const generateimage = (token, setNameAndEmail, name) => {
   const gravatarURL = 'https://www.gravatar.com/avatar/';
-  setNameAndEmail(name, `${gravatarURL}${email}`);
+  setNameAndEmail(name, `${gravatarURL}${token}`);
+  const emailToken = token || '';
   return (
-    <img src={`${gravatarURL}${email}`} alt="Gravatar" />
+    <img src={`${gravatarURL}${emailToken}`} alt="Gravatar" />
   );
 };
 
 const Header = ({
-  score, email, setNameAndEmail, name,
+  score, token, setNameAndEmail, name,
 }) => (
   <header className="header-content">
-    {generateimage(email, setNameAndEmail, name)}
+    {generateimage(token, setNameAndEmail, name)}
     <h1
       data-testid="header-player-name"
       className="jogador"
@@ -37,7 +38,7 @@ const Header = ({
 
 const mapStateToProps = ({
   gravatarReducer: {
-    email,
+    token,
   },
   questionReducer: {
     player: {
@@ -47,7 +48,7 @@ const mapStateToProps = ({
   },
 }) => ({
   name,
-  email,
+  token,
   score,
 });
 

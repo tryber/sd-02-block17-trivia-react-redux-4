@@ -6,7 +6,7 @@ export const getGravatarAction = (hash) => (
   { type: GET_GRAVATAR, loading: true, hash }
 );
 export const getGravatarSuccess = (token, email) => (
-  { type: GET_GRAVATAR_SUCCESS, email, token }
+  { type: GET_GRAVATAR_SUCCESS, token, email }
 );
 export const getGravatarFailure = (error) => (
   { type: GET_GRAVATAR_FAILURE, error }
